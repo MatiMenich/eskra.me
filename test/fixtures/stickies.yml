@@ -1,17 +1,17 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyText
+  name: MyString
   text: MyText
-  url: MyText
-  color: MyText
+  url: MyString
+  color: MyString
   column_id: 
   row_id: 
 
 two:
-  name: MyText
+  name: MyString
   text: MyText
-  url: MyText
-  color: MyText
+  url: MyString
+  color: MyString
   column_id: 
   row_id: 

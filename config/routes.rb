@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
   resources :stickies
 
-  resources :columns
-
   resources :rows
+
+  resources :columns
 
   resources :boards
 

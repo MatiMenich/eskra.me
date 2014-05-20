@@ -11,17 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140516173149) do
+ActiveRecord::Schema.define(version: 20140520190137) do
 
   create_table "boards", force: true do |t|
-    t.text     "name"
-    t.text     "uid"
+    t.string   "name"
+    t.string   "uid"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "columns", force: true do |t|
-    t.text     "name"
+    t.string   "name"
     t.integer  "order"
     t.integer  "board_id"
     t.datetime "created_at"
@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(version: 20140516173149) do
   add_index "columns", ["board_id"], name: "index_columns_on_board_id"
 
   create_table "rows", force: true do |t|
-    t.text     "name"
+    t.string   "name"
     t.integer  "order"
     t.integer  "board_id"
     t.datetime "created_at"
@@ -41,10 +41,10 @@ ActiveRecord::Schema.define(version: 20140516173149) do
   add_index "rows", ["board_id"], name: "index_rows_on_board_id"
 
   create_table "stickies", force: true do |t|
-    t.text     "name"
+    t.string   "name"
     t.text     "text"
-    t.text     "url"
-    t.text     "color"
+    t.string   "url"
+    t.string   "color"
     t.integer  "column_id"
     t.integer  "row_id"
     t.datetime "created_at"

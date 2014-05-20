@@ -1,7 +1,7 @@
 class CreateColumns < ActiveRecord::Migration
   def change
     create_table :columns do |t|
-      t.text :name
+      t.string :name
       t.integer :order
       t.references :board, index: true
 

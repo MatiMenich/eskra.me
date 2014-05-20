@@ -1,10 +1,10 @@
 class CreateStickies < ActiveRecord::Migration
   def change
     create_table :stickies do |t|
-      t.text :name
+      t.string :name
       t.text :text
-      t.text :url
-      t.text :color
+      t.string :url
+      t.string :color
       t.references :column, index: true
       t.references :row, index: true
 
