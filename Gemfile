@@ -32,6 +32,9 @@ gem 'bcrypt', '~> 3.1.7'
 # Twitter bootstrap sass
 gem 'bootstrap-sass'
 
+# jquery ui
+gem 'jquery-ui-rails'
+
 # Use unicorn as the app server
 # gem 'unicorn'
 
