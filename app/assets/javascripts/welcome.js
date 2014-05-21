@@ -24,8 +24,11 @@ $(function() {
   addBehaviour();
 
   $('#addcolumn').click(function () {
-    var newColumn = $('<div class="column"><div class="column-title h4">Título X <button class="btn btn-xs"><span class="glyphicon glyphicon-plus"></span></button></div><div class="column-content"></div></div>');
-    $('.column_field').append(newColumn);
+    var newColumn = $('<td class="column"><div class="column-content"></div></td>');
+    var newTitle = $('<th><div class="column-title h4">Título X <button class="btn btn-xs"><span class="glyphicon glyphicon-plus"></span></button></div></th>');
+    $('.column_field').find('tr').append(newColumn);
+    $('.title_field').find('tr').append(newTitle);
+
 
     addBehaviour();
   });
