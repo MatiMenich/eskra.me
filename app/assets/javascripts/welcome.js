@@ -47,7 +47,7 @@ $(function() {
         });
       });
     });
-    
+
   });
 
   $(".delete-column").click(function(){
@@ -62,7 +62,7 @@ $(function() {
   $('#add_story').click(function () {
     var newRow = $('<tr></tr>');
     var title = $('<td>Story X</td>');
-    var number_of_columns = $('.column_field').find('tr').first().find('td').length
+    var number_of_columns = $('.title_field').find('tr').first().find('th').length
     newRow.append(title);
 
     for(var i = 0 ; i < number_of_columns-1 ; i++){
@@ -74,6 +74,13 @@ $(function() {
     $('.column_field').append(newRow);
     newRow.fadeIn('slow');
     addBehaviour();
+  });
+
+  $(".delete-story").click(function(){
+    var story = $(this).closest('tr');
+    story.fadeOut('slow', function(){
+      $(this).remove();
+    });
   });
 
 });
