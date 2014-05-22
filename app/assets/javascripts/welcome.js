@@ -1,8 +1,8 @@
 $(function() {
 
   function addBehaviour(){
-    $( ".column-content" ).sortable({
-      connectWith: ".column-content",
+    $( ".column" ).sortable({
+      connectWith: ".column",
       handle: ".panel-heading",
       cancel: ".portlet-toggle",
       placeholder: "well portlet-placeholder"
@@ -20,16 +20,60 @@ $(function() {
     
   };
 
-
   addBehaviour();
 
-  $('#addcolumn').click(function () {
-    var newColumn = $('<td class="column"><div class="column-content"></div></td>');
-    var newTitle = $('<th><div class="column-title h4">Título X <button class="btn btn-xs"><span class="glyphicon glyphicon-plus"></span></button></div></th>');
-    $('.column_field').find('tr').append(newColumn);
-    $('.title_field').find('tr').append(newTitle);
+  $('#add_column').click(function () {
 
+    $('.column_field').find('tr').each(function () {
+      var newColumn = $('<td class="column"><div class="column-content"></div></td>');
+      newColumn.hide();
+      $(this).append(newColumn)
+      newColumn.fadeIn('slow');
+    });
+    $('.title_field').find('tr').each(function () {
+      var newTitle = $('<th><div class="column-title h4">Title X <button class="btn btn-xs btn-danger delete-column pull-right"><span class="glyphicon glyphicon-remove"></span></button></div></th>');
+      newTitle.hide();
+      $(this).append(newTitle);
+      newTitle.fadeIn('slow');
+    });
 
     addBehaviour();
+
+    $(".delete-column").click(function(){
+      var columnIndex = $(this).closest("th").prevAll("th").length;
+      $(this).parents("table").find("tr").each(function () {
+        $(this).find("td:eq("+columnIndex+"), th:eq("+columnIndex+")").fadeOut('slow', function() {
+          $(this).remove();
+        });
+      });
+    });
+    
   });
+
+  $(".delete-column").click(function(){
+    var columnIndex = $(this).closest("th").prevAll("th").length;
+    $(this).parents("table").find("tr").each(function () {
+      $(this).find("td:eq("+columnIndex+"), th:eq("+columnIndex+")").fadeOut('slow', function() {
+        $(this).remove();
+      });
+    });
+  });
+
+  $('#add_story').click(function () {
+    var newRow = $('<tr></tr>');
+    var title = $('<td>Story X</td>');
+    var number_of_columns = $('.column_field').find('tr').first().find('td').length
+    newRow.append(title);
+
+    for(var i = 0 ; i < number_of_columns-1 ; i++){
+      var newColumn = $('<td class="column"><div class="column-content"></div></td>');
+      newRow.append(newColumn)
+    }
+
+    newRow.hide();
+    $('.column_field').append(newRow);
+    newRow.fadeIn('slow');
+    addBehaviour();
+  });
+
 });

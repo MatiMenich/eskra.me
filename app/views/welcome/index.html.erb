@@ -2,47 +2,60 @@
 
 	<div class="row">
 		<div class="col-md-6 col-md-offset-6">
-			<button class="btn btn-primary pull-right" id="addcolumn">
-				<span class='glyphicon glyphicon-plus'></span> 
-				Agregar columna
-			</button>	
+			<div class="btn-group pull-right">
+				<button class="btn btn-primary" id="add_column">
+					<span class='glyphicon glyphicon-list-alt'></span> 
+					Add Column
+				</button>
+				<button class="btn btn-success" id="add_story">
+					<span class='glyphicon glyphicon-th-list'></span> 
+					Add Story
+				</button>
+			</div>	
 		</div>
 	</div>
+	<br>
 	<div class="row">
-		<table class="table table-bordered">
-			<thead class="title_field">
-				<tr>
-					<th>
-						<div class="column-title h4">
-							Título 1 
-							<button class="btn btn-xs">
-								<span class='glyphicon glyphicon-plus'></span>
-							</button>
-						</div>
-					</th>
-					<th>
-						<div class="column-title h4">
-							Título 2 
-							<button class="btn btn-xs">
-								<span class='glyphicon glyphicon-plus'></span>
-							</button>
-						</div>
-					</th>
-					<th>
-						<div class="column-title h4">
-							Título 3 
-							<button class="btn btn-xs">
-								<span class='glyphicon glyphicon-plus'></span>
-							</button>
-						</div>
-					</th>
-				</tr>
-			</thead>
-			<tbody class="column_field">
-				<tr>
-					<td class="column">
-						
-						<div class="column-content">
+		<div class="table-responsive">
+			<table class="table table-bordered">
+				<thead class="title_field">
+					<tr>
+						<th><h4>Story</h4></th>
+						<th>
+							<div class="column-title h4">
+								Title 1 
+								<button class="btn btn-xs btn-danger delete-column pull-right">
+									<span class='glyphicon glyphicon-remove'></span>
+								</button>
+							</div>
+						</th>
+						<th>
+							<div class="column-title h4">
+								Title 2 
+								<button class="btn btn-xs btn-danger delete-column pull-right">
+									<span class='glyphicon glyphicon-remove'></span>
+								</button>
+							</div>
+						</th>
+						<th>
+							<div class="column-title h4">
+								Title 3 
+								<button class="btn btn-xs btn-danger delete-column pull-right">
+									<span class='glyphicon glyphicon-remove'></span>
+								</button>
+							</div>
+						</th>
+					</tr>
+				</thead>
+				<tbody class="column_field">
+					<tr>
+						<td class="story-column">Story1
+							<div class="btn-group">
+								<button class="btn btn-xs btn-warning"><span class="glyphicon glyphicon-trash"> </span></button>
+								<button class="btn btn-xs btn-primary"><span class="glyphicon glyphicon-plus"> </span></button>  
+							</div>
+						</td>
+						<td class="column">
 							<div class="panel panel-default">
 								<div class="panel-heading">Feeds<i class="panel-button"></i></div>
 								<div class="panel-body">Lorem ipsum dolor sit amet, consectetuer adipiscing elit</div>
@@ -52,19 +65,14 @@
 								<div class="panel-heading">News<i class="panel-button"></i></div>
 								<div class="panel-body">Lorem ipsum dolor sit amet, consectetuer adipiscing elit</div>
 							</div>
-						</div>
-					</td>
-					<td class="column">
-						
-						<div class="column-content">
+						</td>
+						<td class="column">
 							<div class="panel panel-default">
 								<div class="panel-heading">Shopping<i class="panel-button"></i></div>
 								<div class="panel-body">Lorem ipsum dolor sit amet, consectetuer adipiscing elit</div>
 							</div>
-						</div>
-					</td>
-					<td class="column">
-						<div class="column-content">
+						</td>
+						<td class="column">
 							<div class="panel panel-default">
 								<div class="panel-heading">Links<i class="panel-button"></i></div>
 								<div class="panel-body">Lorem ipsum dolor sit amet, consectetuer adipiscing elit</div>
@@ -74,11 +82,10 @@
 								<div class="panel-heading">Images<i class="panel-button"></i></div>
 								<div class="panel-body">Lorem ipsum dolor sit amet, consectetuer adipiscing elit</div>
 							</div>
-						</div>
-					</td>
-				</tr>
-			</tbody>
-		</table>
-		
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
 	</div>
 </div>
