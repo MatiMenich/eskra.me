@@ -17,6 +17,22 @@ $(function() {
       icon.toggleClass( "glyphicon-chevron-down glyphicon-chevron-up" );
       icon.closest( ".panel" ).find( ".panel-body" ).toggle();
     });
+
+    $(".delete-column").click(function(){
+      var columnIndex = $(this).closest("th").prevAll("th").length;
+      $(this).parents("table").find("tr").each(function () {
+        $(this).find("td:eq("+columnIndex+"), th:eq("+columnIndex+")").fadeOut('slow', function() {
+          $(this).remove();
+        });
+      });
+    });
+
+    $(".delete-story").click(function(){
+    var story = $(this).closest('tr');
+    story.fadeOut('slow', function(){
+      $(this).remove();
+    });
+  });
     
   };
 
@@ -39,30 +55,14 @@ $(function() {
 
     addBehaviour();
 
-    $(".delete-column").click(function(){
-      var columnIndex = $(this).closest("th").prevAll("th").length;
-      $(this).parents("table").find("tr").each(function () {
-        $(this).find("td:eq("+columnIndex+"), th:eq("+columnIndex+")").fadeOut('slow', function() {
-          $(this).remove();
-        });
-      });
-    });
-
-  });
-
-  $(".delete-column").click(function(){
-    var columnIndex = $(this).closest("th").prevAll("th").length;
-    $(this).parents("table").find("tr").each(function () {
-      $(this).find("td:eq("+columnIndex+"), th:eq("+columnIndex+")").fadeOut('slow', function() {
-        $(this).remove();
-      });
-    });
   });
 
   $('#add_story').click(function () {
     var newRow = $('<tr></tr>');
     var title = $('<td>Story X</td>');
+    var buttonGroup = $('<div class="btn-group"><button class="btn btn-xs btn-warning delete-story"><span class="glyphicon glyphicon-trash"> </span></button><button class="btn btn-xs btn-primary"><span class="glyphicon glyphicon-plus"> </span></button></div>');
     var number_of_columns = $('.title_field').find('tr').first().find('th').length
+    title.append(buttonGroup);
     newRow.append(title);
 
     for(var i = 0 ; i < number_of_columns-1 ; i++){
@@ -74,13 +74,6 @@ $(function() {
     $('.column_field').append(newRow);
     newRow.fadeIn('slow');
     addBehaviour();
-  });
-
-  $(".delete-story").click(function(){
-    var story = $(this).closest('tr');
-    story.fadeOut('slow', function(){
-      $(this).remove();
-    });
   });
 
 });
