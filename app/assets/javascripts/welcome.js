@@ -1,6 +1,8 @@
 $(function() {
 
-  function addBehaviour(){
+  var storyNumber = 1
+
+  function addLayoutBehaviour(){
     $( ".column" ).sortable({
       connectWith: ".column",
       handle: ".panel-heading",
@@ -10,13 +12,16 @@ $(function() {
 
     $( ".panel" )
     .find( ".panel-button" )
-    .html( "<button class='btn btn-xs btn-link pull-right panel-toggle'><span class='glyphicon glyphicon-chevron-down'></span></button>");
+    .html( "<button class='btn btn-xs btn-link pull-right panel-toggle'><span class='glyphicon glyphicon-chevron-down'></span></button><button class='btn btn-xs btn-link pull-right'><span class='glyphicon glyphicon-edit'></span></button>");
 
     $( ".panel-toggle" ).click(function() {
       var icon = $( this ).find('span');
       icon.toggleClass( "glyphicon-chevron-down glyphicon-chevron-up" );
       icon.closest( ".panel" ).find( ".panel-body" ).toggle();
     });
+  };
+
+  function addButtonBehaviour(){
 
     $(".delete-column").click(function(){
       var columnIndex = $(this).closest("th").prevAll("th").length;
@@ -28,15 +33,16 @@ $(function() {
     });
 
     $(".delete-story").click(function(){
-    var story = $(this).closest('tr');
-    story.fadeOut('slow', function(){
-      $(this).remove();
+      var story = $(this).closest('tr');
+      story.fadeOut('slow', function(){
+        $(this).remove();
+      });
     });
-  });
     
   };
 
-  addBehaviour();
+  addLayoutBehaviour();
+  addButtonBehaviour();
 
   $('#add_column').click(function () {
 
@@ -53,18 +59,19 @@ $(function() {
       newTitle.fadeIn('slow');
     });
 
-    addBehaviour();
+    addLayoutBehaviour();
+    addButtonBehaviour();
 
   });
 
   $('#add_story').click(function () {
+    storyNumber++;
     var newRow = $('<tr></tr>');
     var title = $('<td>Story X</td>');
-    var buttonGroup = $('<div class="btn-group"><button class="btn btn-xs btn-warning delete-story"><span class="glyphicon glyphicon-trash"> </span></button><button class="btn btn-xs btn-primary"><span class="glyphicon glyphicon-plus"> </span></button></div>');
+    var buttonGroup = $('<div class="btn-group"><button class="btn btn-xs btn-warning delete-story"><span class="glyphicon glyphicon-trash"> </span></button><button class="btn btn-xs btn-primary add-panel-'+storyNumber+'"><span class="glyphicon glyphicon-plus"> </span></button></div>');
     var number_of_columns = $('.title_field').find('tr').first().find('th').length
     title.append(buttonGroup);
     newRow.append(title);
-
     for(var i = 0 ; i < number_of_columns-1 ; i++){
       var newColumn = $('<td class="column"><div class="column-content"></div></td>');
       newRow.append(newColumn)
@@ -73,7 +80,40 @@ $(function() {
     newRow.hide();
     $('.column_field').append(newRow);
     newRow.fadeIn('slow');
-    addBehaviour();
+    addLayoutBehaviour();
+    addButtonBehaviour();
+
+    $('.add-panel-'+storyNumber).click(function(){
+      var title = 'Panel X';
+  var body = 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit';
+  var panel = $('<div class="panel panel-default"></div>');
+  var panelHeader = $('<div class="panel-heading">'+title+'<i class="panel-button"></i></div>');
+  var panelBody = $('<div class="panel-body">'+body+'</div>');
+
+      panel.append(panelHeader);
+      panel.append(panelBody);
+
+      $(this).closest('tr').find("td:eq(1)").append(panel);
+
+      addLayoutBehaviour();
+    });
   });
+
+$('.add-panel-1').click(function(){
+  var title = 'Panel X';
+  var body = 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit';
+  var panel = $('<div class="panel panel-default"></div>');
+  var panelHeader = $('<div class="panel-heading">'+title+'<i class="panel-button"></i></div>');
+  var panelBody = $('<div class="panel-body">'+body+'</div>');
+
+  panel.append(panelHeader);
+  panel.append(panelBody);
+
+  $(this).closest('tr').find("td:eq(1)").append(panel);
+
+  addLayoutBehaviour();
+});
+
+
 
 });
