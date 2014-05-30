@@ -1,11 +1,11 @@
 Rails.application.routes.draw do
-  resources :stickies
+  resources :stickies, defaults: {format: :json}
 
-  resources :rows
+  resources :rows, defaults: {format: :json}
 
-  resources :columns
+  resources :columns, defaults: {format: :json}
 
-  resources :boards
+  resources :boards, defaults: {format: :json}
 
   get 'welcome/index'
 
