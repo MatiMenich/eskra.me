@@ -1,6 +1,46 @@
 $(function() {
 
-  var storyNumber = 1;
+     /* for adding the initial board to the data base */
+    function addBoard(){
+        $.ajax({
+            url:    "/boards",
+            type:   "POST",
+            data:   {board: {name: "pusheen the mouse (?)", uid: 1}},
+        });
+
+    }
+
+
+    function recoverStickiesData(){
+
+        var dani;
+        $.ajax({
+            dataType: "json",
+            type:   'GET',
+            url:    '/stickies/1',
+            success:function(data){
+                // alert( JSON.stringify(data) );
+                //alert( data.name );
+
+                dani = data;
+
+                var title = data.name;
+                var body  = data.text;
+                var panel = $('<div class="panel panel-default"></div>');
+                var panelHeader = $('<div class="panel-heading">'+title+'<i class="panel-button"></i></div>');
+                var panelBody = $('<div class="panel-body">'+body+'</div>');
+
+                panel.append(panelHeader);
+                panel.append(panelBody);
+
+                $('.add-panel-' + 1).closest('tr').find("td:eq(1)").append(panel);
+
+
+            }
+        });
+
+    };
+
 
   function addLayoutBehaviour(){
     $( ".column" ).sortable({
@@ -47,8 +87,11 @@ $(function() {
     
   };
 
+  addBoard();
   addLayoutBehaviour();
   addButtonBehaviour();
+  recoverStickiesData();
+
 
 
   $('#add_column').click(function () {
@@ -59,6 +102,7 @@ $(function() {
       $(this).append(newColumn)
       newColumn.fadeIn('slow');
     });
+
     $('.title_field').find('tr').each(function () {
       var newTitle = $('<th><div class="column-title h4">Title X <button class="btn btn-xs btn-danger delete-column pull-right"><span class="glyphicon glyphicon-remove"></span></button></div></th>');
       newTitle.hide();
@@ -69,10 +113,17 @@ $(function() {
     addLayoutBehaviour();
     addButtonBehaviour();
 
+    $.ajax({
+      url:    "/columns",
+      type:   "POST",
+      data:   {column: {name:"creatividad excesiva", order: 1}},
+    });
+
   });
 
   $('#add_story').click(function () {
     storyNumber++;
+
     var newRow = $('<tr></tr>');
     var title = $('<td>Story X</td>');
     var buttonGroup = $('<div class="btn-group"><button class="btn btn-xs btn-warning delete-story"><span class="glyphicon glyphicon-trash"> </span></button><button class="btn btn-xs btn-primary add-panel-'+storyNumber+'"><span class="glyphicon glyphicon-plus"> </span></button></div>');
@@ -90,7 +141,8 @@ $(function() {
     addLayoutBehaviour();
     addButtonBehaviour();
 
-    $('.add-panel-'+storyNumber).click(function(){
+    /* every other panel (not inicial) */
+    $('.add-panel-' + storyNumber).click(function(){
       var title = 'Panel X';
       var body = 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit';
       var panel = $('<div class="panel panel-default"></div>');
@@ -102,25 +154,33 @@ $(function() {
 
       $(this).closest('tr').find("td:eq(1)").append(panel);
 
-      addLayoutBehaviour();
+      $.ajax({
+          url:    "/stickies",
+          type:   "POST",
+          data:   {stickie: {name: 'dani', text: 'gatito pipipim', column_id: 1/*default value*/,  row_id: storyNumber}},
+          success:function(resp){ alert('!!') }
+      });
+
+    addLayoutBehaviour();
+
+
     });
   });
 
-$('.add-panel-1').click(function(){
-  var title = 'Panel X';
-  var body = 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit';
-  var panel = $('<div class="panel panel-default"></div>');
-  var panelHeader = $('<div class="panel-heading">'+title+'<i class="panel-button"></i></div>');
-  var panelBody = $('<div class="panel-body">'+body+'</div>');
+  /* initial panel */
+  $('.add-panel-1').click(function(){
+    var title = 'Panel X';
+    var body = 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit';
+    var panel = $('<div class="panel panel-default"></div>');
+    var panelHeader = $('<div class="panel-heading">'+title+'<i class="panel-button"></i></div>');
+    var panelBody = $('<div class="panel-body">'+body+'</div>');
 
-  panel.append(panelHeader);
-  panel.append(panelBody);
+    panel.append(panelHeader);
+    panel.append(panelBody);
 
-  $(this).closest('tr').find("td:eq(1)").append(panel);
+    $(this).closest('tr').find("td:eq(1)").append(panel);
 
-  addLayoutBehaviour();
-});
-
-
+    addLayoutBehaviour();
+  });
 
 });

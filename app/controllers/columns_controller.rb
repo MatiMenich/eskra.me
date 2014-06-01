@@ -71,4 +71,5 @@ class ColumnsController < ApplicationController
     def column_params
       params.require(:column).permit(:name, :order, :board_id)
     end
+
 end
