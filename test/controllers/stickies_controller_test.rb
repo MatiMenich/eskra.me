@@ -17,7 +17,7 @@ class StickiesControllerTest < ActionController::TestCase
   end
 
   test "should create sticky" do
-    assert_difference('Stickie.count') do
+    assert_difference('Sticky.count') do
       post :create, sticky: { color: @sticky.color, column_id: @sticky.column_id, name: @sticky.name, row_id: @sticky.row_id, text: @sticky.text, url: @sticky.url }
     end
 
@@ -40,7 +40,7 @@ class StickiesControllerTest < ActionController::TestCase
   end
 
   test "should destroy sticky" do
-    assert_difference('Stickie.count', -1) do
+    assert_difference('Sticky.count', -1) do
       delete :destroy, id: @sticky
     end
 

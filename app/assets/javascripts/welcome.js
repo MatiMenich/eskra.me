@@ -1,6 +1,6 @@
 $(function() {
 
-  var storyNumber = 1
+  var storyNumber = 1;
 
   function addLayoutBehaviour(){
     $( ".column" ).sortable({
@@ -12,12 +12,17 @@ $(function() {
 
     $( ".panel" )
     .find( ".panel-button" )
-    .html( "<button class='btn btn-xs btn-link pull-right panel-toggle'><span class='glyphicon glyphicon-chevron-down'></span></button><button class='btn btn-xs btn-link pull-right'><span class='glyphicon glyphicon-edit'></span></button>");
+    .html( "<button class='btn btn-xs btn-link pull-right panel-toggle'><span class='glyphicon glyphicon-chevron-down'></span></button><button class='btn btn-xs btn-link panel-edit pull-right'><span class='glyphicon glyphicon-edit'></span></button>");
 
     $( ".panel-toggle" ).click(function() {
       var icon = $( this ).find('span');
       icon.toggleClass( "glyphicon-chevron-down glyphicon-chevron-up" );
       icon.closest( ".panel" ).find( ".panel-body" ).toggle();
+    });
+
+    $(".panel-edit").click(function() {
+      var panel = $( this ).closest('.panel');
+      panel.toggleClass( "panel-default panel-success" );
     });
   };
 
@@ -33,6 +38,7 @@ $(function() {
     });
 
     $(".delete-story").click(function(){
+      storyNumber--;
       var story = $(this).closest('tr');
       story.fadeOut('slow', function(){
         $(this).remove();
@@ -43,6 +49,7 @@ $(function() {
 
   addLayoutBehaviour();
   addButtonBehaviour();
+
 
   $('#add_column').click(function () {
 
@@ -73,7 +80,7 @@ $(function() {
     title.append(buttonGroup);
     newRow.append(title);
     for(var i = 0 ; i < number_of_columns-1 ; i++){
-      var newColumn = $('<td class="column"><div class="column-content"></div></td>');
+      var newColumn = $('<td class="column"></td>');
       newRow.append(newColumn)
     }
 
@@ -85,10 +92,10 @@ $(function() {
 
     $('.add-panel-'+storyNumber).click(function(){
       var title = 'Panel X';
-  var body = 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit';
-  var panel = $('<div class="panel panel-default"></div>');
-  var panelHeader = $('<div class="panel-heading">'+title+'<i class="panel-button"></i></div>');
-  var panelBody = $('<div class="panel-body">'+body+'</div>');
+      var body = 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit';
+      var panel = $('<div class="panel panel-default"></div>');
+      var panelHeader = $('<div class="panel-heading">'+title+'<i class="panel-button"></i></div>');
+      var panelBody = $('<div class="panel-body">'+body+'</div>');
 
       panel.append(panelHeader);
       panel.append(panelBody);

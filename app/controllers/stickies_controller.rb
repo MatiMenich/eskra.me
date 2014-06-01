@@ -4,7 +4,7 @@ class StickiesController < ApplicationController
   # GET /stickies
   # GET /stickies.json
   def index
-    @stickies = Stickie.all
+    @stickies = Sticky.all
   end
 
   # GET /stickies/1
@@ -14,7 +14,7 @@ class StickiesController < ApplicationController
 
   # GET /stickies/new
   def new
-    @sticky = Stickie.new
+    @sticky = Sticky.new
   end
 
   # GET /stickies/1/edit
@@ -24,11 +24,11 @@ class StickiesController < ApplicationController
   # POST /stickies
   # POST /stickies.json
   def create
-    @sticky = Stickie.new(sticky_params)
+    @sticky = Sticky.new(sticky_params)
 
     respond_to do |format|
       if @sticky.save
-        format.html { redirect_to @sticky, notice: 'Stickie was successfully created.' }
+        format.html { redirect_to @sticky, notice: 'Sticky was successfully created.' }
         format.json { render :show, status: :created, location: @sticky }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class StickiesController < ApplicationController
   def update
     respond_to do |format|
       if @sticky.update(sticky_params)
-        format.html { redirect_to @sticky, notice: 'Stickie was successfully updated.' }
+        format.html { redirect_to @sticky, notice: 'Sticky was successfully updated.' }
         format.json { render :show, status: :ok, location: @sticky }
       else
         format.html { render :edit }
@@ -56,7 +56,7 @@ class StickiesController < ApplicationController
   def destroy
     @sticky.destroy
     respond_to do |format|
-      format.html { redirect_to stickies_url, notice: 'Stickie was successfully destroyed.' }
+      format.html { redirect_to stickies_url, notice: 'Sticky was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -64,7 +64,7 @@ class StickiesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_sticky
-      @sticky = Stickie.find(params[:id])
+      @sticky = Sticky.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
