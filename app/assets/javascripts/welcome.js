@@ -172,51 +172,74 @@ var ready = function() {
   });
 
   $('#add_story').click(function () {
-    storyNumber++;
+    var name = 'New Story';
+    var boardId = $(this).attr("board-id");
+    $.ajax({
+      url:    "/rows",
+      type:   "POST",
+      data:   {row: {name: name, board_id: boardId}},
+      success: function (response) {
+        var newRow = $('<tr story-id="'+response.id+'"></tr>');
+        var title = $('<td>'+name+' </td>');
+        var buttonGroup = $('<div class="btn-group"></div>');
+        var deleteButton = $('<button class="btn btn-xs btn-warning delete-story"><span class="glyphicon glyphicon-trash"> </span>');
+        var addButton = $('</button><button class="btn btn-xs btn-primary"><span class="glyphicon glyphicon-plus"> </span></button>');
+        var number_of_columns = $('.title_field').find('tr').first().find('th').length
+        
+        /* Button append */
+        buttonGroup.append(deleteButton);
+        buttonGroup.append(addButton);
 
-    var newRow = $('<tr></tr>');
-    var title = $('<td>Story X </td>');
-    var buttonGroup = $('<div class="btn-group"><button class="btn btn-xs btn-warning delete-story"><span class="glyphicon glyphicon-trash"> </span></button><button class="btn btn-xs btn-primary add-panel-'+storyNumber+'"><span class="glyphicon glyphicon-plus"> </span></button></div>');
-    var number_of_columns = $('.title_field').find('tr').first().find('th').length
-    title.append(buttonGroup);
-    newRow.append(title);
-    for(var i = 0 ; i < number_of_columns-1 ; i++){
-      var newColumn = $('<td class="column"></td>');
-      newRow.append(newColumn)
-    }
+        title.append(buttonGroup);
 
-    newRow.hide();
-    $('.column_field').append(newRow);
-    newRow.fadeIn('slow');
-    addLayoutBehaviour();
-    addButtonBehaviour();
+        var columnIds = [];
+        $('.column_field').find('tr').first().find('.column').each(function () { columnIds.push( $(this).attr('column-id')) })
 
-    /* every other panel (not inicial) */
-    $('.add-panel-' + storyNumber).click(function(){
-      var title = 'Panel X';
-      var body = 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit';
-      var panel = $('<div class="panel panel-default"></div>');
-      var panelHeader = $('<div class="panel-heading">'+title+'<i class="panel-button"></i></div>');
-      var panelBody = $('<div class="panel-body">'+body+'</div>');
-
-      panel.append(panelHeader);
-      panel.append(panelBody);
-
-      $(this).closest('tr').find("td:eq(1)").append(panel);
-
-      var starterColumnId = $(this).closest('tr').find("td:eq(1)").attr("column-id");
-
-      $.ajax({
-        url:    "/stickies",
-        type:   "POST",
-        data:   {sticky: {name: 'dani', text: 'gatito pipipim', column_id: starterColumnId,  row_id: storyNumber}},
-        success: function(resp){ 
-          alert("!!");
+        newRow.append(title);
+        for(var i = 0 ; i < number_of_columns-1 ; i++){
+          var newColumn = $('<td class="column" column-id="'+columnIds[i]+'"></td>');
+          newRow.append(newColumn)
         }
-      });
 
-      addLayoutBehaviour();
+        newRow.hide();
+        $('.column_field').append(newRow);
+        newRow.fadeIn('slow');
+        addLayoutBehaviour();
+        addButtonBehaviour();
+
+        addButton.click(function(){
+          var title = 'New Stickie';
+          var body = 'Edit the stickie content';
+          
+          var currentStory = $(this).closest('tr');
+          var storyId = currentStory.attr('story-id');
+          var starterColumnId = $(this).closest('tr').find("td:eq(1)").attr("column-id");
+
+          $.ajax({
+            url:    "/stickies",
+            type:   "POST",
+            data:   {sticky: {name: title, text: body, column_id: starterColumnId,  row_id: storyId}},
+            success: function(response){ 
+              var panel = $('<div class="panel panel-default" sticky-id="'+response.id+'"></div>');
+              var panelHeader = $('<div class="panel-heading">'+title+'<i class="panel-button"></i></div>');
+              var panelBody = $('<div class="panel-body">'+body+'</div>');
+
+              panel.append(panelHeader);
+              panel.append(panelBody);
+
+              currentStory.find("td:eq(1)").append(panel);
+
+              addLayoutBehaviour();
+            }
+          });
+
+          addLayoutBehaviour();
+        });
+      }
+
     });
+
+    
   });
 
   /* initial panel's buttons */
@@ -235,7 +258,7 @@ var ready = function() {
         type:   "POST",
         data:   {sticky: {name: title, text: body, column_id: starterColumnId,  row_id: storyId}},
         success: function(response){ 
-          var panel = $('<div class="panel panel-default"></div>');
+          var panel = $('<div class="panel panel-default" sticky-id="'+response.id+'"></div>');
           var panelHeader = $('<div class="panel-heading">'+title+'<i class="panel-button"></i></div>');
           var panelBody = $('<div class="panel-body">'+body+'</div>');
 
