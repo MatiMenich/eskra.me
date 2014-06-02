@@ -2,15 +2,17 @@
 
 	<div class="row">
 		<div class="col-md-6">
-			<h4>Board 1</h4>
+			<h4><a href="#" data-xeditable="true" data-pk="<%= @board.id %>" data-model="board" data-name="name" data-url="<%= board_url(@board) %>" data-title="Enter name">
+            <%= @board.name %>
+          </a></h4>
 		</div>
 		<div class="col-md-6">
 			<div class="btn-group pull-right">
-				<button class="btn btn-primary" id="add_column">
+				<button class="btn btn-primary" id="add_column" board-id="<%= @board.id %>">
 					<span class='glyphicon glyphicon-list-alt'></span> 
 					Add Column
 				</button>
-				<button class="btn btn-success" id="add_story">
+				<button class="btn btn-success" id="add_story" board-id="<%= @board.id %>">
 					<span class='glyphicon glyphicon-th-list'></span> 
 					Add Story
 				</button>
@@ -24,33 +26,44 @@
 				<thead class="title_field">
 					<tr>
 						<th><h4>Stories</h4></th>
-						<th>
-							<div class="column-title h4">
-								To Do
-								<button class="btn btn-xs btn-danger delete-column pull-right">
-									<span class='glyphicon glyphicon-remove'></span>
-								</button>
-							</div>
-						</th>
-						<th>
-							<div class="column-title h4">
-						        Doing
-								<button class="btn btn-xs btn-danger delete-column pull-right">
-									<span class='glyphicon glyphicon-remove'></span>
-								</button>
-							</div>
-						</th>
-						<th>
-							<div class="column-title h4">
-								Done
-								<button class="btn btn-xs btn-danger delete-column pull-right">
-									<span class='glyphicon glyphicon-remove'></span>
-								</button>
-							</div>
-						</th>
+						<% @board.columns.each do |column| %>
+							<th>
+								<div class="column-title h4" board-id='<%= column.id %>'>
+										<a href="#" data-xeditable="true" data-pk="<%= column.id %>" data-model="column" data-name="name" data-url="<%= column_url(column) %>" data-title="Enter name">
+							            	<%= column.name %>
+							          	</a>
+									<button class="btn btn-xs btn-danger delete-column pull-right">
+										<span class='glyphicon glyphicon-remove'></span>
+									</button>
+								</div>
+							</th>
+						<% end %>
 					</tr>
 				</thead>
 				<tbody class="column_field">
+					<% @board.rows.each do |story| %>
+						<tr>
+							<td class="story-column"><%= story.name %>
+								<div class="btn-group">
+									<button class="btn btn-xs btn-warning delete-story"><span class="glyphicon glyphicon-trash"> </span></button>
+									<button class="btn btn-xs btn-primary add-panel-1"><span class="glyphicon glyphicon-plus"> </span></button>  
+								</div>
+							</td>
+							<% @board.columns.each do |column|%>
+								<td class="column">
+									<% column.stickies.each do |sticky| %>
+										<% if story.stickies.include?(sticky) %>
+										<div class="panel panel-default">
+											<div class="panel-heading"><%= sticky.name %><i class="panel-button"></i></div>
+											<div class="panel-body"><%= sticky.text %></div>
+										</div>
+										<% end %>
+									<% end %>
+								</td>
+							<% end %>
+						</tr>
+					<% end %>
+					<!--
 					<tr>
 						<td class="story-column">Story_1
 							<div class="btn-group">
@@ -67,16 +80,17 @@
 
 						</td>
 						<td class="column">
-                            <!-- column 2 -->
+                            
 
 
 						</td>
 						<td class="column">
-                            <!-- column 3 -->
+                            
 
 
 						</td>
 					</tr>
+					-->
 				</tbody>
 			</table>
 		</div>
