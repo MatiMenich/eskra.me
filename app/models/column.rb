@@ -3,5 +3,4 @@ class Column < ActiveRecord::Base
 
   has_many :stickies
 
-
 end
