@@ -32,6 +32,9 @@ gem 'bcrypt', '~> 3.1.7'
 # Twitter bootstrap sass
 gem 'bootstrap-sass'
 
+# bootstrap x-editable
+gem 'bootstrap-x-editable-rails'
+
 # jquery ui
 gem 'jquery-ui-rails'
 
