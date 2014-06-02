@@ -88,8 +88,16 @@ var ready = function() {
     $(".delete-story").click(function(){
       storyNumber--;
       var story = $(this).closest('tr');
-      story.fadeOut('slow', function(){
-        $(this).remove();
+      var storyId = story.attr('story-id');
+      $.ajax({
+        dataType: "json",
+        type: 'delete',
+        url: '/rows/'+storyId,
+        success: function (data) {
+          story.fadeOut('slow', function(){
+            $(this).remove();
+          });
+        }
       });
     });
 
