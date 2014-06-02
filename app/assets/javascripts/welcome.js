@@ -39,7 +39,25 @@ var ready = function() {
       connectWith: ".column",
       handle: ".panel-heading",
       cancel: ".portlet-toggle",
-      placeholder: "well portlet-placeholder"
+      placeholder: "well portlet-placeholder",
+      opacity: 0.5,
+      revert: true,
+      update: function (event, ui) {
+
+          var columnId = ui.item.parents(".column").attr("column-id");
+          var storyId = ui.item.parents("tr").attr("story-id");
+          var stickyId = ui.item.attr("sticky-id");
+          //console.log('column-id:'+columnId);
+          //console.log('story-id:'+storyId);
+          //console.log('sticky-id:'+stickyId);
+          $.ajax({
+            url:    "/stickies/"+stickyId,
+            type:   "PUT",
+            data:   {sticky: {column_id: columnId, story_id: storyId}},
+            success: function(response){ 
+            }
+          });
+        }
     });
 
     $( ".panel" )
@@ -58,21 +76,21 @@ var ready = function() {
     });
 
     $("[data-xeditable=true]").each(function() {
-    return $(this).editable({
-      mode: 'inline',
-      ajaxOptions: {
-        type: "PUT",
-        dataType: "json"
-      },
-      params: function(params) {
-        var railsParams;
-        railsParams = {};
-        railsParams[$(this).data("model")] = {};
-        railsParams[$(this).data("model")][params.name] = params.value;
-        return railsParams;
-      }
+      return $(this).editable({
+        mode: 'inline',
+        ajaxOptions: {
+          type: "PUT",
+          dataType: "json"
+        },
+        params: function(params) {
+          var railsParams;
+          railsParams = {};
+          railsParams[$(this).data("model")] = {};
+          railsParams[$(this).data("model")][params.name] = params.value;
+          return railsParams;
+        }
+      });
     });
-  });
   };
 
   function addButtonBehaviour(){
@@ -186,10 +204,12 @@ var ready = function() {
 
       $(this).closest('tr').find("td:eq(1)").append(panel);
 
+      var starterColumnId = $(this).closest('tr').find("td:eq(1)").attr("column-id");
+
       $.ajax({
         url:    "/stickies",
         type:   "POST",
-        data:   {sticky: {name: 'dani', text: 'gatito pipipim', column_id: 1/*default value*/,  row_id: storyNumber}},
+        data:   {sticky: {name: 'dani', text: 'gatito pipipim', column_id: starterColumnId,  row_id: storyNumber}},
         success: function(resp){ 
           alert("!!");
         }
@@ -199,20 +219,35 @@ var ready = function() {
     });
   });
 
-  /* initial panel */
-  $('.add-panel-1').click(function(){
-    var title = 'Panel X';
-    var body = 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit';
-    var panel = $('<div class="panel panel-default"></div>');
-    var panelHeader = $('<div class="panel-heading">'+title+'<i class="panel-button"></i></div>');
-    var panelBody = $('<div class="panel-body">'+body+'</div>');
+  /* initial panel's buttons */
+  $("[add-sticky=true]").each(function () { 
+    return $(this).click(function(){
 
-    panel.append(panelHeader);
-    panel.append(panelBody);
+      var currentStory = $(this).closest('tr');
 
-    $(this).closest('tr').find("td:eq(1)").append(panel);
+      var title = 'New Stickie';
+      var body = 'Edit the stickie content';
+      var starterColumnId = currentStory.find("td:eq(1)").attr("column-id");
+      var storyId = currentStory.attr('story-id');
 
-    addLayoutBehaviour();
+      $.ajax({
+        url:    "/stickies",
+        type:   "POST",
+        data:   {sticky: {name: title, text: body, column_id: starterColumnId,  row_id: storyId}},
+        success: function(response){ 
+          var panel = $('<div class="panel panel-default"></div>');
+          var panelHeader = $('<div class="panel-heading">'+title+'<i class="panel-button"></i></div>');
+          var panelBody = $('<div class="panel-body">'+body+'</div>');
+
+          panel.append(panelHeader);
+          panel.append(panelBody);
+
+          currentStory.find("td:eq(1)").append(panel);
+
+          addLayoutBehaviour();
+        }
+      });
+    });
   });
 
 };
