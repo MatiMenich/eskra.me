@@ -43,7 +43,10 @@
 				<tbody class="column_field">
 					<% @board.rows.each do |story| %>
 						<tr story-id="<%= story.id %>">
-							<td class="story-column"><%= story.name %>
+							<td class="story-column">
+							<a href="#" data-xeditable="true" data-pk="<%= story.id %>" data-model="row" data-name="name" data-url="<%= row_url(story) %>" data-title="Enter name">
+						        <%= story.name %>
+						    </a>
 								<div class="btn-group">
 									<button class="btn btn-xs btn-warning delete-story"><span class="glyphicon glyphicon-trash"> </span></button>
 									<button class="btn btn-xs btn-primary" add-sticky="true"><span class="glyphicon glyphicon-plus"> </span></button>  
@@ -63,34 +66,6 @@
 							<% end %>
 						</tr>
 					<% end %>
-					<!--
-					<tr>
-						<td class="story-column">Story_1
-							<div class="btn-group">
-								<button class="btn btn-xs btn-warning delete-story"><span class="glyphicon glyphicon-trash"> </span></button>
-								<button class="btn btn-xs btn-primary add-panel-1"><span class="glyphicon glyphicon-plus"> </span></button>  
-							</div>
-						</td>
-						<td class="column">
-							<div class="panel panel-info">
-								<div class="panel-heading">Feeds<i class="panel-button"></i></div>
-								<div class="panel-body">Lorem ipsum dolor sit amet, consectetuer adipiscing elit</div>
-							</div>
-
-
-						</td>
-						<td class="column">
-                            
-
-
-						</td>
-						<td class="column">
-                            
-
-
-						</td>
-					</tr>
-					-->
 				</tbody>
 			</table>
 		</div>

@@ -2,37 +2,6 @@ var ready = function() {
 
   var storyNumber = 1;
 
-/*
-  function recoverStickiesData(){
-
-    var dani;
-    $.ajax({
-      dataType: "json",
-      type:   'GET',
-      url:    '/stickies/1',
-      success:function(data){
-              // alert( JSON.stringify(data) );
-              //alert( data.name );
-
-              dani = data;
-
-              var title = data.name;
-              var body  = data.text;
-              var panel = $('<div class="panel panel-default"></div>');
-              var panelHeader = $('<div class="panel-heading">'+title+'<i class="panel-button"></i></div>');
-              var panelBody = $('<div class="panel-body">'+body+'</div>');
-
-              panel.append(panelHeader);
-              panel.append(panelBody);
-
-              $('.add-panel-' + 1).closest('tr').find("td:eq(1)").append(panel);
-
-
-            }
-          });
-
-  };
-*/
 
   function addLayoutBehaviour(){
     $( ".column" ).sortable({
@@ -126,7 +95,6 @@ var ready = function() {
 
   };
 
-  //recoverStickiesData();
   addLayoutBehaviour();
   addButtonBehaviour();
 
@@ -180,7 +148,10 @@ var ready = function() {
       data:   {row: {name: name, board_id: boardId}},
       success: function (response) {
         var newRow = $('<tr story-id="'+response.id+'"></tr>');
-        var title = $('<td>'+name+' </td>');
+        var editable = $('<a href="#" data-xeditable="true" data-pk="'+response.id+'" data-model="row" data-name="name" data-url="/rows/'+response.id+'" data-title="Enter name"></a>');
+        var title = $('<td></td>');
+        editable.append(name);
+        title.append(editable);
         var buttonGroup = $('<div class="btn-group"></div>');
         var deleteButton = $('<button class="btn btn-xs btn-warning delete-story"><span class="glyphicon glyphicon-trash"> </span>');
         var addButton = $('</button><button class="btn btn-xs btn-primary"><span class="glyphicon glyphicon-plus"> </span></button>');
