@@ -57,8 +57,12 @@
 									<% column.stickies.each do |sticky| %>
 										<% if story.stickies.include?(sticky) %>
 										<div class="panel panel-default" sticky-id="<%= sticky.id %>">
-											<div class="panel-heading"><%= sticky.name %><i class="panel-button"></i></div>
-											<div class="panel-body"><%= sticky.text %></div>
+											<div class="panel-heading"><a href="#" data-xeditable="true" data-pk="<%= sticky.id %>" data-model="sticky" data-name="name" data-url="<%= sticky_url(sticky) %>" data-title="Enter name">
+									        <%= sticky.name %>
+									    	</a><i class="panel-button"></i></div>
+											<div class="panel-body"><a href="#" data-xeditable="true" data-pk="<%= sticky.id %>" data-model="sticky" data-name="text" data-url="<%= sticky_url(sticky) %>" data-title="Enter text">
+									        <%= sticky.text %>
+									    	</a></div>
 										</div>
 										<% end %>
 									<% end %>

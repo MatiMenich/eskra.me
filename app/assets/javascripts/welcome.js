@@ -192,8 +192,12 @@ var ready = function() {
             data:   {sticky: {name: title, text: body, column_id: starterColumnId,  row_id: storyId}},
             success: function(response){ 
               var panel = $('<div class="panel panel-default" sticky-id="'+response.id+'"></div>');
-              var panelHeader = $('<div class="panel-heading">'+title+'<i class="panel-button"></i></div>');
-              var panelBody = $('<div class="panel-body">'+body+'</div>');
+              var editableHeader = $('<a href="#" data-xeditable="true" data-pk="'+response.id+'" data-model="sticky" data-name="name" data-url="/stickies/'+response.id+'" data-title="Enter name">'+title+'</a>')
+              var panelHeader = $('<div class="panel-heading"><i class="panel-button"></i></div>');
+              panelHeader.prepend(editableHeader);
+              var editableBody = $('<a href="#" data-xeditable="true" data-pk="'+response.id+'" data-model="sticky" data-name="text" data-url="/stickies/'+response.id+'" data-title="Enter text">'+body+'</a>');
+              var panelBody = $('<div class="panel-body"></div>');
+              panelBody.append(editableBody);
 
               panel.append(panelHeader);
               panel.append(panelBody);
@@ -230,8 +234,12 @@ var ready = function() {
         data:   {sticky: {name: title, text: body, column_id: starterColumnId,  row_id: storyId}},
         success: function(response){ 
           var panel = $('<div class="panel panel-default" sticky-id="'+response.id+'"></div>');
-          var panelHeader = $('<div class="panel-heading">'+title+'<i class="panel-button"></i></div>');
-          var panelBody = $('<div class="panel-body">'+body+'</div>');
+          var editableHeader = $('<a href="#" data-xeditable="true" data-pk="'+response.id+'" data-model="sticky" data-name="name" data-url="/stickies/'+response.id+'" data-title="Enter name">'+title+'</a>')
+          var panelHeader = $('<div class="panel-heading"><i class="panel-button"></i></div>');
+          panelHeader.prepend(editableHeader);
+          var editableBody = $('<a href="#" data-xeditable="true" data-pk="'+response.id+'" data-model="sticky" data-name="text" data-url="/stickies/'+response.id+'" data-title="Enter text">'+body+'</a>');
+          var panelBody = $('<div class="panel-body"></div>');
+          panelBody.append(editableBody);
 
           panel.append(panelHeader);
           panel.append(panelBody);
