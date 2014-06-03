@@ -185,17 +185,16 @@ var ready = function() {
   });
 
   $('#add_story').click(function () {
-    var name = 'New Story';
     var boardId = $(this).attr("board-id");
     $.ajax({
       url:    "/rows",
       type:   "POST",
-      data:   {row: {name: name, board_id: boardId}},
+      data:   {row: {board_id: boardId}},
       success: function (response) {
         var newRow = $('<tr story-id="'+response.id+'"></tr>');
         var editable = $('<a href="#" data-xeditable="true" data-pk="'+response.id+'" data-model="row" data-name="name" data-url="/rows/'+response.id+'" data-title="Enter name"></a>');
         var title = $('<td></td>');
-        editable.append(name);
+        editable.append(response.name);
         title.append(editable);
         var buttonGroup = $('<div class="btn-group"></div>');
         var deleteButton = $('<button class="btn btn-xs btn-warning delete-story"><span class="glyphicon glyphicon-trash"> </span>');

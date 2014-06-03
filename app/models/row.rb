@@ -3,4 +3,12 @@ class Row < ActiveRecord::Base
 
   has_many :stickies
   
+  before_create :set_default_parameters
+
+  private
+
+  def set_default_parameters
+  	self.name = 'New Story'
+  end
+
 end
