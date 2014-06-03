@@ -31,7 +31,9 @@ var ready = function() {
 
     $( ".panel" )
     .find( ".panel-button" )
-    .html( "<button class='btn btn-xs btn-link pull-right panel-toggle'><span class='glyphicon glyphicon-chevron-down'></span></button>");
+    .html( "<div class='btn-group btn-xs'></div>");
+
+    var toggleButton = $("<button class='btn btn-xs btn-link pull-right panel-toggle'><span class='glyphicon glyphicon-chevron-down'></span></button>");
 
     var dropdownDiv = $("<div class='icon-btn pull-right dropdown'></div>");
     var dropdownButton = $("<button class='btn btn-link btn-xs dropdown-toggle' role='button' href='#' data-toggle='dropdown'><span class='glyphicon glyphicon-tint'></span></button>");
@@ -53,9 +55,7 @@ var ready = function() {
 
     $( ".panel" )
     .find( ".panel-button" )
-    .append(dropdownDiv);
-
-
+    .append(toggleButton).append(dropdownDiv);
 
 
     $( ".panel-toggle" ).click(function() {
@@ -83,9 +83,19 @@ var ready = function() {
 
     $('[color-class]').click(function() {
       var panel = $(this).closest('.panel');
-      panel.removeClass();
-      panel.addClass('panel');
-      panel.addClass($(this).attr('color-class'));
+      var colorClass = $(this).attr('color-class');
+      $.ajax({
+        dataType: "json",
+        type: "PUT",
+        url: '/stickies/'+panel.attr('sticky-id'),
+        data: {sticky: {color: colorClass}},
+        success: function () {
+          panel.removeClass();
+          panel.addClass('panel');
+          panel.addClass(colorClass);
+        }
+      });
+      
     });
   };
 
@@ -214,8 +224,6 @@ var ready = function() {
         addButtonBehaviour();
 
         addButton.click(function(){
-          var title = 'New Stickie';
-          var body = 'Edit the stickie content';
           
           var currentStory = $(this).closest('tr');
           var storyId = currentStory.attr('story-id');
@@ -224,13 +232,13 @@ var ready = function() {
           $.ajax({
             url:    "/stickies",
             type:   "POST",
-            data:   {sticky: {name: title, text: body, column_id: starterColumnId,  row_id: storyId}},
+            data:   {sticky: {column_id: starterColumnId, row_id: storyId}},
             success: function(response){ 
               var panel = $('<div class="panel panel-default" sticky-id="'+response.id+'"></div>');
-              var editableHeader = $('<a href="#" data-xeditable="true" data-pk="'+response.id+'" data-model="sticky" data-name="name" data-url="/stickies/'+response.id+'" data-title="Enter name">'+title+'</a>')
+              var editableHeader = $('<a href="#" data-xeditable="true" data-pk="'+response.id+'" data-model="sticky" data-name="name" data-url="/stickies/'+response.id+'" data-title="Enter name">'+response.name+'</a>')
               var panelHeader = $('<div class="panel-heading"><i class="panel-button"></i></div>');
               panelHeader.prepend(editableHeader);
-              var editableBody = $('<a href="#" data-xeditable="true" data-pk="'+response.id+'" data-model="sticky" data-name="text" data-url="/stickies/'+response.id+'" data-title="Enter text">'+body+'</a>');
+              var editableBody = $('<a href="#" data-xeditable="true" data-pk="'+response.id+'" data-model="sticky" data-name="text" data-url="/stickies/'+response.id+'" data-title="Enter text">'+response.text+'</a>');
               var panelBody = $('<div class="panel-body"></div>');
               panelBody.append(editableBody);
 
@@ -258,21 +266,19 @@ var ready = function() {
 
       var currentStory = $(this).closest('tr');
 
-      var title = 'New Stickie';
-      var body = 'Edit the stickie content';
       var starterColumnId = currentStory.find("td:eq(1)").attr("column-id");
       var storyId = currentStory.attr('story-id');
 
       $.ajax({
         url:    "/stickies",
         type:   "POST",
-        data:   {sticky: {name: title, text: body, column_id: starterColumnId,  row_id: storyId}},
+        data:   {sticky: {column_id: starterColumnId, row_id: storyId}},
         success: function(response){ 
           var panel = $('<div class="panel panel-default" sticky-id="'+response.id+'"></div>');
-          var editableHeader = $('<a href="#" data-xeditable="true" data-pk="'+response.id+'" data-model="sticky" data-name="name" data-url="/stickies/'+response.id+'" data-title="Enter name">'+title+'</a>')
+          var editableHeader = $('<a href="#" data-xeditable="true" data-pk="'+response.id+'" data-model="sticky" data-name="name" data-url="/stickies/'+response.id+'" data-title="Enter name">'+response.name+'</a>')
           var panelHeader = $('<div class="panel-heading"><i class="panel-button"></i></div>');
           panelHeader.prepend(editableHeader);
-          var editableBody = $('<a href="#" data-xeditable="true" data-pk="'+response.id+'" data-model="sticky" data-name="text" data-url="/stickies/'+response.id+'" data-title="Enter text">'+body+'</a>');
+          var editableBody = $('<a href="#" data-xeditable="true" data-pk="'+response.id+'" data-model="sticky" data-name="text" data-url="/stickies/'+response.id+'" data-title="Enter text">'+response.text+'</a>');
           var panelBody = $('<div class="panel-body"></div>');
           panelBody.append(editableBody);
 
