@@ -263,7 +263,10 @@ var ready = function() {
       $(this).toggleClass( "glyphicon-chevron-down glyphicon-chevron-up" );
       $(this).closest( ".panel" ).find( ".panel-body" ).toggle();
     });
-    
+  });
+
+  $('#toggle_edit').click(function () {
+    $("[data-xeditable=true]").editable('toggleDisabled');
   });
 
   /* initial panel's buttons */
