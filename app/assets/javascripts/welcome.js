@@ -31,17 +31,37 @@ var ready = function() {
 
     $( ".panel" )
     .find( ".panel-button" )
-    .html( "<button class='btn btn-xs btn-link pull-right panel-toggle'><span class='glyphicon glyphicon-chevron-down'></span></button><button class='btn btn-xs btn-link panel-edit pull-right'><span class='glyphicon glyphicon-edit'></span></button>");
+    .html( "<button class='btn btn-xs btn-link pull-right panel-toggle'><span class='glyphicon glyphicon-chevron-down'></span></button>");
+
+    var dropdownDiv = $("<div class='icon-btn pull-right dropdown'></div>");
+    var dropdownButton = $("<button class='btn btn-link btn-xs dropdown-toggle' role='button' href='#' data-toggle='dropdown'><span class='glyphicon glyphicon-tint'></span></button>");
+    var dropdownMenu = $("<ul class='dropdown-menu pull-right' role='menu'></ul>");
+    var redOption = $("<li color-class='panel-danger'><a tabindex='-1'><div class='color-circle' style='background-color:#f2dede;'></div>&nbsp</a></li>");
+    var greenOption = $("<li color-class='panel-success'><a tabindex='-1'><div class='color-circle' style='background-color:#dff0d8;' ></div>&nbsp</a></li>");
+    var defaultOption = $("<li color-class='panel-default'><a tabindex='-1'><div class='color-circle' style='background-color:whitesmoke;' ></div>&nbsp</a></li>");
+    var yellowOption = $("<li color-class='panel-warning'><a tabindex='-1'><div class='color-circle' style='background-color:#fcf8e3;' ></div>&nbsp</a></li>"); 
+    var blueOption = $("<li color-class='panel-info'><a tabindex='-1'><div class='color-circle' style='background-color:#d9edf7;' ></div>&nbsp</a></li>");
+
+    dropdownMenu.append(defaultOption);
+    dropdownMenu.append(redOption);
+    dropdownMenu.append(greenOption);
+    dropdownMenu.append(yellowOption);
+    dropdownMenu.append(blueOption);
+
+    dropdownDiv.append(dropdownButton);
+    dropdownDiv.append(dropdownMenu);
+
+    $( ".panel" )
+    .find( ".panel-button" )
+    .append(dropdownDiv);
+
+
+
 
     $( ".panel-toggle" ).click(function() {
       var icon = $( this ).find('span');
       icon.toggleClass( "glyphicon-chevron-down glyphicon-chevron-up" );
       icon.closest( ".panel" ).find( ".panel-body" ).toggle();
-    });
-
-    $(".panel-edit").click(function() {
-      var panel = $( this ).closest('.panel');
-      panel.toggleClass( "panel-default panel-success" );
     });
 
     $("[data-xeditable=true]").each(function() {
@@ -59,6 +79,13 @@ var ready = function() {
           return railsParams;
         }
       });
+    });
+
+    $('[color-class]').click(function() {
+      var panel = $(this).closest('.panel');
+      panel.removeClass();
+      panel.addClass('panel');
+      panel.addClass($(this).attr('color-class'));
     });
   };
 

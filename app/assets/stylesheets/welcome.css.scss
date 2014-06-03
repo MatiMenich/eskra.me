@@ -13,3 +13,28 @@
     margin: 0 1em 1em 0;
     height: 50px;
   }
+
+  .dropdown-menu {
+    min-width: 0px !important;
+  }
+
+  .color-circle {   
+    float: left;
+    width: 20px;
+    height: 20px;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 50%;
+    border-color: rgba(0,0,0,.2);
+  }
+
+  /* Make inline editables take the full width of the panel */
+  .panel-body .editable-container.editable-inline,
+  .panel-body .editable-container.editable-inline .control-group.form-group,
+  .panel-body .editable-container.editable-inline .control-group.form-group .editable-input,
+  .panel-body .editable-container.editable-inline .control-group.form-group .editable-input textarea,
+  .panel-body .editable-container.editable-inline .control-group.form-group .editable-input select,
+  .panel-body .editable-container.editable-inline .control-group.form-group .editable-input input:not([type=radio]):not([type=checkbox]):not([type=submit])
+  {
+      width: 100% !important;
+  }
