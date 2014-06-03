@@ -236,7 +236,7 @@ var ready = function() {
               var editableHeader = $('<a href="#" data-xeditable="true" data-pk="'+response.id+'" data-model="sticky" data-name="name" data-url="/stickies/'+response.id+'" data-title="Enter name">'+response.name+'</a>')
               var panelHeader = $('<div class="panel-heading"><i class="panel-button"></i></div>');
               panelHeader.prepend(editableHeader);
-              var editableBody = $('<a href="#" data-xeditable="true" data-pk="'+response.id+'" data-model="sticky" data-name="text" data-url="/stickies/'+response.id+'" data-title="Enter text">'+response.text+'</a>');
+              var editableBody = $('<a href="#" data-xeditable="true" data-pk="'+response.id+'" data-model="sticky" data-name="text" data-url="/stickies/'+response.id+'" data-title="Enter text" data-type="textarea" data-showbuttons="bottom" data-anim="500">'+response.text+'</a>');
               var panelBody = $('<div class="panel-body"></div>');
               panelBody.append(editableBody);
 
@@ -287,7 +287,7 @@ var ready = function() {
           var editableHeader = $('<a href="#" data-xeditable="true" data-pk="'+response.id+'" data-model="sticky" data-name="name" data-url="/stickies/'+response.id+'" data-title="Enter name">'+response.name+'</a>')
           var panelHeader = $('<div class="panel-heading"><i class="panel-button"></i></div>');
           panelHeader.prepend(editableHeader);
-          var editableBody = $('<a href="#" data-xeditable="true" data-pk="'+response.id+'" data-model="sticky" data-name="text" data-url="/stickies/'+response.id+'" data-title="Enter text">'+response.text+'</a>');
+          var editableBody = $('<a href="#" data-xeditable="true" data-pk="'+response.id+'" data-model="sticky" data-name="text" data-url="/stickies/'+response.id+'" data-title="Enter text" data-type="textarea" data-showbuttons="bottom" data-anim="500" >'+response.text+'</a>');
           var panelBody = $('<div class="panel-body"></div>');
           panelBody.append(editableBody);
 
