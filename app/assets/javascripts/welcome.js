@@ -137,7 +137,6 @@ var ready = function() {
         }
       });
     });
-
   };
 
   addLayoutBehaviour();
@@ -256,6 +255,14 @@ var ready = function() {
 
     });
 
+    
+  });
+
+  $('#toggle_collapse').click(function() {
+    $('[class*="glyphicon-chevron-"]').each(function () {
+      $(this).toggleClass( "glyphicon-chevron-down glyphicon-chevron-up" );
+      $(this).closest( ".panel" ).find( ".panel-body" ).toggle();
+    });
     
   });
 

@@ -7,6 +7,7 @@
           </a></h4>
 		</div>
 		<div class="col-md-6">
+			<div class='btn-toolbar'>
 			<div class="btn-group pull-right">
 				<button class="btn btn-primary" id="add_column" board-id="<%= @board.id %>">
 					<span class='glyphicon glyphicon-list-alt'></span> 
@@ -16,7 +17,13 @@
 					<span class='glyphicon glyphicon-th-list'></span> 
 					Add Story
 				</button>
-			</div>	
+			</div>
+			<button class="btn btn-default pull-right" id="toggle_collapse">
+				<span class='glyphicon glyphicon-eye-open'></span> 
+				Toggle Collapse
+			</button>
+			</div>
+
 		</div>
 	</div>
 	<br>
