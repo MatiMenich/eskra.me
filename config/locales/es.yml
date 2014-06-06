@@ -5,4 +5,9 @@ es:
   story: "Historia"
   stories: "Historias"
   about_us: "Acerca de nosotros"
+  options: "Opciones"
+  toggle_view: "Alternar Vista"
+  toggle_edit: "Alternar Edición"
+  add_column: "Añadir Columna"
+  add_story: "Añadir Historia"
   
