@@ -15,6 +15,7 @@ class Board < ActiveRecord::Base
 		end while Board.exists?(uid: self.uid)
 	end
 
+
 	def create_default_parameters
 		Column.create(name: 'To Do', order: 1, board_id: self.id)
 		Column.create(name: 'Doing', order: 2, board_id: self.id)

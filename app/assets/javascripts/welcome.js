@@ -52,12 +52,13 @@ var ready = function() {
 
     dropdownDiv.append(dropdownButton);
     dropdownDiv.append(dropdownMenu);
+    dropdownDiv.append(deleteButton);
     
     $( ".panel" )
     .find( ".panel-button" )
     .append(toggleButton).append(dropdownDiv);
 
-	dropdownDiv.append(deleteButton);
+	
 
     $( ".panel-toggle" ).click(function() {
       var icon = $( this ).find('span');
@@ -141,7 +142,7 @@ var ready = function() {
 
     $(".delete-sticky").click(function(){
       var button = $(this);
-      var panel = button.closest(".panel");
+      var panel = button.closest(".panel-default");
       var stickyId = panel.attr('sticky-id');
       $.ajax({
         dataType: "json",
