@@ -5,13 +5,17 @@ class WelcomeController < ApplicationController
   		@board = Board.create(name: 'Your Board')
   	else
   		unless params[:locale].nil?
-  			if params[:locale] == 'es'
-  				I18n.locale = :es
-  			else
-  				I18n.locale = :en
-  			end
-  		end
-
+        case params[:locale]
+          when 'es'
+            I18n.locale = :es
+          when 'en'
+            I18n.locale = :en
+          when 'jp'
+            I18n.locale = :jp
+          when 'zh'
+            I18n.locale = :zh
+        end
+      end
   		@board = Board.find_by_uid uid
   	end
   end

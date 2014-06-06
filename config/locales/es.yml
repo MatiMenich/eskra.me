@@ -1,7 +1,9 @@
 es:
   hello: "Hola Mundo"
-  english: "Inglés"
+  english: "English"
   spanish: "Español"
+  japanese: "Japanese"
+  chinise : "Chinise"
   story: "Historia"
   stories: "Historias"
   about_us: "Acerca de nosotros"
@@ -10,4 +12,4 @@ es:
   toggle_edit: "Alternar Edición"
   add_column: "Añadir Columna"
   add_story: "Añadir Historia"
-  
+  save: "Guardar"
