@@ -277,11 +277,22 @@ var ready = function() {
     
   });
 
+  var viewState = true;
+
   $('#toggle_collapse').click(function() {
     $('[class*="glyphicon-chevron-"]').each(function () {
-      $(this).toggleClass( "glyphicon-chevron-down glyphicon-chevron-up" );
-      $(this).closest( ".panel" ).find( ".panel-body" ).toggle();
+      if(viewState){
+        $(this).removeClass( "glyphicon-chevron-down" );
+        $(this).addClass( "glyphicon-chevron-up" );
+        $(this).closest( ".panel" ).find( ".panel-body" ).hide();
+      }
+      else {
+        $(this).removeClass( "glyphicon-chevron-up" );
+        $(this).addClass( "glyphicon-chevron-down" );
+        $(this).closest( ".panel" ).find( ".panel-body" ).show();
+      }
     });
+    viewState = !viewState;
   });
 
   $('#toggle_edit').click(function () {
