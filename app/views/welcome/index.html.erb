@@ -38,10 +38,10 @@
 			<table class="table table-bordered">
 				<thead class="title_field">
 					<tr>
-						<th><h4>Stories</h4></th>
+						<th><h4><%= t(:stories) %></h4></th>
 						<% @board.columns.each do |column| %>
 							<th>
-								<div class="column-title h4" board-id='<%= column.id %>'>
+								<div class="column-title h4" column-id='<%= column.id %>'>
 										<a href="#" data-xeditable="true" data-pk="<%= column.id %>" data-model="column" data-name="name" data-url="<%= column_url(column) %>" data-title="Enter name">
 							            	<%= column.name %>
 							          	</a>

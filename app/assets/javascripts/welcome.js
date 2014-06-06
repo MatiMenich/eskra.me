@@ -105,7 +105,7 @@ var ready = function() {
     $(".delete-column").click(function(){
 
       var button = $(this);
-      var columnId = button.parent().attr('board-id');
+      var columnId = button.parent().attr('column-id');
 
       $.ajax({
         dataType: "json",
@@ -175,7 +175,7 @@ var ready = function() {
       data:   {column: {name: columnTitle, board_id: boardId, order: 4}},
       success: function(response){ 
 
-          columnId = response.id;
+          var columnId = response.id;
 
           $('.column_field').find('tr').each(function () {
             var newColumn = $('<td class="column"><div class="column-content"></div></td>');
@@ -186,7 +186,7 @@ var ready = function() {
 
           $('.title_field').find('tr').each(function () {
             var removeButton = $('<button class="btn btn-xs btn-danger delete-column pull-right"><span class="glyphicon glyphicon-remove"></span></button>')
-            var newTitle = $('<div class="column-title h4" id="'+columnId+'"></div>');
+            var newTitle = $('<div class="column-title h4" column-id="'+columnId+'"></div>');
             var titleContent = $('<a href="#" data-xeditable="true" data-pk="'+columnId+'" data-model="column" data-name="name" data-url="/columns/'+columnId+'" data-title="Enter name">'+columnTitle+'</a>');
             newTitle.append(titleContent);
             newTitle.append(removeButton);
