@@ -137,6 +137,23 @@ var ready = function() {
         }
       });
     });
+
+    $(".delete-sticky").click(function(){
+      var button = $(this);
+      var stickyId = button.parent().parent().attr('sticky-id');
+      $.ajax({
+        dataType: "json",
+        type: 'delete',
+        url: '/stickies/'+stickyId,
+        success: function (data) {
+          stickybutton.parent().parent().fadeOut('slow', function(){
+            $(this).remove();
+          });
+        }
+      });
+    });
+
+
   };
 
   addLayoutBehaviour();
