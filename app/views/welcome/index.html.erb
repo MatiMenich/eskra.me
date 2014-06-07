@@ -13,7 +13,7 @@
 						<span class='glyphicon glyphicon-list-alt'></span> 
 						<%= t(:add_column) %>
 					</button>
-					<button class="btn btn-success" id="add_story" board-id="<%= @board.id %>">
+					<button class="btn btn-success" id="add_story"  board-id="<%= @board.id %>">
 						<span class='glyphicon glyphicon-th-list'></span> 
 						<%= t(:add_story) %>
 					</button>
@@ -29,7 +29,6 @@
 					</button>
 				</div>
 			</div>
-
 		</div>
 	</div>
 	<br>
@@ -42,9 +41,9 @@
 						<% @board.columns.each do |column| %>
 							<th>
 								<div class="column-title h4" column-id='<%= column.id %>'>
-										<a href="#" data-xeditable="true" data-pk="<%= column.id %>" data-model="column" data-name="name" data-url="<%= column_url(column) %>" data-title="Enter name">
-							            	<%= column.name %>
-							          	</a>
+								    <a href="#" data-xeditable="true" data-pk="<%= column.id %>" data-model="column" data-name="name" data-url="<%= column_url(column) %>" data-title="Enter name">
+							           	<%= column.name %>
+							        </a>
 									<button class="btn btn-xs btn-danger delete-column pull-right">
 										<span class='glyphicon glyphicon-remove'></span>
 									</button>
@@ -56,14 +55,13 @@
 				<tbody class="column_field">
 					<% @board.rows.each do |story| %>
 						<tr story-id="<%= story.id %>">
-							<td class="story-column">
-							<a href="#" data-xeditable="true" data-pk="<%= story.id %>" data-model="row" data-name="name" data-url="<%= row_url(story) %>" data-title="Enter name">
-						        <%= story.name %>
-						    </a>
-						    <br/>
-								<div class="btn-group">
-									<button class="btn btn-xs btn-warning delete-story"><span class="glyphicon glyphicon-trash"> </span></button>
-									<button class="btn btn-xs btn-primary" add-sticky="true"><span class="glyphicon glyphicon-plus"> </span></button>  
+                            <td class="story-column">
+                                <a href="#" data-xeditable="true" data-pk="<%= story.id %>" data-model="row" data-name="name" data-url="<%= row_url(story) %>" data-title="Enter name">
+                                    <%= story.name %>
+                                </a>
+						    	<div class="btn-group pull-right">
+									<button class="btn btn-xs btn-primary" add-sticky="true"><span class="glyphicon glyphicon-plus"> </span></button>
+                                    <button class="btn btn-xs btn-warning delete-story"><span class="glyphicon glyphicon-trash"> </span></button>
 								</div>
 							</td>
 							<% @board.columns.each do |column|%>
@@ -72,10 +70,10 @@
 										<% if story.stickies.include?(sticky) %>
 										<div class="panel <%= sticky.color %>" sticky-id="<%= sticky.id %>">
 											<div class="panel-heading"><a href="#" data-xeditable="true" data-pk="<%= sticky.id %>" data-model="sticky" data-name="name" data-url="<%= sticky_url(sticky) %>" data-title="Enter name">
-									        <%= sticky.name %>
-									        </a>
-									    	<i class="panel-button"></i>	
-									    	</div>
+                                                <%= sticky.name %>
+                                                </a>
+                                                <i class="panel-button"></i>
+                                            </div>
 											<div class="panel-body"><a href="#" data-xeditable="true" data-pk="<%= sticky.id %>" data-model="sticky" data-type="textarea" data-showbuttons="bottom" data-anim="500" data-name="text" data-url="<%= sticky_url(sticky) %>" data-title="Enter text"><%= sticky.text %></a></div>
 										</div>
 										<% end %>

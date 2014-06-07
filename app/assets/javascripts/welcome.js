@@ -2,7 +2,6 @@ var ready = function() {
 
   var storyNumber = 1;
 
-
   function addLayoutBehaviour(){
     $( ".column" ).sortable({
       connectWith: ".column",
@@ -38,12 +37,15 @@ var ready = function() {
     var dropdownDiv = $("<div class='icon-btn pull-right dropdown'></div>");
     var dropdownButton = $("<button class='btn btn-link btn-xs dropdown-toggle' role='button' href='#' data-toggle='dropdown'><span class='glyphicon glyphicon-tint'></span></button>");
     var dropdownMenu = $("<ul class='dropdown-menu'  role='menu'></ul>");
+
     var redOption = $("<li color-class='panel-danger'><a tabindex='-1'><div class='color-circle' style='background-color:#f2dede;'></div>&nbsp</a></li>");
     var greenOption = $("<li color-class='panel-success'><a tabindex='-1'><div class='color-circle' style='background-color:#dff0d8;' ></div>&nbsp</a></li>");
     var defaultOption = $("<li color-class='panel-default'><a tabindex='-1'><div class='color-circle' style='background-color:whitesmoke;' ></div>&nbsp</a></li>");
     var yellowOption = $("<li color-class='panel-warning'><a tabindex='-1'><div class='color-circle' style='background-color:#fcf8e3;' ></div>&nbsp</a></li>"); 
     var blueOption = $("<li color-class='panel-info'><a tabindex='-1'><div class='color-circle' style='background-color:#d9edf7;' ></div>&nbsp</a></li>");
+
     var deleteButton = $("<button class='btn btn-xs btn-link delete-sticky pull-right'><span class='glyphicon glyphicon-remove'></span></button>");
+
     dropdownMenu.append(defaultOption);
     dropdownMenu.append(redOption);
     dropdownMenu.append(greenOption);
@@ -97,7 +99,6 @@ var ready = function() {
           panel.addClass(colorClass);
         }
       });
-      
     });
 
     $(".delete-sticky").click(function(){
@@ -172,14 +173,10 @@ var ready = function() {
       });
     });
 
-
   };
 
   addLayoutBehaviour();
   addButtonBehaviour();
-
-
-
 
   $('#add_column').click(function () {
 
@@ -217,7 +214,7 @@ var ready = function() {
       }
     });
 
-});
+  });
 
 $('#add_story').click(function () {
   var boardId = $(this).attr("board-id");
@@ -231,15 +228,14 @@ $('#add_story').click(function () {
       var title = $('<td></td>');
       editable.append(response.name);
       title.append(editable);
-      var buttonGroup = $('<div class="btn-group"></div>');
-      var deleteButton = $('<button class="btn btn-xs btn-warning delete-story"><span class="glyphicon glyphicon-trash"> </span>');
-      var addButton = $('</button><button class="btn btn-xs btn-primary"><span class="glyphicon glyphicon-plus"> </span></button>');
+      var buttonGroup = $('<div class="btn-group pull-right"></div>');
+      var addButton = $('<button class="btn btn-xs btn-primary" add-sticky="true"><span class="glyphicon glyphicon-plus"> </span></button>');
+      var deleteButton = $('<button class="btn btn-xs btn-warning delete-story"><span class="glyphicon glyphicon-trash"> </span></button>');
       var number_of_columns = $('.title_field').find('tr').first().find('th').length
       
       /* Button append */
-      buttonGroup.append(deleteButton);
       buttonGroup.append(addButton);
-
+      buttonGroup.append(deleteButton);
       title.append(buttonGroup);
 
       var columnIds = [];
@@ -285,17 +281,14 @@ $('#add_story').click(function () {
           }
         });
 
-addLayoutBehaviour();
-});
-}
-
-});
-
+        addLayoutBehaviour();
+      });
+    }
+  });
 
 });
 
 var viewState = true;
-
 $('#toggle_collapse').click(function() {
   $('[class*="glyphicon-chevron-"]').each(function () {
     if(viewState){
@@ -345,14 +338,12 @@ $("[add-sticky=true]").each(function () {
 
         addLayoutBehaviour();
 
-        
       }
     });
-});
+  });
 });
 
 };
 
 $(document).ready(ready);
 $(document).on('page:load', ready);
-
