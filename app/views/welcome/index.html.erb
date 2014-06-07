@@ -59,10 +59,10 @@
                                 <a href="#" data-xeditable="true" data-pk="<%= story.id %>" data-model="row" data-name="name" data-url="<%= row_url(story) %>" data-title="Enter name">
                                     <%= story.name %>
                                 </a>
-						    	<div class="btn-group pull-right"> <!-- TODO: need to add < container: 'body' > option somewhere (?) -->
+						    	<div class="btn-group pull-right"> <!-- TODO: need to add " container: 'body' " option somewhere (?) this should make the tooltips work -->
 									<button class="btn btn-xs btn-primary" add-sticky="true" data-toggle="tooltip" data-placement="right" title="Adds a new sticky"><span class="glyphicon glyphicon-plus"></span> new</button>
                                     <button class="btn btn-xs btn-warning delete-story" data-toggle="tooltip" data-placement="right" title="Removes the whole story">rvm <span class="glyphicon glyphicon-trash"></span></button>
-								</div>
+							    </div>
 							</td>
 							<% @board.columns.each do |column|%>
 								<td class="column" column-id="<%= column.id %>">
