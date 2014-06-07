@@ -22,7 +22,7 @@ var ready = function() {
             url:    "/stickies/"+stickyId,
             type:   "PUT",
             data:   {sticky: {column_id: columnId, story_id: storyId}},
-            success: function(response){ 
+            success: function(response){
             }
           });
         }
@@ -39,9 +39,10 @@ var ready = function() {
     var redOption = $("<li color-class='panel-danger'><a tabindex='-1'><div class='color-circle' style='background-color:#f2dede;'></div>&nbsp</a></li>");
     var greenOption = $("<li color-class='panel-success'><a tabindex='-1'><div class='color-circle' style='background-color:#dff0d8;' ></div>&nbsp</a></li>");
     var defaultOption = $("<li color-class='panel-default'><a tabindex='-1'><div class='color-circle' style='background-color:whitesmoke;' ></div>&nbsp</a></li>");
-    var yellowOption = $("<li color-class='panel-warning'><a tabindex='-1'><div class='color-circle' style='background-color:#fcf8e3;' ></div>&nbsp</a></li>"); 
+    var yellowOption = $("<li color-class='panel-warning'><a tabindex='-1'><div class='color-circle' style='background-color:#fcf8e3;' ></div>&nbsp</a></li>");
     var blueOption = $("<li color-class='panel-info'><a tabindex='-1'><div class='color-circle' style='background-color:#d9edf7;' ></div>&nbsp</a></li>");
-    var deleteButton = $("<button class='btn btn-xs btn-link delete-sticky pull-right'><span class='glyphicon glyphicon-remove'></span></button>");
+    var deleteButton = $("<button class='btn btn-xs btn-link delete-sticky pull-right' data-toggle='tooltip' data-placement='left' title='Delete sticky'><span class='glyphicon glyphicon-remove'></span></button>");
+    var linkButton = $("<button class='btn btn-xs btn-link sticky-link pull-right'><span class='glyphicon glyphicon-link'></span></button>");
 
     dropdownMenu.append(defaultOption);
     dropdownMenu.append(redOption);
@@ -52,7 +53,8 @@ var ready = function() {
     dropdownDiv.append(dropdownButton);
     dropdownDiv.append(dropdownMenu);
     dropdownDiv.append(deleteButton);
-    
+    dropdownDiv.append(linkButton);
+
     $( ".panel" )
     .find( ".panel-button" )
     .append(toggleButton).append(dropdownDiv);
@@ -111,6 +113,14 @@ var ready = function() {
         }
       });
     });
+
+    $(".sticky-link").click(function(){
+        var button = $(this);
+        /* TODO: see what to do with this..
+         *   maybe a pop-over element? or a drop-down element?
+         *   we might want to add more than one link, maybe we should change the model a bit? */
+    });
+
   };
 
   function addButtonBehaviour(){
@@ -133,7 +143,7 @@ var ready = function() {
           });
         }
       });
-      
+
     });
 
     $(".delete-story").click(function(){
@@ -177,12 +187,12 @@ var ready = function() {
 
     var columnTitle = "Column title";
     var boardId = $(this).attr("board-id");
-    
+
     $.ajax({
       url:    "/columns",
       type:   "POST",
       data:   {column: {name: columnTitle, board_id: boardId, order: 4}},
-      success: function(response){ 
+      success: function(response){
 
         var columnId = response.id;
 
@@ -223,11 +233,11 @@ $('#add_story').click(function () {
       var title = $('<td></td>');
       editable.append(response.name);
       title.append(editable);
-      var buttonGroup = $('<div class="btn-group pull-right"></div>');
-      var addButton = $('<button class="btn btn-xs btn-primary" add-sticky="true"><span class="glyphicon glyphicon-plus"> </span></button>');
-      var deleteButton = $('<button class="btn btn-xs btn-warning delete-story"><span class="glyphicon glyphicon-trash"> </span></button>');
+      var buttonGroup = $('<div class="btn-group pull-right"></div>'); /* TODO: need to add < container: 'body' > option somewhere (?) */
+      var addButton = $('<button class="btn btn-xs btn-primary" add-sticky="true" data-toggle="tooltip" data-placement="right" title="Adds a new sticky"><span class="glyphicon glyphicon-plus"></span> new</button>');
+      var deleteButton = $('<button class="btn btn-xs btn-warning delete-story" data-toggle="tooltip" data-placement="right" title="Removes the whole story">rvm <span class="glyphicon glyphicon-trash"></span></button>');
       var number_of_columns = $('.title_field').find('tr').first().find('th').length
-      
+
       /* Button append */
       buttonGroup.append(addButton);
       buttonGroup.append(deleteButton);
@@ -249,7 +259,7 @@ $('#add_story').click(function () {
       addButtonBehaviour();
 
       addButton.click(function(){
-        
+
         var currentStory = $(this).closest('tr');
         var storyId = currentStory.attr('story-id');
         var starterColumnId = $(this).closest('tr').find("td:eq(1)").attr("column-id");
@@ -258,7 +268,7 @@ $('#add_story').click(function () {
           url:    "/stickies",
           type:   "POST",
           data:   {sticky: {column_id: starterColumnId, row_id: storyId}},
-          success: function(response){ 
+          success: function(response){
             var panel = $('<div class="panel panel-default" sticky-id="'+response.id+'"></div>');
             var editableHeader = $('<a href="#" data-xeditable="true" data-pk="'+response.id+'" data-model="sticky" data-name="name" data-url="/stickies/'+response.id+'" data-title="Enter name">'+response.name+'</a>')
             var panelHeader = $('<div class="panel-heading"><i class="panel-button"></i></div>');
@@ -305,7 +315,7 @@ $('#toggle_edit').click(function () {
 });
 
 /* initial panel's buttons */
-$("[add-sticky=true]").each(function () { 
+$("[add-sticky=true]").each(function () {
   return $(this).click(function(){
 
     var currentStory = $(this).closest('tr');
@@ -317,7 +327,7 @@ $("[add-sticky=true]").each(function () {
       url:    "/stickies",
       type:   "POST",
       data:   {sticky: {column_id: starterColumnId, row_id: storyId}},
-      success: function(response){ 
+      success: function(response){
         var panel = $('<div class="panel panel-default" sticky-id="'+response.id+'"></div>');
         var editableHeader = $('<a href="#" data-xeditable="true" data-pk="'+response.id+'" data-model="sticky" data-name="name" data-url="/stickies/'+response.id+'" data-title="Enter name">'+response.name+'</a>')
         var panelHeader = $('<div class="panel-heading"><i class="panel-button"></i></div>');
