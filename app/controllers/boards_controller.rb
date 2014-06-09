@@ -1,15 +1,36 @@
 class BoardsController < ApplicationController
-  before_action :set_board, only: [:show, :edit, :update, :destroy]
+  before_action :set_board, only: [:edit, :update, :destroy]
 
-  # GET /boards
-  # GET /boards.json
   def index
     @boards = Board.all
+  end
+
+  def create_board
+    @board = Board.create(name: 'Your Board')
+    redirect_to '/boards/'+@board.uid
   end
 
   # GET /boards/1
   # GET /boards/1.json
   def show
+    uid = params[:id]
+    if uid.nil?
+      @board = Board.create(name: 'Your Board')
+    else
+      unless params[:locale].nil?
+        case params[:locale]
+        when 'es'
+          I18n.locale = :es
+        when 'en'
+          I18n.locale = :en
+        when 'jp'
+          I18n.locale = :jp
+        when 'zh'
+          I18n.locale = :zh
+        end
+      end
+      @board = Board.find_by_uid! uid
+    end
   end
 
   # GET /boards/new

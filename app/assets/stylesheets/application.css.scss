@@ -10,7 +10,7 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
- *= require_tree .
+ *= require application 
  *= require_self
  *= require jquery.ui.all
  *= require bootstrap3-editable/bootstrap-editable
@@ -20,13 +20,7 @@
 
 @import "bootstrap";
 
-
-
 $font-stack: 'PT Sans', sans-serif;
-
-body {
-	font-family: 'Myriad Pro', sans-serif;
-}
 
 .logo{
 	//color: #1BA1E2;
@@ -36,6 +30,13 @@ body {
 	letter-spacing: -1px;
 }
 
+.board-title{
+	font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+    border-bottom: none !important;
+}
+
 .editable {
-  color: #585858;
+  	color: #585858 !important;
 }

@@ -5,17 +5,20 @@ Rails.application.routes.draw do
 
   resources :columns, defaults: {format: :json}
 
-  resources :boards, defaults: {format: :json}
+  resources :boards
 
-  get 'saved/:uid' => 'welcome#index'
+  get 'boards/:uid' => 'boards#index'
 
+  get 'landing_page' => 'welcome#landing_page'
+
+  get 'create_board' => 'boards#create_board'
 
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'welcome#index'
+  root 'welcome#landing_page'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

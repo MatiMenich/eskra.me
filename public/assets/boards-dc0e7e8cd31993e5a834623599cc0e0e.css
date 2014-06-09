@@ -1,0 +1,82 @@
+/* line 14, /Users/matimenich/rails-proyects/eskra-me/app/assets/stylesheets/boards.css.scss */
+.column {
+  min-width: 200px;
+  padding-bottom: 30px;
+}
+
+/* line 19, /Users/matimenich/rails-proyects/eskra-me/app/assets/stylesheets/boards.css.scss */
+.portlet-placeholder {
+  background-color: white !important;
+  border: 1px dashed grey !important;
+  margin: 0 1em 1em 0;
+  height: 50px;
+}
+
+/* line 26, /Users/matimenich/rails-proyects/eskra-me/app/assets/stylesheets/boards.css.scss */
+.dropdown-menu {
+  min-width: 0px !important;
+}
+
+/* line 30, /Users/matimenich/rails-proyects/eskra-me/app/assets/stylesheets/boards.css.scss */
+.color-circle {
+  float: left;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgba(0, 0, 0, 0.2);
+}
+
+/* Make inline editables take the full width of the panel */
+/* line 40, /Users/matimenich/rails-proyects/eskra-me/app/assets/stylesheets/boards.css.scss */
+.panel-body .editable-container.editable-inline {
+  width: 100% !important;
+}
+/* line 42, /Users/matimenich/rails-proyects/eskra-me/app/assets/stylesheets/boards.css.scss */
+.panel-body .editable-container.editable-inline .control-group.form-group {
+  width: 100% !important;
+}
+/* line 44, /Users/matimenich/rails-proyects/eskra-me/app/assets/stylesheets/boards.css.scss */
+.panel-body .editable-container.editable-inline .control-group.form-group .editable-input {
+  width: 100% !important;
+}
+/* line 46, /Users/matimenich/rails-proyects/eskra-me/app/assets/stylesheets/boards.css.scss */
+.panel-body .editable-container.editable-inline .control-group.form-group .editable-input textarea {
+  width: 100% !important;
+}
+/* line 49, /Users/matimenich/rails-proyects/eskra-me/app/assets/stylesheets/boards.css.scss */
+.panel-body .editable-container.editable-inline .control-group.form-group .editable-input select {
+  width: 100% !important;
+}
+/* line 52, /Users/matimenich/rails-proyects/eskra-me/app/assets/stylesheets/boards.css.scss */
+.panel-body .editable-container.editable-inline .control-group.form-group .editable-input input:not([type=radio]):not([type=checkbox]):not([type=submit]) {
+  width: 100% !important;
+}
+
+/* line 60, /Users/matimenich/rails-proyects/eskra-me/app/assets/stylesheets/boards.css.scss */
+.board-title {
+  font-family: "PT Sans", sans-serif;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+/* line 66, /Users/matimenich/rails-proyects/eskra-me/app/assets/stylesheets/boards.css.scss */
+.panel {
+  font-family: "PT Sans", sans-serif;
+  font-size: 13px;
+}
+/* line 69, /Users/matimenich/rails-proyects/eskra-me/app/assets/stylesheets/boards.css.scss */
+.panel .panel-button {
+  visibility: hidden;
+}
+/* line 73, /Users/matimenich/rails-proyects/eskra-me/app/assets/stylesheets/boards.css.scss */
+.panel :hover .panel-button {
+  visibility: visible;
+}
+
+/* line 79, /Users/matimenich/rails-proyects/eskra-me/app/assets/stylesheets/boards.css.scss */
+.navbar-nav {
+  font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 700;
+}

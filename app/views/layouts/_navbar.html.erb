@@ -8,17 +8,54 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#"><span class="logo text-info">eskra.me</span></a>
+      <a class="navbar-brand" href="<%= root_path %>"><span class="logo text-info">eskra.me</span></a>
+      
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <li><a href="/saved/<%= @board.uid %>"><span class="glyphicon glyphicon-hdd"></span> <%= t(:save) %> </a></li>
+      <ul class="nav navbar-nav navbar-left">
+      <li>
+        <a class="board-title" data-xeditable="true" data-pk="<%= @board.id %>" data-model="board" data-name="name" data-url="<%= board_url(@board) %>" data-title="Enter name" data-inputclass="navbar-btn" data-showbuttons="false">
+            <%= @board.name %>
+        </a>
+      </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-left hidden-xs">
+        <div class='btn-toolbar navbar-btn'>
+          <div class="btn-group" data-toggle="buttons">
+            <button class="btn btn-default active toggle-collapse" data-toggle="tooltip" data-placement="bottom" title="<%= t(:toggle_view) %>">
+              <span class='glyphicon glyphicon-eye-open'></span> 
+            </button>
+            <button class="btn btn-default active toggle-edit" data-toggle="tooltip" data-placement="bottom" title="<%= t(:toggle_edit) %>">
+            <span class='glyphicon glyphicon-edit'></span> 
+            </button>
+          </div>
+        </div>
+      </ul>
+      <ul class="nav navbar-nav navbar-left visible-xs">
+        <li><a><span class='glyphicon glyphicon-plus'></span> 
+              <span class='glyphicon glyphicon-list-alt'></span> <%= t(:add_story) %></a></li>
+        <li><a> <span class='glyphicon glyphicon-plus'></span> 
+              <span class='glyphicon glyphicon-th-list'></span> <%= t(:add_column) %></a></li>
+        <li class="divider-vertical"></li>
+        <li><a class="toggle-collapse"><span class='glyphicon glyphicon-eye-open'></span>  <%= t(:toggle_view) %></a></li>
+        <li><a class="toggle-edit"><span class='glyphicon glyphicon-edit'></span> <%= t(:toggle_edit) %></a></li>
+        <li class="divider-vertical"></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown"> 
+        <li class="btn-group navbar-btn hidden-xs">
+          <button class="btn btn-primary add-column" board-id="<%= @board.id %>" data-toggle="tooltip" data-placement="bottom" title="<%= t(:add_column) %>">
+            <span class='glyphicon glyphicon-plus'></span> 
+            <span class='glyphicon glyphicon-list-alt'></span> 
+          </button>
+          <button class="btn btn-success add-story"  board-id="<%= @board.id %>" data-toggle="tooltip" data-placement="bottom" title="<%= t(:add_story) %>">
+            <span class='glyphicon glyphicon-plus'></span> 
+            <span class='glyphicon glyphicon-th-list'></span> 
+          </button>
+        </li>
+        <li class="dropdown hidden-xs">
+          <a class="dropdown-toggle" data-toggle="dropdown"> 
             <%  case I18n.locale
                    when :en
                      language = "us"
@@ -39,6 +76,26 @@
               <a href="?locale=es"> <%= image_tag "flags/es.png", :height => "16" %> &nbsp;<%= t(:spanish) %></a>
             </li>
             <li>
+              <a href="?locale=jp"> <%= image_tag "flags/jp.png", :height => "16" %> &nbsp;<%= t(:japanese) %></a>
+            </li>
+            <li>
+              <a href="?locale=zh"> <%= image_tag "flags/zh.png", :height => "16" %> &nbsp;<%= t(:chinese) %></a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="dropdown visible-xs">
+          <a class="dropdown-toggle" data-toggle="dropdown"> 
+            <%= t(:choose_language) %> <b class="caret"></b>
+          </a>
+          <ul class="dropdown-menu">
+            <li>
+              <a href="?locale=en"> <%= image_tag "flags/us.png", :height => "16" %> &nbsp;<%= t(:english) %></a>
+            </li>
+            <li>
+              <a href="?locale=es"> <%= image_tag "flags/es.png", :height => "16" %> &nbsp;<%= t(:spanish) %></a>
+            </li>
+            <li>
               <a href="?locale=jp"> <%= image_tag "flags/jp.png", :height => "16" %> &nbsp; <%= t(:japanese) %></a>
             </li>
             <li>
@@ -48,13 +105,13 @@
         </li>
 
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%=t(:options)%> <b class="caret"></b></a>
+          <a class="dropdown-toggle" data-toggle="dropdown"><%= t(:options) %> <b class="caret"></b></a>
           <ul class="dropdown-menu">
-            <li><a href="#">Share with ...</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
+            <li><a>Share with ...</a></li>
+            <li><a>Another action</a></li>
+            <li><a>Something else here</a></li>
             <li class="divider"></li>
-            <li><a href="#" data-toggle="modal" data-target="#about_us"><%= t(:about_us) %></a></li>
+            <li><a data-toggle="modal" data-target="#about_us"><%= t(:about_us) %></a></li>
           </ul>
         </li>
       </ul>
