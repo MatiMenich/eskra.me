@@ -3,7 +3,7 @@
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">
         <span class="sr-only">Toggle navigation</span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -14,7 +14,7 @@
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <div class="collapse navbar-collapse" id="navbar-collapse">
       <ul class="nav navbar-nav navbar-left">
       <li>
         <a class="board-title" data-xeditable="true" data-pk="<%= @board.id %>" data-model="board" data-name="name" data-url="<%= board_url(@board) %>" data-title="Enter name" data-inputclass="navbar-btn" data-showbuttons="false">
@@ -35,13 +35,13 @@
         </div>
       </ul>
       <ul class="nav navbar-nav navbar-left visible-xs">
-        <li><a class="add-story" board-id="<%= @board.id %>" ><span class='glyphicon glyphicon-plus'></span> 
+        <li><a class="add-story" board-id="<%= @board.id %>" data-toggle="collapse" data-target="#navbar-collapse" ><span class='glyphicon glyphicon-plus'></span> 
               <span class='glyphicon glyphicon-list-alt'></span> <%= t(:add_story) %></a></li>
-        <li><a class="add-column" board-id="<%= @board.id %>" > <span class='glyphicon glyphicon-plus'></span> 
+        <li><a class="add-column" board-id="<%= @board.id %>" data-toggle="collapse" data-target="#navbar-collapse" > <span class='glyphicon glyphicon-plus'></span> 
               <span class='glyphicon glyphicon-th-list'></span> <%= t(:add_column) %></a></li>
         <li class="divider-vertical"></li>
-        <li><a class="toggle-collapse"><span class='glyphicon glyphicon-eye-open'></span>  <%= t(:toggle_view) %></a></li>
-        <li><a class="toggle-edit"><span class='glyphicon glyphicon-edit'></span> <%= t(:toggle_edit) %></a></li>
+        <li><a class="toggle-collapse" data-toggle="collapse" data-target="#navbar-collapse" ><span class='glyphicon glyphicon-eye-open'></span>  <%= t(:toggle_view) %></a></li>
+        <li><a class="toggle-edit" data-toggle="collapse" data-target="#navbar-collapse" ><span class='glyphicon glyphicon-edit'></span> <%= t(:toggle_edit) %></a></li>
         <li class="divider-vertical"></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
