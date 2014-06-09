@@ -5,6 +5,8 @@
 $font-stack: 'PT Sans', sans-serif;
 $max-width: 100% !important;
 
+body { padding-top: 50px; }
+
 @mixin make-circle($radius){
   width: $radius*2;
   height: $radius*2;
