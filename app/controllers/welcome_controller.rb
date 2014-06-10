@@ -1,7 +1,6 @@
 class WelcomeController < ApplicationController
 
   def landing_page
-    render :layout => false
 
     unless params[:locale].nil?
       case params[:locale]

@@ -1,6 +1,9 @@
 <% content_for :head do %>
   <%= stylesheet_link_tag "boards", media: 'all', 'data-turbolinks-track' => true %>
 <% end %>
+<% content_for :title do %>
+    <title> <%= @board.name %> - eskra.me </title>
+<% end %>
 
 <div class='container-fluid'>
   <div class="row">

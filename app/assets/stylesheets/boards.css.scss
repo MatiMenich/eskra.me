@@ -5,7 +5,6 @@
 $font-stack: 'PT Sans', sans-serif;
 $max-width: 100% !important;
 
-body { padding-top: 50px; }
 
 @mixin make-circle($radius){
   width: $radius*2;
@@ -91,16 +90,5 @@ body { padding-top: 50px; }
       text-align: center;
       margin: auto;
   }
-}
-
-footer {
-  font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  text-align: center;
-  background-color: #f8f8f8;
-  padding: 50px 0;
-}
-
-p.copyright {
-  margin: 15px 0 0;
 }
 

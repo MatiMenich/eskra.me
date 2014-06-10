@@ -20,7 +20,22 @@
 
 @import "bootstrap";
 
+
 $font-stack: 'PT Sans', sans-serif;
+
+body { padding-top: 50px; }
+
+
+footer {
+  font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  text-align: center;
+  background-color: #f8f8f8;
+  padding: 50px 0;
+}
+
+p.copyright {
+  margin: 15px 0 0;
+}
 
 .logo{
 	//color: #1BA1E2;
