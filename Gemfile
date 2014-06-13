@@ -7,6 +7,10 @@ gem 'rails', '4.1.1'
 gem 'sqlite3', group: :development
 # Use postgresql as the database for Active Record, only production
 gem 'pg', group: :production
+
+# Heroku gem for all platform features
+gem 'rails_12factor', group: :production
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'
 # Use Uglifier as compressor for JavaScript assets
