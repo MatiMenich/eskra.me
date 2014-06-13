@@ -5,6 +5,8 @@
 <title> <%= @board.name %> - eskra.me </title>
 <% end %>
 
+<%= render :partial => 'boards/stickie_option_modal' %>
+
 <div class='container-fluid'>
   <div class="row">
     <div class="table-responsive">
@@ -47,7 +49,7 @@
                   <%= sticky.name %>
                 </a>
                 <i class="panel-button"></i>
-                <i class="panel-button-mobile"><span class="glyphicon glyphicon-cog pull-right"></span></i>
+                <i class="panel-button-mobile"><a data-toggle="modal" data-target="#stickieOptionModal"><span class="glyphicon glyphicon-cog pull-right"></span></a></i>
               </div>
               <div class="panel-body"><a href="#" data-xeditable="true" data-pk="<%= sticky.id %>" data-model="sticky" data-type="textarea" data-showbuttons="bottom" data-anim="500" data-name="text" data-url="<%= sticky_url(sticky) %>" data-title="Enter text"><%= sticky.text %></a></div>
             </div>
