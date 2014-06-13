@@ -183,7 +183,7 @@ var ready = function() {
   addLayoutBehaviour();
   addButtonBehaviour();
 
-  $('[data-toggle="tooltip"').tooltip({
+  $('[data-toggle="tooltip"]').tooltip({
       container: 'body'
   });
 
