@@ -3,7 +3,7 @@ en:
   english: "English"
   spanish: "Español"
   japanese: "Japanese"
-  chinise : "Chinise"
+  chinese : "Chinese"
   story: "Story"
   stories: "Stories"
   about_us: "About Us"
@@ -14,3 +14,4 @@ en:
   add_story: "Add Story"
   save: "Save"
   choose_language: "Choose Language"
+  about_us_description: "Or software is the best software that you could get when it comes to bibibibi"

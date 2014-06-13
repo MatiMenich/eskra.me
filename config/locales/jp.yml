@@ -1,9 +1,9 @@
 jp:
   hello: "ハローワールド"
-  english: "Inglés"
+  english: "English"
   spanish: "Español"
   japanese: "Japanese"
-  chinise : "Chinise"
+  chinese : "Chinese"
   story: "物語"
   stories: "ストーリー"
   about_us: "会社案内"
@@ -12,4 +12,5 @@ jp:
   toggle_edit: "トグル編集"
   add_column: "列を追加する"
   add_story: "追加ストーリー"
-  save: "Save"
+  save: "保存"
+  about_us_description: "Bli bli bli"
