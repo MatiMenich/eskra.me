@@ -238,8 +238,8 @@ $('.add-story').click(function () {
       editable.append(response.name);
       title.append(editable);
       var buttonGroup = $('<div class="btn-group pull-right"></div>'); /* TODO: need to add < container: 'body' > option somewhere (?) */
-      var addButton = $('<button class="btn btn-xs btn-primary" add-sticky="true" data-toggle="tooltip" data-placement="right" title="Adds a new sticky"><span class="glyphicon glyphicon-plus"></span> new</button>');
-      var deleteButton = $('<button class="btn btn-xs btn-warning delete-story" data-toggle="tooltip" data-placement="right" title="Removes the whole story">rvm <span class="glyphicon glyphicon-trash"></span></button>');
+      var addButton = $('<button class="btn btn-xs btn-primary" add-sticky="true" data-toggle="tooltip" data-placement="bottom" title="Adds a new sticky"><span class="glyphicon glyphicon-plus"></span> </button>');
+      var deleteButton = $('<button class="btn btn-xs btn-warning delete-story" data-toggle="tooltip" data-placement="bottom" title="Removes the whole story"><span class="glyphicon glyphicon-trash"></span></button>');
       var number_of_columns = $('.title_field').find('tr').first().find('th').length
 
       /* Button append */
