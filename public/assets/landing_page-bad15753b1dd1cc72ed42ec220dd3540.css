@@ -1,0 +1,190 @@
+/* line 1, /Users/matimenich/rails-proyects/eskra-me/app/assets/stylesheets/landing_page.css.scss */
+body, html {
+  height: 100%;
+  width: 100%;
+}
+
+/* line 6, /Users/matimenich/rails-proyects/eskra-me/app/assets/stylesheets/landing_page.css.scss */
+.logo {
+  font-family: 'PT Sans', sans-serif;
+  font-weight: bold;
+  font-size: 28px;
+  letter-spacing: -1px;
+}
+
+/* line 13, /Users/matimenich/rails-proyects/eskra-me/app/assets/stylesheets/landing_page.css.scss */
+body, h1, h2, h3, h4, h5, h6 {
+  font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 700;
+}
+
+/* line 18, /Users/matimenich/rails-proyects/eskra-me/app/assets/stylesheets/landing_page.css.scss */
+.lead {
+  font-size: 18px;
+  font-weight: 400;
+}
+
+/* line 23, /Users/matimenich/rails-proyects/eskra-me/app/assets/stylesheets/landing_page.css.scss */
+.intro-header {
+  padding-bottom: 50px;
+  color: #f8f8f8;
+  background: url(/assets/intro-bg.jpg) no-repeat center center;
+  background-size: cover;
+  text-align: center;
+}
+
+/* line 32, /Users/matimenich/rails-proyects/eskra-me/app/assets/stylesheets/landing_page.css.scss */
+.intro-message {
+  position: relative;
+  padding-top: 20%;
+  padding-bottom: 20%;
+}
+
+/* line 38, /Users/matimenich/rails-proyects/eskra-me/app/assets/stylesheets/landing_page.css.scss */
+.intro-message > h1 {
+  margin: 0;
+  font-size: 5em;
+  text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.6);
+}
+
+/* line 44, /Users/matimenich/rails-proyects/eskra-me/app/assets/stylesheets/landing_page.css.scss */
+.intro-divider {
+  width: 400px;
+  border-top: 1px solid #f8f8f8;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+/* line 50, /Users/matimenich/rails-proyects/eskra-me/app/assets/stylesheets/landing_page.css.scss */
+.intro-message > h3 {
+  text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.6);
+}
+
+@media (max-width: 767px) {
+  /* line 55, /Users/matimenich/rails-proyects/eskra-me/app/assets/stylesheets/landing_page.css.scss */
+  .intro-message {
+    padding-bottom: 15%;
+  }
+
+  /* line 59, /Users/matimenich/rails-proyects/eskra-me/app/assets/stylesheets/landing_page.css.scss */
+  .intro-message > h1 {
+    font-size: 3em;
+  }
+
+  /* line 63, /Users/matimenich/rails-proyects/eskra-me/app/assets/stylesheets/landing_page.css.scss */
+  ul.intro-social-buttons > li {
+    display: block;
+    margin-bottom: 20px;
+    padding: 0;
+  }
+
+  /* line 69, /Users/matimenich/rails-proyects/eskra-me/app/assets/stylesheets/landing_page.css.scss */
+  ul.intro-social-buttons > li:last-child {
+    margin-bottom: 0;
+  }
+
+  /* line 73, /Users/matimenich/rails-proyects/eskra-me/app/assets/stylesheets/landing_page.css.scss */
+  .intro-divider {
+    width: 100%;
+  }
+}
+/* line 78, /Users/matimenich/rails-proyects/eskra-me/app/assets/stylesheets/landing_page.css.scss */
+.network-name {
+  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 2px;
+}
+
+/* line 85, /Users/matimenich/rails-proyects/eskra-me/app/assets/stylesheets/landing_page.css.scss */
+.content-section-a {
+  background-color: #f8f8f8;
+  padding: 50px 0;
+}
+
+/* line 90, /Users/matimenich/rails-proyects/eskra-me/app/assets/stylesheets/landing_page.css.scss */
+.content-section-b {
+  border-top: 1px solid #e7e7e7;
+  border-bottom: 1px solid #e7e7e7;
+  padding: 50px 0;
+}
+
+/* line 96, /Users/matimenich/rails-proyects/eskra-me/app/assets/stylesheets/landing_page.css.scss */
+.section-heading {
+  margin-bottom: 30px;
+}
+
+/* line 100, /Users/matimenich/rails-proyects/eskra-me/app/assets/stylesheets/landing_page.css.scss */
+.section-heading-spacer {
+  border-top: 3px solid #e7e7e7;
+  width: 200px;
+  float: left;
+}
+
+/* line 106, /Users/matimenich/rails-proyects/eskra-me/app/assets/stylesheets/landing_page.css.scss */
+.banner {
+  padding: 100px 0;
+  color: #f8f8f8;
+  background: url(/assets/banner-bg.jpg) no-repeat center center;
+  background-size: cover;
+}
+
+/* line 113, /Users/matimenich/rails-proyects/eskra-me/app/assets/stylesheets/landing_page.css.scss */
+.banner h2 {
+  margin: 0;
+  text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.6);
+  font-size: 3em;
+}
+
+/* line 119, /Users/matimenich/rails-proyects/eskra-me/app/assets/stylesheets/landing_page.css.scss */
+.banner ul {
+  margin-bottom: 0;
+}
+
+/* line 123, /Users/matimenich/rails-proyects/eskra-me/app/assets/stylesheets/landing_page.css.scss */
+.banner-social-buttons {
+  float: right;
+  margin-top: 0;
+}
+
+@media (max-width: 1199px) {
+  /* line 129, /Users/matimenich/rails-proyects/eskra-me/app/assets/stylesheets/landing_page.css.scss */
+  ul.banner-social-buttons {
+    float: left;
+    margin-top: 15px;
+  }
+}
+@media (max-width: 767px) {
+  /* line 136, /Users/matimenich/rails-proyects/eskra-me/app/assets/stylesheets/landing_page.css.scss */
+  .banner h2 {
+    margin: 0;
+    text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.6);
+    font-size: 3em;
+  }
+
+  /* line 142, /Users/matimenich/rails-proyects/eskra-me/app/assets/stylesheets/landing_page.css.scss */
+  ul.banner-social-buttons > li {
+    display: block;
+    margin-bottom: 20px;
+    padding: 0;
+  }
+
+  /* line 148, /Users/matimenich/rails-proyects/eskra-me/app/assets/stylesheets/landing_page.css.scss */
+  ul.banner-social-buttons > li:last-child {
+    margin-bottom: 0;
+  }
+}
+/* line 153, /Users/matimenich/rails-proyects/eskra-me/app/assets/stylesheets/landing_page.css.scss */
+.btn-outline-inverse {
+  color: #fff;
+  background-color: transparent;
+  border-color: #fff;
+  padding: 15px 30px;
+}
+
+/* line 161, /Users/matimenich/rails-proyects/eskra-me/app/assets/stylesheets/landing_page.css.scss */
+.btn-outline-inverse:hover {
+  color: #585858;
+  text-shadow: none;
+  background-color: #fff;
+  border-color: #fff;
+}

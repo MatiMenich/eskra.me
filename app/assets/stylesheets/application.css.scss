@@ -18,7 +18,11 @@
 
 //$navbar-default-bg: #F5D76E;
 
+//@import "variables";
+
 @import "bootstrap";
+
+//@import "bootswatch";
 
 
 $font-stack: 'PT Sans', sans-serif;
@@ -46,10 +50,10 @@ p.copyright {
 }
 
 .board-title{
-	font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-size: 20px;
-    font-weight: bold;
-    border-bottom: none !important;
+  font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 20px;
+  font-weight: bold;
+  border-bottom: none !important;
 }
 
 .editable {

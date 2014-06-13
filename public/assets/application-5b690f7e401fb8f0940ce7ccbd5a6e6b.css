@@ -7908,7 +7908,25 @@ button.close {
     display: none !important;
   }
 }
-/* line 25, /Users/matimenich/rails-proyects/eskra-me/app/assets/stylesheets/application.css.scss */
+/* line 30, /Users/matimenich/rails-proyects/eskra-me/app/assets/stylesheets/application.css.scss */
+body {
+  padding-top: 50px;
+}
+
+/* line 33, /Users/matimenich/rails-proyects/eskra-me/app/assets/stylesheets/application.css.scss */
+footer {
+  font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  text-align: center;
+  background-color: #f8f8f8;
+  padding: 50px 0;
+}
+
+/* line 40, /Users/matimenich/rails-proyects/eskra-me/app/assets/stylesheets/application.css.scss */
+p.copyright {
+  margin: 15px 0 0;
+}
+
+/* line 44, /Users/matimenich/rails-proyects/eskra-me/app/assets/stylesheets/application.css.scss */
 .logo {
   font-family: "PT Sans", sans-serif;
   font-weight: bold;
@@ -7916,7 +7934,7 @@ button.close {
   letter-spacing: -1px;
 }
 
-/* line 33, /Users/matimenich/rails-proyects/eskra-me/app/assets/stylesheets/application.css.scss */
+/* line 52, /Users/matimenich/rails-proyects/eskra-me/app/assets/stylesheets/application.css.scss */
 .board-title {
   font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 20px;
@@ -7924,7 +7942,7 @@ button.close {
   border-bottom: none !important;
 }
 
-/* line 40, /Users/matimenich/rails-proyects/eskra-me/app/assets/stylesheets/application.css.scss */
+/* line 59, /Users/matimenich/rails-proyects/eskra-me/app/assets/stylesheets/application.css.scss */
 .editable {
   color: #585858 !important;
 }

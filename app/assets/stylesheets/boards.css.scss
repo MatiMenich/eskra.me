@@ -5,7 +5,6 @@
 $font-stack: 'PT Sans', sans-serif;
 $max-width: 100% !important;
 
-
 @mixin make-circle($radius){
   width: $radius*2;
   height: $radius*2;
@@ -67,12 +66,25 @@ $max-width: 100% !important;
 .panel{
   font-family: $font-stack;
   font-size: 13px;
-  .panel-button {
-    visibility: hidden;
-  }
-  :hover{
+  @media (min-width: 768px){
+    .panel-button-mobile {
+      display: none;
+    }
     .panel-button {
-      visibility: visible;
+      display: none;
+    }
+    :hover{
+      .panel-button {
+        display: inline;
+      }
+    }
+  }
+  @media (max-width: 767px){
+    .panel-button-mobile {
+      display: inline;
+    }
+    .panel-button {
+      display: none;
     }
   }
 } 
