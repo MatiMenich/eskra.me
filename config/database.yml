@@ -7,9 +7,9 @@
 production:
   adapter: postgresql
   host: ec2-54-197-246-197.compute-1.amazonaws.com
-  database: d4e12a2o1130ld
-  user: mncbksnqymitlc
-  password: Y_oSFIoYmxfqZu1otQnPEX5Npx
+  database: d7tctilhatiabr
+  user: zosnywoiivlnhu
+  password: SqYxIAAhsZMz1xIYaS7LEGPVmg
   pool: 5
   timeout: 5000
 
