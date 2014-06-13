@@ -21,6 +21,21 @@ class ColumnsController < ApplicationController
   def edit
   end
 
+  # POST /columns/insert_between_columns
+  def insert_between_columns
+    @column = Column.new(column_params)
+    update_board_column_orders(@column)
+
+    respond_to do |format|
+      if @column.save
+        format.json { render :show, status: :created, location: @column }
+      else
+        format.json { render json: @column.errors, status: :unprocessable_entity }
+      end
+    end
+
+  end
+
   # POST /columns
   # POST /columns.json
   def create
@@ -28,10 +43,8 @@ class ColumnsController < ApplicationController
 
     respond_to do |format|
       if @column.save
-        format.html { redirect_to @column, notice: 'Column was successfully created.' }
         format.json { render :show, status: :created, location: @column }
       else
-        format.html { render :new }
         format.json { render json: @column.errors, status: :unprocessable_entity }
       end
     end
@@ -70,6 +83,15 @@ class ColumnsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def column_params
       params.require(:column).permit(:name, :order, :board_id)
+    end
+
+    def update_board_column_orders(a_column)
+      Board.find(a_column.board_id).columns.each do |column|
+        if column.order > a_column.order
+          column.increment(:order,1)
+          column.save
+        end
+      end
     end
 
 end

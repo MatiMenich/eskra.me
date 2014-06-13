@@ -3,7 +3,11 @@ Rails.application.routes.draw do
 
   resources :rows, defaults: {format: :json}
 
-  resources :columns, defaults: {format: :json}
+  resources :columns, defaults: {format: :json} do
+    collection do
+      post :insert_between_columns
+    end
+  end
 
   resources :boards
 
