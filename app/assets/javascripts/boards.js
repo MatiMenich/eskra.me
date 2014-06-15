@@ -30,12 +30,12 @@ var ready = function() {
 
     $( ".panel" )
     .find( ".panel-button" )
-    .html( "<div class='btn-group btn-xs'></div>");
+    .html( "");
 
     var toggleButton = $("<button class='btn btn-xs btn-link panel-toggle pull-right' ><span class='glyphicon glyphicon-chevron-down'></span></button>");
-    var dropdownDiv = $("<div class='icon-btn pull-right dropdown'></div>");
-    var dropdownButton = $("<button class='btn btn-link btn-xs dropdown-toggle' role='button' href='#' data-toggle='dropdown'><span class='glyphicon glyphicon-tint'></span></button>");
-    var dropdownMenu = $("<ul class='dropdown-menu'  role='menu'></ul>");
+    var colorDiv = $("<div class='icon-btn pull-right dropdown'></div>");
+    var colorButton = $("<button class='btn btn-link btn-xs dropdown-toggle' role='button' href='#' data-toggle='dropdown'><span class='glyphicon glyphicon-tint'></span></button>");
+    var colorMenu = $("<ul class='dropdown-menu'  role='menu'></ul>");
     var redOption = $("<li color-class='panel-danger'><a tabindex='-1'><div class='color-circle' style='background-color:#f2dede;'></div>&nbsp</a></li>");
     var greenOption = $("<li color-class='panel-success'><a tabindex='-1'><div class='color-circle' style='background-color:#dff0d8;' ></div>&nbsp</a></li>");
     var defaultOption = $("<li color-class='panel-default'><a tabindex='-1'><div class='color-circle' style='background-color:whitesmoke;' ></div>&nbsp</a></li>");
@@ -44,20 +44,18 @@ var ready = function() {
     var deleteButton = $("<button class='btn btn-xs btn-link delete-sticky pull-right' data-toggle='tooltip' data-placement='left' title='Delete sticky'><span class='glyphicon glyphicon-remove'></span></button>");
     var linkButton = $("<button class='btn btn-xs btn-link sticky-link pull-right'><span class='glyphicon glyphicon-link'></span></button>");
 
-    dropdownMenu.append(defaultOption);
-    dropdownMenu.append(redOption);
-    dropdownMenu.append(greenOption);
-    dropdownMenu.append(yellowOption);
-    dropdownMenu.append(blueOption);
+    colorMenu.append(defaultOption);
+    colorMenu.append(redOption);
+    colorMenu.append(greenOption);
+    colorMenu.append(yellowOption);
+    colorMenu.append(blueOption);
 
-    dropdownDiv.append(dropdownButton);
-    dropdownDiv.append(dropdownMenu);
-    dropdownDiv.append(deleteButton);
-    dropdownDiv.append(linkButton);
+    colorDiv.append(colorButton);
+    colorDiv.append(colorMenu);
     
     $( ".panel" )
     .find( ".panel-button" )
-    .append(deleteButton).append(dropdownDiv).append(toggleButton);
+    .append(deleteButton).append(linkButton).append(colorDiv).append(toggleButton);
 
     $( ".panel-toggle" ).click(function() {
       var icon = $( this ).find('span');
@@ -388,7 +386,7 @@ $("[add-sticky=true]").each(function () {
         panel.append(panelHeader);
         panel.append(panelBody);
 
-        currentStory.find("td:eq(1)").append(panel);
+        currentStory.find("td:eq(1)").prepend(panel);
 
         addLayoutBehaviour();
 
