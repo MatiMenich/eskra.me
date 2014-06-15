@@ -29,6 +29,7 @@ GEM
       tzinfo (~> 1.1)
     arel (5.0.1.20140414130214)
     bcrypt (3.1.7)
+    bcrypt (3.1.7-x86-mingw32)
     bootstrap-sass (3.1.1.1)
       sass (~> 3.2)
     bootstrap-x-editable-rails (1.5.1.1)
@@ -62,6 +63,7 @@ GEM
     minitest (5.3.4)
     multi_json (1.10.1)
     pg (0.17.1)
+    pg (0.17.1-x86-mingw32)
     polyglot (0.3.5)
     rack (1.5.2)
     rack-test (0.6.2)
@@ -110,6 +112,7 @@ GEM
       activesupport (>= 3.0)
       sprockets (~> 2.8)
     sqlite3 (1.3.9)
+    sqlite3 (1.3.9-x86-mingw32)
     therubyracer (0.12.1)
       libv8 (~> 3.16.14.0)
       ref
@@ -123,12 +126,15 @@ GEM
       coffee-rails
     tzinfo (1.2.1)
       thread_safe (~> 0.1)
+    tzinfo-data (1.2014.3)
+      tzinfo (>= 1.0.0)
     uglifier (2.5.0)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
 
 PLATFORMS
   ruby
+  x86-mingw32
 
 DEPENDENCIES
   bcrypt (~> 3.1.7)

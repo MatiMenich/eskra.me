@@ -129,7 +129,6 @@ var ready = function() {
 
       var button = $(this);
       var columnId = button.parent().attr('column-id');
-
       $.ajax({
         dataType: "json",
         type:   'delete',
@@ -178,6 +177,51 @@ var ready = function() {
       });
     });
 
+	 $('.add-column2').click(function(side){
+		var button = $(this);
+		var columnTitle = "Column title";
+		var boardId = $(this).attr("board-id");
+		var columnIndex = button.closest("th").prevAll("th").length;
+		var side = $(this).attr("side");
+		if(side==='right')
+			order=columnIndex + 1;
+		else
+			order=columnIndex;
+		$.ajax({
+				url:    "/columns/insert_between_columns",
+				type:   "POST",
+				data:   {column: {name: columnTitle, board_id: boardId, order: order}, side: side},
+				success: function(response){
+					if (side === 'left')
+						columnId = columnIndex-1;
+					else
+						columnId = columnIndex;
+					$('.column_field').find('tr').each(function () {
+						var newColumn = $('<td class="column"><div class="column-content"></div></td>');
+						newColumn.hide();
+						$(this).find('td').eq(columnId).after(newColumn)
+						newColumn.fadeIn('slow');
+					});
+
+					$('.title_field').find('tr').each(function () {
+						var removeButton = $('<button class="btn btn-xs btn-danger delete-column pull-right"><span class="glyphicon glyphicon-remove"></span></button>')
+						var addButton_right = $('<button class="btn btn-xs btn-info add-column2 pull-right" board-id="'+boardId+'" side="right"><span class="glyphicon glyphicon-plus-sign"></span></button>')
+						var addButton_left = $('<button class="btn btn-xs btn-info add-column2 pull-left" board-id="'+boardId+'" side="left"><span class="glyphicon glyphicon-plus-sign"></span></button>')
+						var newTitle = $('<div class="column-title h4" column-id="'+columnId+'"></div>');
+						var titleContent = $('<a href="#" data-xeditable="true" data-pk="'+columnId+'" data-model="column" data-name="name" data-url="/columns/'+columnId+'" data-title="Enter name">'+columnTitle+'</a>');
+						newTitle.append(titleContent);
+						newTitle.append(removeButton);
+						newTitle.append(addButton_right);
+						newTitle.append(addButton_left);
+						newTitle.hide();
+						$(this).find('th').eq(columnId).after($('<th></th>').append(newTitle));
+						newTitle.fadeIn('slow');
+					});
+					addButtonBehaviour();
+				}
+		});
+	});
+
   };
 
   addLayoutBehaviour();
@@ -225,6 +269,7 @@ var ready = function() {
 
   });
 
+  
 $('.add-story').click(function () {
   var boardId = $(this).attr("board-id");
   $.ajax({
