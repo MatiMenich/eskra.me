@@ -18,7 +18,7 @@ class ColumnsControllerTest < ActionController::TestCase
 
   test "should create column" do
     assert_difference('Column.count') do
-      post :create, column: { board_id: @column.board_id, name: @column.name, order: @column.order }
+      post :create, column: { board_id: @column.board_id, column_order: @column.column_order, name: @column.name }
     end
 
     assert_redirected_to column_path(assigns(:column))
@@ -35,7 +35,7 @@ class ColumnsControllerTest < ActionController::TestCase
   end
 
   test "should update column" do
-    patch :update, id: @column, column: { board_id: @column.board_id, name: @column.name, order: @column.order }
+    patch :update, id: @column, column: { board_id: @column.board_id, column_order: @column.column_order, name: @column.name }
     assert_redirected_to column_path(assigns(:column))
   end
 

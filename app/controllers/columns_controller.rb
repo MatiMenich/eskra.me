@@ -43,8 +43,10 @@ class ColumnsController < ApplicationController
 
     respond_to do |format|
       if @column.save
+        format.html { redirect_to @column, notice: 'Column was successfully created.' }
         format.json { render :show, status: :created, location: @column }
       else
+        format.html { render :new }
         format.json { render json: @column.errors, status: :unprocessable_entity }
       end
     end
@@ -82,23 +84,22 @@ class ColumnsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def column_params
-      params.require(:column).permit(:name, :order, :board_id)
+      params.require(:column).permit(:name, :column_order, :board_id)
     end
 
     def update_board_column_orders(a_column, side)
       Board.find(a_column.board_id).columns.each do |column|
-		if side = 'right'
-			if column.order >= a_column.order
-			  column.increment(:order,1)
-			  column.save
-			end
-		else
-			if column.order >= a_column.order
-			  column.increment(:order,1)
-			  column.save
-			end
-		end
+    if side = 'right'
+      if column.column_order >= a_column.column_order
+        column.increment(:column_order,1)
+        column.save
+      end
+    else
+      if column.column_order >= a_column.column_order
+        column.increment(:column_order,1)
+        column.save
       end
     end
-
+      end
+    end
 end

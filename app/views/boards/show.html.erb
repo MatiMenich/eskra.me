@@ -46,7 +46,7 @@
                 <button class="btn btn-xs btn-warning delete-story"><span class="glyphicon glyphicon-trash" data-toggle="tooltip" data-placement="bottom" title="Removes the whole story"> </span></button>
               </div>
             </td>
-            <% @board.columns.each do |column|%>
+            <% @board.columns.order('column_order ASC').each do |column|%>
             <td class="column" column-id="<%= column.id %>">
               <% column.stickies.each do |sticky| %>
               <% if story.stickies.include?(sticky) %>

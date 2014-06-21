@@ -188,7 +188,7 @@ var ready = function() {
 		$.ajax({
 				url:    "/columns/insert_between_columns",
 				type:   "POST",
-				data:   {column: {name: columnTitle, board_id: boardId, order: order}, side: side},
+				data:   {column: {name: columnTitle, board_id: boardId, column_order: order}, side: side},
 				success: function(response){
 					if (side === 'left')
 						columnId = columnIndex-1;

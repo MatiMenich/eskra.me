@@ -8,7 +8,6 @@ class Board < ActiveRecord::Base
 	after_create :create_default_parameters
 
 	private
-
 	def generate_unique_uid
 		begin 
 			self.uid = SecureRandom.urlsafe_base64
@@ -17,9 +16,9 @@ class Board < ActiveRecord::Base
 
 
 	def create_default_parameters
-		Column.create(name: 'To Do', order: 1, board_id: self.id)
-		Column.create(name: 'Doing', order: 2, board_id: self.id)
-		Column.create(name: 'Done', order: 3, board_id: self.id)
+		Column.create(name: 'To Do', column_order: 1, board_id: self.id)
+		Column.create(name: 'Doing', column_order: 2, board_id: self.id)
+		Column.create(name: 'Done', column_order: 3, board_id: self.id)
 		Row.create(name: 'Story 1', order: 1, board_id: self.id)
 	end
 end

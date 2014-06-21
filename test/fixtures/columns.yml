@@ -2,10 +2,10 @@
 
 one:
   name: MyString
-  order: 1
+  column_order: 1
   board_id: 
 
 two:
   name: MyString
-  order: 1
+  column_order: 1
   board_id: 
