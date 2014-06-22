@@ -118,7 +118,6 @@ var ready = function() {
          *   maybe a pop-over element? or a drop-down element?
          *   we might want to add more than one link, maybe we should change the model a bit? */
     });
-
   };
 
   function addButtonBehaviour(){
@@ -175,50 +174,7 @@ var ready = function() {
       });
     });
 
-	 $('.add-column2').click(function(side){
-		var button = $(this);
-		var columnTitle = "Column title";
-		var boardId = $(this).attr("board-id");
-		var columnIndex = button.closest("th").prevAll("th").length;
-		var side = $(this).attr("side");
-		if(side==='right')
-			order=columnIndex + 1;
-		else
-			order=columnIndex;
-		$.ajax({
-				url:    "/columns/insert_between_columns",
-				type:   "POST",
-				data:   {column: {name: columnTitle, board_id: boardId, column_order: order}, side: side},
-				success: function(response){
-					if (side === 'left')
-						columnId = columnIndex-1;
-					else
-						columnId = columnIndex;
-					$('.column_field').find('tr').each(function () {
-						var newColumn = $('<td class="column"><div class="column-content"></div></td>');
-						newColumn.hide();
-						$(this).find('td').eq(columnId).after(newColumn)
-						newColumn.fadeIn('slow');
-					});
-
-					$('.title_field').find('tr').each(function () {
-						var removeButton = $('<button class="btn btn-xs btn-danger delete-column pull-right"><span class="glyphicon glyphicon-remove"></span></button>')
-						var addButton_right = $('<button class="btn btn-xs btn-info add-column2 pull-right" board-id="'+boardId+'" side="right"><span class="glyphicon glyphicon-plus-sign"></span></button>')
-						var addButton_left = $('<button class="btn btn-xs btn-info add-column2 pull-left" board-id="'+boardId+'" side="left"><span class="glyphicon glyphicon-plus-sign"></span></button>')
-						var newTitle = $('<div class="column-title h4" column-id="'+columnId+'"></div>');
-						var titleContent = $('<a href="#" data-xeditable="true" data-pk="'+columnId+'" data-model="column" data-name="name" data-url="/columns/'+columnId+'" data-title="Enter name">'+columnTitle+'</a>');
-						newTitle.append(titleContent);
-						newTitle.append(removeButton);
-						newTitle.append(addButton_right);
-						newTitle.append(addButton_left);
-						newTitle.hide();
-						$(this).find('th').eq(columnId).after($('<th></th>').append(newTitle));
-						newTitle.fadeIn('slow');
-					});
-					addButtonBehaviour();
-				}
-		});
-	});
+	 
 
   };
 
@@ -251,12 +207,12 @@ var ready = function() {
 
         $('.title_field').find('tr').each(function () {
           var removeButton = $('<button class="btn btn-xs btn-danger delete-column pull-right"><span class="glyphicon glyphicon-remove"></span></button>')
-          var newTitle = $('<div class="column-title h4" column-id="'+columnId+'"></div>');
+          var newTitle = $('<div class="h4" column-id="'+columnId+'"></div>');
           var titleContent = $('<a href="#" data-xeditable="true" data-pk="'+columnId+'" data-model="column" data-name="name" data-url="/columns/'+columnId+'" data-title="Enter name">'+columnTitle+'</a>');
           newTitle.append(titleContent);
           newTitle.append(removeButton);
           newTitle.hide();
-          $(this).append($('<th></th>').append(newTitle));
+          $(this).append($('<th class="column-title"></th>').append(newTitle));
           newTitle.fadeIn('slow');
         });
 
@@ -268,132 +224,184 @@ var ready = function() {
   });
 
   
-$('.add-story').click(function () {
-  var boardId = $(this).attr("board-id");
-  $.ajax({
-    url:    "/rows",
-    type:   "POST",
-    data:   {row: {board_id: boardId}},
-    success: function (response) {
-      var newRow = $('<tr story-id="'+response.id+'"></tr>');
-      var editable = $('<a href="#" data-xeditable="true" data-pk="'+response.id+'" data-model="row" data-name="name" data-url="/rows/'+response.id+'" data-title="Enter name"></a>');
-      var title = $('<td></td>');
-      editable.append(response.name);
-      title.append(editable);
-      var buttonGroup = $('<div class="btn-group pull-right"></div>'); /* TODO: need to add < container: 'body' > option somewhere (?) */
-      var addButton = $('<button class="btn btn-xs btn-primary" add-sticky="true" data-toggle="tooltip" data-placement="bottom" title="Adds a new sticky"><span class="glyphicon glyphicon-plus"></span> </button>');
-      var deleteButton = $('<button class="btn btn-xs btn-warning delete-story" data-toggle="tooltip" data-placement="bottom" title="Removes the whole story"><span class="glyphicon glyphicon-trash"></span></button>');
-      var number_of_columns = $('.title_field').find('tr').first().find('th').length
-
-      /* Button append */
-      buttonGroup.append(addButton);
-      buttonGroup.append(deleteButton);
-      title.append(buttonGroup);
-
-      var columnIds = [];
-      $('.column_field').find('tr').first().find('.column').each(function () { columnIds.push( $(this).attr('column-id')) })
-
-      newRow.append(title);
-      for(var i = 0 ; i < number_of_columns-1 ; i++){
-        var newColumn = $('<td class="column" column-id="'+columnIds[i]+'"></td>');
-        newRow.append(newColumn)
-      }
-
-      newRow.hide();
-      $('.column_field').append(newRow);
-      newRow.fadeIn('slow');
-      addLayoutBehaviour();
-      addButtonBehaviour();
-
-      addButton.click(function(){
-
-        var currentStory = $(this).closest('tr');
-        var storyId = currentStory.attr('story-id');
-        var starterColumnId = $(this).closest('tr').find("td:eq(1)").attr("column-id");
-
-        $.ajax({
-          url:    "/stickies",
-          type:   "POST",
-          data:   {sticky: {column_id: starterColumnId, row_id: storyId}},
-          success: function(response){
-            var panel = $('<div class="panel panel-default" sticky-id="'+response.id+'"></div>');
-            var editableHeader = $('<a href="#" data-xeditable="true" data-pk="'+response.id+'" data-model="sticky" data-name="name" data-url="/stickies/'+response.id+'" data-title="Enter name">'+response.name+'</a>')
-            var panelHeader = $('<div class="panel-heading"><i class="panel-button"></i></div>');
-            panelHeader.prepend(editableHeader);
-            var editableBody = $('<a href="#" data-xeditable="true" data-pk="'+response.id+'" data-model="sticky" data-name="text" data-url="/stickies/'+response.id+'" data-title="Enter text" data-type="textarea" data-showbuttons="bottom" data-anim="500">'+response.text+'</a>');
-            var panelBody = $('<div class="panel-body"></div>');
-            panelBody.append(editableBody);
-
-            panel.append(panelHeader);
-            panel.append(panelBody);
-
-            currentStory.find("td:eq(1)").append(panel);
-
-            addLayoutBehaviour();
-          }
-        });
-
-        addLayoutBehaviour();
-      });
-    }
-  });
-
-});
-
-var viewState = true;
-$('.toggle-collapse').click(function() {
-  $('[class*="glyphicon-chevron-"]').each(function () {
-    if(viewState){
-      $(this).removeClass( "glyphicon-chevron-down" );
-      $(this).addClass( "glyphicon-chevron-up" );
-      $(this).closest( ".panel" ).find( ".panel-body" ).hide();
-    }
-    else {
-      $(this).removeClass( "glyphicon-chevron-up" );
-      $(this).addClass( "glyphicon-chevron-down" );
-      $(this).closest( ".panel" ).find( ".panel-body" ).show();
-    }
-  });
-  viewState = !viewState;
-});
-
-$('.toggle-edit').click(function () {
-  $("[data-xeditable=true]").editable('toggleDisabled');
-});
-
-/* initial panel's buttons */
-$("[add-sticky=true]").each(function () {
-  return $(this).click(function(){
-
-    var currentStory = $(this).closest('tr');
-
-    var starterColumnId = currentStory.find("td:eq(1)").attr("column-id");
-    var storyId = currentStory.attr('story-id');
-
+  $('.add-story').click(function () {
+    var boardId = $(this).attr("board-id");
     $.ajax({
-      url:    "/stickies",
+      url:    "/rows",
       type:   "POST",
-      data:   {sticky: {column_id: starterColumnId, row_id: storyId}},
-      success: function(response){
-        var panel = $('<div class="panel panel-default" sticky-id="'+response.id+'"></div>');
-        var editableHeader = $('<a href="#" data-xeditable="true" data-pk="'+response.id+'" data-model="sticky" data-name="name" data-url="/stickies/'+response.id+'" data-title="Enter name">'+response.name+'</a>')
-        var panelHeader = $('<div class="panel-heading"><i class="panel-button"></i></div>');
-        panelHeader.prepend(editableHeader);
-        var editableBody = $('<a href="#" data-xeditable="true" data-pk="'+response.id+'" data-model="sticky" data-name="text" data-url="/stickies/'+response.id+'" data-title="Enter text" data-type="textarea" data-showbuttons="bottom" data-anim="500" >'+response.text+'</a>');
-        var panelBody = $('<div class="panel-body"></div>');
-        panelBody.append(editableBody);
+      data:   {row: {board_id: boardId}},
+      success: function (response) {
+        var newRow = $('<tr story-id="'+response.id+'"></tr>');
+        var editable = $('<a href="#" data-xeditable="true" data-pk="'+response.id+'" data-model="row" data-name="name" data-url="/rows/'+response.id+'" data-title="Enter name"></a>');
+        var title = $('<td></td>');
+        editable.append(response.name);
+        title.append(editable);
+        var buttonGroup = $('<div class="btn-group pull-right"></div>'); /* TODO: need to add < container: 'body' > option somewhere (?) */
+        var addButton = $('<button class="btn btn-xs btn-primary" add-sticky="true" data-toggle="tooltip" data-placement="bottom" title="Adds a new sticky"><span class="glyphicon glyphicon-plus"></span> </button>');
+        var deleteButton = $('<button class="btn btn-xs btn-warning delete-story" data-toggle="tooltip" data-placement="bottom" title="Removes the whole story"><span class="glyphicon glyphicon-trash"></span></button>');
+        var number_of_columns = $('.title_field').find('tr').first().find('th').length
 
-        panel.append(panelHeader);
-        panel.append(panelBody);
+        /* Button append */
+        buttonGroup.append(addButton);
+        buttonGroup.append(deleteButton);
+        title.append(buttonGroup);
 
-        currentStory.find("td:eq(1)").prepend(panel);
+        var columnIds = [];
+        $('.column_field').find('tr').first().find('.column').each(function () { columnIds.push( $(this).attr('column-id')) })
 
+        newRow.append(title);
+        for(var i = 0 ; i < number_of_columns-1 ; i++){
+          var newColumn = $('<td class="column" column-id="'+columnIds[i]+'"></td>');
+          newRow.append(newColumn)
+        }
+
+        newRow.hide();
+        $('.column_field').append(newRow);
+        newRow.fadeIn('slow');
         addLayoutBehaviour();
+        addButtonBehaviour();
 
+        addButton.click(function(){
+
+          var currentStory = $(this).closest('tr');
+          var storyId = currentStory.attr('story-id');
+          var starterColumnId = $(this).closest('tr').find("td:eq(1)").attr("column-id");
+
+          $.ajax({
+            url:    "/stickies",
+            type:   "POST",
+            data:   {sticky: {column_id: starterColumnId, row_id: storyId}},
+            success: function(response){
+              var panel = $('<div class="panel panel-default" sticky-id="'+response.id+'"></div>');
+              var editableHeader = $('<a href="#" data-xeditable="true" data-pk="'+response.id+'" data-model="sticky" data-name="name" data-url="/stickies/'+response.id+'" data-title="Enter name">'+response.name+'</a>')
+              var panelHeader = $('<div class="panel-heading"><i class="panel-button"></i></div>');
+              panelHeader.prepend(editableHeader);
+              var editableBody = $('<a href="#" data-xeditable="true" data-pk="'+response.id+'" data-model="sticky" data-name="text" data-url="/stickies/'+response.id+'" data-title="Enter text" data-type="textarea" data-showbuttons="bottom" data-anim="500">'+response.text+'</a>');
+              var panelBody = $('<div class="panel-body"></div>');
+              panelBody.append(editableBody);
+
+              panel.append(panelHeader);
+              panel.append(panelBody);
+
+              currentStory.find("td:eq(1)").append(panel);
+
+              addLayoutBehaviour();
+            }
+          });
+
+          addLayoutBehaviour();
+        });
       }
     });
+
   });
-});
+
+  var viewState = true;
+  $('.toggle-collapse').click(function() {
+    $('[class*="glyphicon-chevron-"]').each(function () {
+      if(viewState){
+        $(this).removeClass( "glyphicon-chevron-down" );
+        $(this).addClass( "glyphicon-chevron-up" );
+        $(this).closest( ".panel" ).find( ".panel-body" ).hide();
+      }
+      else {
+        $(this).removeClass( "glyphicon-chevron-up" );
+        $(this).addClass( "glyphicon-chevron-down" );
+        $(this).closest( ".panel" ).find( ".panel-body" ).show();
+      }
+    });
+    viewState = !viewState;
+  });
+
+  $('.toggle-edit').click(function () {
+    $("[data-xeditable=true]").editable('toggleDisabled');
+  });
+
+  /* initial panel's buttons */
+  $("[add-sticky=true]").each(function () {
+    return $(this).click(function(){
+
+      var currentStory = $(this).closest('tr');
+
+      var starterColumnId = currentStory.find("td:eq(1)").attr("column-id");
+      var storyId = currentStory.attr('story-id');
+
+      $.ajax({
+        url:    "/stickies",
+        type:   "POST",
+        data:   {sticky: {column_id: starterColumnId, row_id: storyId}},
+        success: function(response){
+          var panel = $('<div class="panel panel-default" sticky-id="'+response.id+'"></div>');
+          var editableHeader = $('<a href="#" data-xeditable="true" data-pk="'+response.id+'" data-model="sticky" data-name="name" data-url="/stickies/'+response.id+'" data-title="Enter name">'+response.name+'</a>')
+          var panelHeader = $('<div class="panel-heading"><i class="panel-button"></i></div>');
+          panelHeader.prepend(editableHeader);
+          var editableBody = $('<a href="#" data-xeditable="true" data-pk="'+response.id+'" data-model="sticky" data-name="text" data-url="/stickies/'+response.id+'" data-title="Enter text" data-type="textarea" data-showbuttons="bottom" data-anim="500" >'+response.text+'</a>');
+          var panelBody = $('<div class="panel-body"></div>');
+          panelBody.append(editableBody);
+
+          panel.append(panelHeader);
+          panel.append(panelBody);
+
+          currentStory.find("td:eq(1)").prepend(panel);
+
+          addLayoutBehaviour();
+
+        }
+      });
+    });
+  });
+
+  function addSideColumnBehaviour(element){
+    element.click(function(){
+      var button = $(this);
+      var columnTitle = "Column title";
+      var boardId = $(this).attr("board-id");
+      var columnIndex = button.closest("th").prevAll("th").length;
+      var side = $(this).attr("side");
+      if(side=='right')
+        order=columnIndex + 1;
+      else
+        order=columnIndex;
+      $.ajax({
+          url:    "/columns/insert_between_columns",
+          type:   "POST",
+          data:   {column: {name: columnTitle, board_id: boardId, column_order: order}, side: side},
+          success: function(response){
+            var columnId = response.id;
+            var insertIndex = columnIndex;
+            if (side === 'left')
+              insertIndex = columnIndex-1;
+            $('.column_field').find('tr').each(function () {
+              var newColumn = $('<td class="column"><div class="column-content"></div></td>');
+              newColumn.hide();
+              $(this).find('td').eq(insertIndex).after(newColumn)
+              newColumn.fadeIn('slow');
+            });
+
+            $('.title_field').find('tr').each(function () {
+              var removeButton = $('<button class="btn btn-xs btn-danger delete-column pull-right"><span class="glyphicon glyphicon-remove"></span></button>')
+              var addButton_right = $('<button class="btn btn-xs btn-info add-side-column pull-right" board-id="'+boardId+'" side="right"><span class="glyphicon glyphicon-plus-sign"></span></button>')
+              var addButton_left = $('<button class="btn btn-xs btn-info add-side-column pull-left" board-id="'+boardId+'" side="left"><span class="glyphicon glyphicon-plus-sign"></span></button>')
+              var newTitle = $('<div class="h4" column-id="'+columnId+'"></div>');
+              var titleContent = $('<a href="#" data-xeditable="true" data-pk="'+columnId+'" data-model="column" data-name="name" data-url="/columns/'+columnId+'" data-title="Enter name">'+columnTitle+'</a>');
+              newTitle.append(titleContent);
+              newTitle.append(removeButton);
+              newTitle.append(addButton_right);
+              newTitle.append(addButton_left);
+              addSideColumnBehaviour(addButton_right);
+              addSideColumnBehaviour(addButton_left);
+              newTitle.hide();
+              $(this).find('th').eq(insertIndex).after($('<th class="column-title"></th>').append(newTitle));
+              newTitle.fadeIn('slow');
+            });
+            addButtonBehaviour();
+            addLayoutBehaviour();
+          }
+      });
+    });
+  }
+
+  addSideColumnBehaviour($('.add-side-column'));
 
 };
 

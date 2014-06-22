@@ -16,6 +16,25 @@ $max-width: 100% !important;
   padding-bottom: 30px;
 }
 
+
+.form-control {
+  :active ~ .add-side-column { display:none; }
+}
+
+.column-title{
+  .add-side-column {
+    display: none;
+  }
+  :hover {
+    .form-control {
+      :active ~ .add-side-column { display:none; }
+    }
+    .add-side-column {
+      display : inline;
+    }
+  }
+}
+
 .portlet-placeholder {
   background-color: white !important;
   border: 1px dashed grey !important;

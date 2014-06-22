@@ -24,7 +24,7 @@ class ColumnsController < ApplicationController
   # POST /columns/insert_between_columns
   def insert_between_columns
     @column = Column.new(column_params)
-    update_board_column_orders(@column, @side)
+    update_board_column_orders(@column, params[:side])
 
     respond_to do |format|
       if @column.save
@@ -97,5 +97,5 @@ class ColumnsController < ApplicationController
       end
     end
   end
-  
+
 end
