@@ -1,5 +1,7 @@
 class ColumnsController < ApplicationController
   before_action :set_column, only: [:show, :edit, :update, :destroy]
+  after_action :increment_column_orders, only: :insert_between_columns
+  before_action :decrease_column_orders, only: :destroy
 
   # GET /columns
   # GET /columns.json
@@ -24,7 +26,6 @@ class ColumnsController < ApplicationController
   # POST /columns/insert_between_columns
   def insert_between_columns
     @column = Column.new(column_params)
-    update_board_column_orders(@column, params[:side])
 
     respond_to do |format|
       if @column.save
@@ -82,18 +83,22 @@ class ColumnsController < ApplicationController
     params.require(:column).permit(:name, :column_order, :board_id)
   end
 
-  def update_board_column_orders(a_column, side)
-    Board.find(a_column.board_id).columns.each do |column|
-      if side == 'right'
-        if column.column_order >= a_column.column_order
+  def increment_column_orders
+    Board.find(@column.board_id).columns.each do |column|
+      if column.column_order >= @column.column_order
+        if(column.id!=@column.id)
           column.increment(:column_order,1)
           column.save
         end
-      else
-        if column.column_order >= a_column.column_order
-          column.increment(:column_order,1)
-          column.save
-        end
+      end
+    end
+  end
+
+  def decrease_column_orders
+    Board.find(@column.board_id).columns.each do |column|
+      if column.column_order >= @column.column_order
+        column.decrement(:column_order,1)
+        column.save
       end
     end
   end
