@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :columns
 
   resources :stickies, defaults: {format: :json}
 

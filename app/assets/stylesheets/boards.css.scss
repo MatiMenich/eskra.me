@@ -66,6 +66,9 @@ $max-width: 100% !important;
 .panel{
   font-family: $font-stack;
   font-size: 13px;
+  .panel-heading:hover {
+    cursor: move;
+  }
   @media (min-width: 768px){
     .panel-button-mobile {
       display: none;
