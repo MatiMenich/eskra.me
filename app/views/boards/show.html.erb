@@ -14,7 +14,7 @@
         <thead class="title_field">
           <tr>
             <th><h4><%= t(:stories) %></h4></th>
-            <% @board.columns.each do |column| %>
+            <% @board.columns.order(:column_order).each do |column| %>
             <th class="column-title">
               <div class="h4" column-id='<%= column.id %>'>
                 <a href="#" data-xeditable="true" data-pk="<%= column.id %>" data-model="column" data-name="name" data-url="<%= column_url(column) %>" data-title="Enter name">
@@ -46,7 +46,7 @@
                 <button class="btn btn-xs btn-warning delete-story"><span class="glyphicon glyphicon-trash" data-toggle="tooltip" data-placement="bottom" title="Removes the whole story"> </span></button>
               </div>
             </td>
-            <% @board.columns.order('column_order ASC').each do |column|%>
+            <% @board.columns.order(:column_order).each do |column|%>
             <td class="column" column-id="<%= column.id %>">
               <% column.stickies.each do |sticky| %>
               <% if story.stickies.include?(sticky) %>
