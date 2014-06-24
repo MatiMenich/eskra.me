@@ -20,15 +20,31 @@
                 <a href="#" data-xeditable="true" data-pk="<%= column.id %>" data-model="column" data-name="name" data-url="<%= column_url(column) %>" data-title="Enter name">
                   <%= column.name %>
                 </a>
-				        <button class="btn btn-xs btn-info add-side-column pull-right" board-id="<%= @board.id %>" side="right">
-                  <span class='glyphicon glyphicon-plus-sign'></span>
-                </button>
-                <button class="btn btn-xs btn-danger delete-column pull-right" >
-                  <span class='glyphicon glyphicon-remove'></span>
-                </button>
-				        <button class="btn btn-xs btn-info add-side-column pull-left" board-id="<%= @board.id %>" side="left">
-                  <span class='glyphicon glyphicon-plus-sign'></span>
-                </button>
+                <div class="btn-group pull-right btn-group-xs">
+                  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                    <span class="glyphicon glyphicon-wrench"></span> <span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu" role="menu">
+                    <li role="presentation" class="dropdown-header">Add Column ...</li>
+                    <li>
+                      <a href="#" class="add-side-column" board-id="<%= @board.id %>" side="left">
+                        <span class='glyphicon glyphicon-circle-arrow-left'></span> To the left
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#" class="add-side-column" board-id="<%= @board.id %>" side="right">
+                        <span class='glyphicon glyphicon-circle-arrow-right'></span> To the right
+                      </a>
+                    </li>
+                    <li role="presentation" class="divider"></li>
+                    <li role="presentation" class="dropdown-header">Actions</li>
+                    <li>
+                      <a href="#" class="delete-column" board-id="<%= @board.id %>" side="right">
+                        <span class='glyphicon glyphicon-remove'></span> Delete Column
+                      </a>
+                    </li>
+                  </ul>
+                </div>
               </div>
             </th>
             <% end %>

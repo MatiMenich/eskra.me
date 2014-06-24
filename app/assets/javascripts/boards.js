@@ -125,7 +125,7 @@ var ready = function() {
     $(".delete-column").click(function(){
 
       var button = $(this);
-      var columnId = button.parent().attr('column-id');
+      var columnId = button.closest(".h4").attr('column-id');
       $.ajax({
         dataType: "json",
         type:   'delete',
