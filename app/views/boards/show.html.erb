@@ -40,7 +40,7 @@
                     <li role="presentation" class="dropdown-header">Actions</li>
                     <li>
                       <a href="#" class="delete-column" board-id="<%= @board.id %>" side="right">
-                        <span class='glyphicon glyphicon-remove'></span> Delete Column
+                        <span class='glyphicon glyphicon-remove-sign'></span> Delete Column
                       </a>
                     </li>
                   </ul>
@@ -61,19 +61,20 @@
                 <button class="btn btn-xs btn-primary" add-sticky="true" data-toggle="tooltip" data-placement="bottom" title="Adds a new sticky"><span class="glyphicon glyphicon-plus"> </span></button>
                 <button class="btn btn-xs btn-warning delete-story"><span class="glyphicon glyphicon-trash" data-toggle="tooltip" data-placement="bottom" title="Removes the whole story"> </span></button>
               </div>
-            </td>
+            </td> 
             <% @board.columns.order(:column_order).each do |column|%>
             <td class="column" column-id="<%= column.id %>">
-              <% column.stickies.each do |sticky| %>
+              <% column.stickies.order('created_at DESC').each do |sticky| %>
               <% if story.stickies.include?(sticky) %>
               <div class="panel <%= sticky.color %>" sticky-id="<%= sticky.id %>">
+                <div class="panel-button"></div>
                 <div class="panel-heading"><a href="#" data-xeditable="true" data-pk="<%= sticky.id %>" data-model="sticky" data-name="name" data-url="<%= sticky_url(sticky) %>" data-title="Enter name">
                   <%= sticky.name %>
                 </a>
-                <i class="panel-button"></i>
-                <i class="panel-button-mobile"><a data-toggle="modal" data-target="#stickieOptionModal"><span class="glyphicon glyphicon-cog pull-right"></span></a></i>
+                <i class="panel-button-mobile"><a data-toggle="modal" data-target="#stickieOptionModal" data-id="<%= sticky.id %>"><span class="glyphicon glyphicon-cog pull-right"></span></a></i>
               </div>
-              <div class="panel-body"><a href="#" data-xeditable="true" data-pk="<%= sticky.id %>" data-model="sticky" data-type="textarea" data-showbuttons="bottom" data-anim="500" data-name="text" data-url="<%= sticky_url(sticky) %>" data-title="Enter text"><%= sticky.text %></a></div>
+              <div class="panel-body"><a href="#" data-xeditable="true" data-pk="<%= sticky.id %>" data-model="sticky" data-type="textarea" data-showbuttons="bottom" data-anim="500" data-name="text" data-url="<%= sticky_url(sticky) %>" data-title="Enter text"><%= sticky.text %></a>
+              </div>
             </div>
             <% end %>
             <% end %>

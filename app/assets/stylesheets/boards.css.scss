@@ -16,25 +16,6 @@ $max-width: 100% !important;
   padding-bottom: 30px;
 }
 
-
-.form-control {
-  :active ~ .add-side-column { display:none; }
-}
-
-// .column-title{
-//   .add-side-column {
-//     display: none;
-//   }
-//   :hover {
-//     .form-control {
-//       :active ~ .add-side-column { display:none; }
-//     }
-//     .add-side-column {
-//       display : inline;
-//     }
-//   }
-// }
-
 .portlet-placeholder {
   background-color: white !important;
   border: 1px dashed grey !important;
@@ -42,7 +23,37 @@ $max-width: 100% !important;
   height: 50px;
 }
 
-.dropdown-menu {
+
+.dropdown-submenu{
+  position:relative;
+  .dropdown-menu{
+    top:0;
+    left:100%;
+    margin-top:-6px;
+    margin-left:-1px;
+    -webkit-border-radius:0 6px 6px 6px;
+    -moz-border-radius:0 6px 6px 6px;
+    border-radius:0 6px 6px 6px;
+  }
+}
+.dropdown-submenu:hover>.dropdown-menu{
+  display:block;
+}
+.dropdown-submenu>a:after{
+  display:block;
+  content:" ";
+  float:right;
+  width:0;
+  height:0;
+  border-color:transparent;
+  border-style:solid;
+  border-width:5px 0 5px 5px;
+  border-left-color:#cccccc;
+  margin-top:5px;
+  margin-right:-10px;
+ }
+
+.dropdown-color {
   min-width: 0px !important;
 }
 
@@ -82,23 +93,25 @@ $max-width: 100% !important;
   font-weight: bold;
 }
 
+
+
+
 .panel{
   font-family: $font-stack;
   font-size: 13px;
+  position: relative;
+  .panel-button {
+      position:absolute;
+      display:none;
+      top: 8px;
+      right:10px;
+  } 
   .panel-heading:hover {
     cursor: move;
   }
   @media (min-width: 768px){
     .panel-button-mobile {
       display: none;
-    }
-    .panel-button {
-      display: none;
-    }
-    :hover{
-      .panel-button {
-        display: inline;
-      }
     }
   }
   @media (max-width: 767px){

@@ -37,8 +37,6 @@
       <ul class="nav navbar-nav navbar-left visible-xs">
         <li><a class="add-story" board-id="<%= @board.id %>" data-toggle="collapse" data-target="#navbar-collapse" ><span class='glyphicon glyphicon-plus'></span> 
               <span class='glyphicon glyphicon-list-alt'></span> <%= t(:add_story) %></a></li>
-        <li><a class="add-column" board-id="<%= @board.id %>" data-toggle="collapse" data-target="#navbar-collapse" > <span class='glyphicon glyphicon-plus'></span> 
-              <span class='glyphicon glyphicon-th-list'></span> <%= t(:add_column) %></a></li>
         <li class="divider-vertical"></li>
         <li><a class="toggle-collapse" data-toggle="collapse" data-target="#navbar-collapse" ><span class='glyphicon glyphicon-eye-open'></span>  <%= t(:toggle_view) %></a></li>
         <li><a class="toggle-edit" data-toggle="collapse" data-target="#navbar-collapse" ><span class='glyphicon glyphicon-edit'></span> <%= t(:toggle_edit) %></a></li>
@@ -46,10 +44,6 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li class="btn-group navbar-btn hidden-xs">
-          <button class="btn btn-primary add-column" board-id="<%= @board.id %>" data-toggle="tooltip" data-placement="bottom" title="<%= t(:add_column) %>">
-            <span class='glyphicon glyphicon-plus'></span> 
-            <span class='glyphicon glyphicon-list-alt'></span> 
-          </button>
           <button class="btn btn-success add-story"  board-id="<%= @board.id %>" data-toggle="tooltip" data-placement="bottom" title="<%= t(:add_story) %>">
             <span class='glyphicon glyphicon-plus'></span> 
             <span class='glyphicon glyphicon-th-list'></span> 
