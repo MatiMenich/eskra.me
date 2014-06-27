@@ -8,10 +8,6 @@ eskra.me is a nice web rails application that allows you create and manage your 
 * Multilanguage (currently supporting english, spanish and experimental support for chinese and japanese)
 * And much more !
 
-Here we write the nice features of the app.
-
-blabla bla
-
 ## Usage ##
 
 ### Installation ###
@@ -62,6 +58,8 @@ rake db:drop; rake db:migrate
 	After this is done, just go to 'localhost:3000' in your favorite browser, and you will see the application.
 
 ### Code documentation ###
+
+These are key points to have in mind if you want to contribute our project:
 
 * This application is very ajax-heavy and it uses jquery.
 * It has the following models:
