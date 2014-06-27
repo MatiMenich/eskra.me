@@ -16,5 +16,6 @@ es:
   actions: "Acciones"
   delete_column: "Eliminar columna"
   select_color: "Elegir color"
+  delete: "Eliminar"
   home: "Inicio"
   contact: "Contacto"
