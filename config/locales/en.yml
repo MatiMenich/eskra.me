@@ -9,6 +9,7 @@ en:
   toggle_view: "Toggle View"
   toggle_edit: "Toggle Edit"
   add_column: "Add Column"
+  add_story: "Add Story"
   about_us_description: "Eskra-me is the world's leading software of personal information management for businesses and professionals."
   to_the_right: "To the right"
   to_the_left: "To the left"
@@ -16,3 +17,5 @@ en:
   delete_column: "Delete column"
   select_color: "Select color"
   delete: "Delete"
+  home: "Home"
+  contact: "Contact"
