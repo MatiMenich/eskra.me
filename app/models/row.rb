@@ -8,7 +8,7 @@ class Row < ActiveRecord::Base
   private
 
   def set_default_parameters
-  	self.name = 'New Story'
+  	self.name = Row.human_attribute_name("new_lane")
   end
 
 end

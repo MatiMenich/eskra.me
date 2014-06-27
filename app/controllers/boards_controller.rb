@@ -6,7 +6,7 @@ class BoardsController < ApplicationController
   end
 
   def create_board
-    @board = Board.create(name: 'Your Board')
+    @board = Board.create(name: t(:your_board))
     redirect_to '/boards/'+@board.uid
   end
 
@@ -15,7 +15,7 @@ class BoardsController < ApplicationController
   def show
     uid = params[:id]
     if uid.nil?
-      @board = Board.create(name: 'Your Board')
+      @board = Board.create(name: t(:your_board))
     else
       unless params[:locale].nil?
         case params[:locale]
