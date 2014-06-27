@@ -15,7 +15,7 @@
       <table class="table table-bordered table-condensed">
         <thead class="title_field">
           <tr>
-            <th><h4><%= t(:stories) %></h4></th>
+            <th><h4><%= t(:lanes) %></h4></th>
             <% @board.columns.order(:column_order).each do |column| %>
             <th class="column-title">
               <div class="h4" column-id='<%= column.id %>'>

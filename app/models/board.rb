@@ -16,9 +16,9 @@ class Board < ActiveRecord::Base
 
 
 	def create_default_parameters
-		Column.create(name: 'To Do', column_order: 1, board_id: self.id)
-		Column.create(name: 'Doing', column_order: 2, board_id: self.id)
-		Column.create(name: 'Done', column_order: 3, board_id: self.id)
+		Column.create(name: Board.human_attribute_name("todo"), column_order: 1, board_id: self.id)
+		Column.create(name: Board.human_attribute_name("doing"), column_order: 2, board_id: self.id)
+		Column.create(name: Board.human_attribute_name("done"), column_order: 3, board_id: self.id)
 		Row.create(name: 'Story 1', order: 1, board_id: self.id)
 	end
 end
