@@ -69,6 +69,6 @@ class StickiesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def sticky_params
-      params.require(:sticky).permit(:name, :text, :url, :color, :column_id, :row_id)
+      params.require(:sticky).permit(:name, :text, :link, :color, :column_id, :row_id)
     end
 end

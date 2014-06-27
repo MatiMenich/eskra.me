@@ -1,0 +1,36 @@
+<!-- Modal -->
+<div class="modal fade" id="linkEditModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-body">
+      <form id="editLinkForm" class="form-horizontal" method="PUT">
+          <fieldset>
+
+            <!-- Form Name -->
+            <legend>Add/Edit Link</legend>
+
+            <!-- Text input-->
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="link">Link</label>  
+              <div class="col-md-5">
+                <input id="link_input" name="link" type="text" placeholder="Insert a link" class="form-control input-md" required="">
+              </div>
+            </div>
+
+            <!-- Button (Double) -->
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="submit"></label>
+              <div class="col-md-8">
+                <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-check"></span> Submit</button>
+                <button data-dismiss="modal" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+              </div>
+            </div>
+
+          </fieldset>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>

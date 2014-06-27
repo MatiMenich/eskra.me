@@ -43,7 +43,7 @@ ActiveRecord::Schema.define(version: 20140620171002) do
   create_table "stickies", force: true do |t|
     t.string   "name"
     t.text     "text"
-    t.string   "url"
+    t.string   "link"
     t.string   "color"
     t.integer  "column_id"
     t.integer  "row_id"

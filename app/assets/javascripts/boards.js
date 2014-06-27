@@ -26,102 +26,84 @@ var ready = function() {
       }
     });
 
+
+    
     $( ".panel" )
-    .find( ".panel-button" )
-    .html( "");
+    .find( ".panel-button" ).each(function() {
 
-    var optionsDiv = $('<div class="btn-group btn-group-xs pull-right"></div>');
-    var optionsButton = $('<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="glyphicon '+stickieOptionsIcon+'"></span> <span class="caret"></span></button>');
-    var optionsDropdownMenu = $('<ul class="dropdown-menu" role="menu"></ul>');
-    var optionsDropdownColorSubmenu = $('<li class="dropdown-submenu"></li>');
-    var chooseColorOption = $('<a tabindex="-1"><span class="glyphicon glyphicon-tint"></span>Select color</a>');
-    var colorChooser = $('<ul class="dropdown-menu dropdown-color"></ul>');
-    var divider = $('<li role="presentation" class="divider"></li>');
-    var actionsHeader = $('<li role="presentation" class="dropdown-header">Actions</li>');
-    var deleteOption = $('<li><a href="#" class="delete-sticky"><span class="glyphicon glyphicon-remove"></span> Delete</a></li>');
+      var stickyId = $(this).closest('.panel').attr('sticky-id');
 
-    deleteOption.click(function(){
-      var button = $(this);
-      var panel = button.closest(".panel");
-      var stickyId = panel.attr('sticky-id');
-      $.ajax({
-        dataType: "json",
-        type: 'delete',
-        url: '/stickies/' + stickyId,
-        success: function (data) {
-          panel.fadeOut('slow', function(){
-            panel.remove();
-          });
-        }
+      var stickyLink = $(this).text();
+
+      var optionsDiv = $('<div class="btn-group btn-group-xs pull-right"></div>');
+      var optionsButton = $('<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="glyphicon '+stickieOptionsIcon+'"></span> <span class="caret"></span></button>');
+      var optionsDropdownMenu = $('<ul class="dropdown-menu" role="menu"></ul>');
+      var optionsDropdownColorSubmenu = $('<li class="dropdown-submenu"></li>');
+      var chooseColorOption = $('<a tabindex="-1"><span class="glyphicon glyphicon-chevron-left" style="opacity:0.3;"></span> Select Color</a>');
+      var colorChooser = $('<ul class="dropdown-menu dropdown-color"></ul>');
+      var divider = $('<li role="presentation" class="divider"></li>');
+      var actionsHeader = $('<li role="presentation" class="dropdown-header">Actions</li>');
+      var li = $('<li></li>');
+      var actionButtonGroup = $('<div class="btn-group btn-group-xs action-group"></div>');
+      var deleteOption = $('<a class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Delete</a>');
+      var linkOption = $('<a href="'+stickyLink+ '" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-link"></span> Link</a>');
+      var editLinkOption = $('<a href="#" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#linkEditModal"><span class="glyphicon glyphicon-pencil"></span></a>');
+
+      editLinkOption.click(function () {
+        $('#link_input').val(stickyLink);
+        var hiddenStickieIdInput = $('<input type="hidden" value="'+stickyId+'" id="hiddenStickyId"');
+        $('#editLinkForm').find('fieldset').prepend(hiddenStickieIdInput);
       });
+
+      deleteOption.click(function(){
+        var button = $(this);
+        var panel = button.closest(".panel");
+        var stickyId = panel.attr('sticky-id');
+        $.ajax({
+          dataType: "json",
+          type: 'delete',
+          url: '/stickies/' + stickyId,
+          success: function (data) {
+            panel.fadeOut('slow', function(){
+              panel.remove();
+            });
+          }
+        });
+      });
+
+      var redOption = $("<li color-class='panel-danger'><a tabindex='-1'><div class='color-circle' style='background-color:#f2dede;'></div>&nbsp</a></li>");
+      var greenOption = $("<li color-class='panel-success'><a tabindex='-1'><div class='color-circle' style='background-color:#dff0d8;' ></div>&nbsp</a></li>");
+      var defaultOption = $("<li color-class='panel-default'><a tabindex='-1'><div class='color-circle' style='background-color:whitesmoke;' ></div>&nbsp</a></li>");
+      var yellowOption = $("<li color-class='panel-warning'><a tabindex='-1'><div class='color-circle' style='background-color:#fcf8e3;' ></div>&nbsp</a></li>");
+      var blueOption = $("<li color-class='panel-info'><a tabindex='-1'><div class='color-circle' style='background-color:#d9edf7;' ></div>&nbsp</a></li>");
+
+      colorChooser.append(defaultOption);
+      colorChooser.append(redOption);
+      colorChooser.append(greenOption);
+      colorChooser.append(yellowOption);
+      colorChooser.append(blueOption);
+
+      actionButtonGroup.append(deleteOption);
+      actionButtonGroup.append(linkOption);
+      actionButtonGroup.append(editLinkOption);
+
+      li.append(actionButtonGroup);
+
+
+      optionsDropdownColorSubmenu.append(chooseColorOption);
+      optionsDropdownColorSubmenu.append(colorChooser);
+
+      optionsDropdownMenu.append(optionsDropdownColorSubmenu);
+      optionsDropdownMenu.append(divider);
+      optionsDropdownMenu.append(actionsHeader);
+      optionsDropdownMenu.append(li);
+      
+
+      optionsDiv.append(optionsButton);
+      optionsDiv.append(optionsDropdownMenu);
+      $(this).html(optionsDiv);
     });
-
-    var redOption = $("<li color-class='panel-danger'><a tabindex='-1'><div class='color-circle' style='background-color:#f2dede;'></div>&nbsp</a></li>");
-    var greenOption = $("<li color-class='panel-success'><a tabindex='-1'><div class='color-circle' style='background-color:#dff0d8;' ></div>&nbsp</a></li>");
-    var defaultOption = $("<li color-class='panel-default'><a tabindex='-1'><div class='color-circle' style='background-color:whitesmoke;' ></div>&nbsp</a></li>");
-    var yellowOption = $("<li color-class='panel-warning'><a tabindex='-1'><div class='color-circle' style='background-color:#fcf8e3;' ></div>&nbsp</a></li>");
-    var blueOption = $("<li color-class='panel-info'><a tabindex='-1'><div class='color-circle' style='background-color:#d9edf7;' ></div>&nbsp</a></li>");
-
-    colorChooser.append(defaultOption);
-    colorChooser.append(redOption);
-    colorChooser.append(greenOption);
-    colorChooser.append(yellowOption);
-    colorChooser.append(blueOption);
-
-    optionsDropdownColorSubmenu.append(chooseColorOption);
-    optionsDropdownColorSubmenu.append(colorChooser);
-
-    optionsDropdownMenu.append(optionsDropdownColorSubmenu);
-    optionsDropdownMenu.append(divider);
-    optionsDropdownMenu.append(actionsHeader);
-    optionsDropdownMenu.append(deleteOption);
-
-
-    // <div class="btn-group btn-group-xs">
-    //               <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-    //                 <span class="glyphicon glyphicon-cog"></span> <span class="caret"></span>
-    //               </button>
-    //               <ul class="dropdown-menu" role="menu">
-    //                 <li class="dropdown-submenu">
-    //                   <a tabindex="-1"><span class='glyphicon glyphicon-tint'></span> Select color </a>
-    //                   <ul class="dropdown-menu dropdown-color">
-    //                     <li color-class='panel-danger'><a tabindex='-1'><div class='color-circle' style='background-color:#f2dede;'></div>&nbsp</a></li>
-    //                     <li color-class='panel-success'><a tabindex='-1'><div class='color-circle' style='background-color:#dff0d8;' ></div>&nbsp</a></li>
-    //                     <li color-class='panel-default'><a tabindex='-1'><div class='color-circle' style='background-color:whitesmoke;' ></div>&nbsp</a></li>
-    //                     <li color-class='panel-warning'><a tabindex='-1'><div class='color-circle' style='background-color:#fcf8e3;' ></div>&nbsp</a></li>
-    //                     <li color-class='panel-info'><a tabindex='-1'><div class='color-circle' style='background-color:#d9edf7;' ></div>&nbsp</a></li>
-    //                   </ul>
-    //                 </li>
-    //                 <li role="presentation" class="divider"></li>
-    //                 <li role="presentation" class="dropdown-header">Actions</li>
-    //                 <li>
-    //                   <a href="#">
-    //                     <span class='glyphicon glyphicon-eye-open'></span> Toggle View
-    //                   </a>
-    //                 </li>
-    //                 <li class="dropdown-submenu">
-    //                   <a tabindex="-1" href="#"><span class='glyphicon glyphicon-link'></span> Link</a>
-    //                   <ul class="dropdown-menu">
-    //                     <li><a tabindex="-1" href="#"><span class='glyphicon glyphicon-edit'></span> Edit</a></li>
-    //                   </ul>
-    //                 </li>
-    //                 <li>
-    //                   <a href="#">
-    //                     <span class='glyphicon glyphicon-remove'></span> Delete
-    //                   </a>
-    //                 </li>
-    //               </ul>
-    //             </div>
-
     
-    
-
-    optionsDiv.append(optionsButton);
-    optionsDiv.append(optionsDropdownMenu);
-    
-    $( ".panel" )
-    .find( ".panel-button" )
-    .append(optionsDiv);
 
     $( ".panel-toggle" ).click(function() {
       $(this).closest( ".panel" ).find( ".panel-body" ).toggle();
@@ -171,17 +153,12 @@ var ready = function() {
       });
     });
 
-    
 
-    $(".sticky-link").click(function(){
-        var button = $(this);
-        /* TODO: see what to do with this.. */
-    });
   };
 
-  function addModalBehaviour(){
+  function addMobileBehaviour(){
 
-    $('a[data-toggle=modal], button[data-toggle=modal]').click(function () {
+    $('.mobile-modal').click(function () {
       var data_id = '';
       if (typeof $(this).data('id') !== 'undefined') {
         data_id = $(this).data('id');
@@ -342,9 +319,9 @@ var ready = function() {
         success: function(response){
           var panel = $('<div class="panel panel-default" sticky-id="'+response.id+'"></div>');
           var editableHeader = $('<a href="#" data-xeditable="true" data-pk="'+response.id+'" data-model="sticky" data-name="name" data-url="/stickies/'+response.id+'" data-title="Enter name">'+response.name+'</a>');
-          var panelButton = $('<div class="panel-button"></div>');
+          var panelButton = $('<div class="panel-button">'+response.link+'</div>');
           var panelHeader = $('<div class="panel-heading"></div>');
-          var panelMobileButton = $('<i class="panel-button-mobile"><a data-toggle="modal" data-target="#stickieOptionModal" data-id="'+response.id+'"><span class="glyphicon glyphicon-cog pull-right"></span></a></i>');
+          var panelMobileButton = $('<i class="panel-button-mobile"><a data-toggle="modal" data-target="#stickieOptionModal" data-id="'+response.id+'" class="mobile-modal"><span class="glyphicon glyphicon-cog pull-right"></span></a></i>');
           panelHeader.prepend(editableHeader);
           panelHeader.append(panelMobileButton);
           var editableBody = $('<a href="#" data-xeditable="true" data-pk="'+response.id+'" data-model="sticky" data-name="text" data-url="/stickies/'+response.id+'" data-title="Enter text" data-type="textarea" data-showbuttons="bottom" data-anim="500" >'+response.text+'</a>');
@@ -358,6 +335,7 @@ var ready = function() {
           currentStory.find("td:eq(1)").prepend(panel);
 
           addLayoutBehaviour();
+          addMobileBehaviour();
 
         }
       });
@@ -441,7 +419,20 @@ var ready = function() {
 
   addLayoutBehaviour();
   addButtonBehaviour();
-  addModalBehaviour();
+  addMobileBehaviour();
+
+  $('#editLinkForm').submit(function(){ 
+    var linkInput = $("#link_input").val();
+    var stickyId = $("#hiddenStickieIdInput").val();
+    $.ajax({
+      url: '/stickies/'+stickyId,
+      type: 'PUT',
+      data: {link: linkInput},
+      success: function () {
+        $('#linkEditModal').modal('hide');
+      }
+    });
+  });
 
 };
 

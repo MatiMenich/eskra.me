@@ -6,6 +6,8 @@
 <% end %>
 
 <%= render :partial => 'boards/stickie_option_modal' %>
+<%= render :partial => 'boards/link_edit_modal' %>
+
 
 <div class='container-fluid'>
   <div class="row">
@@ -67,11 +69,11 @@
               <% column.stickies.order('created_at DESC').each do |sticky| %>
               <% if story.stickies.include?(sticky) %>
               <div class="panel <%= sticky.color %>" sticky-id="<%= sticky.id %>">
-                <div class="panel-button"></div>
+                <div class="panel-button"><%= sticky.link %></div>
                 <div class="panel-heading"><a href="#" data-xeditable="true" data-pk="<%= sticky.id %>" data-model="sticky" data-name="name" data-url="<%= sticky_url(sticky) %>" data-title="Enter name">
                   <%= sticky.name %>
                 </a>
-                <i class="panel-button-mobile"><a data-toggle="modal" data-target="#stickieOptionModal" data-id="<%= sticky.id %>"><span class="glyphicon glyphicon-cog pull-right"></span></a></i>
+                <i class="panel-button-mobile"><a data-toggle="modal" data-target="#stickieOptionModal" data-id="<%= sticky.id %>" class="mobile-modal"><span class="glyphicon glyphicon-cog pull-right"></span></a></i>
               </div>
               <div class="panel-body"><a href="#" data-xeditable="true" data-pk="<%= sticky.id %>" data-model="sticky" data-type="textarea" data-showbuttons="bottom" data-anim="500" data-name="text" data-url="<%= sticky_url(sticky) %>" data-title="Enter text"><%= sticky.text %></a>
               </div>
