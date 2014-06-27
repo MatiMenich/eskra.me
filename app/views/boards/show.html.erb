@@ -25,22 +25,22 @@
                     <span class="glyphicon glyphicon-wrench"></span> <span class="caret"></span>
                   </button>
                   <ul class="dropdown-menu" role="menu">
-                    <li role="presentation" class="dropdown-header">Add Column ...</li>
+                    <li role="presentation" class="dropdown-header"> <%= t(:add_column) %>...</li>
                     <li>
                       <a href="#" class="add-side-column" board-id="<%= @board.id %>" side="left">
-                        <span class='glyphicon glyphicon-circle-arrow-left'></span> To the left
+                        <span class='glyphicon glyphicon-circle-arrow-left'></span> <%= t(:to_the_left) %>
                       </a>
                     </li>
                     <li>
                       <a href="#" class="add-side-column" board-id="<%= @board.id %>" side="right">
-                        <span class='glyphicon glyphicon-circle-arrow-right'></span> To the right
+                        <span class='glyphicon glyphicon-circle-arrow-right'></span> <%= t(:to_the_right)%>
                       </a>
                     </li>
                     <li role="presentation" class="divider"></li>
-                    <li role="presentation" class="dropdown-header">Actions</li>
+                    <li role="presentation" class="dropdown-header"><%= t(:actions) %></li>
                     <li>
                       <a href="#" class="delete-column" board-id="<%= @board.id %>" side="right">
-                        <span class='glyphicon glyphicon-remove-sign'></span> Delete Column
+                        <span class='glyphicon glyphicon-remove-sign'></span> <%= t(:delete_column)%>
                       </a>
                     </li>
                   </ul>

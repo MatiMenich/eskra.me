@@ -34,7 +34,7 @@ var ready = function() {
     var optionsButton = $('<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="glyphicon '+stickieOptionsIcon+'"></span> <span class="caret"></span></button>');
     var optionsDropdownMenu = $('<ul class="dropdown-menu" role="menu"></ul>');
     var optionsDropdownColorSubmenu = $('<li class="dropdown-submenu"></li>');
-    var chooseColorOption = $('<a tabindex="-1"><span class="glyphicon glyphicon-tint"></span> Select Color</a>');
+    var chooseColorOption = $('<a tabindex="-1"><span class="glyphicon glyphicon-tint"></span>Select color</a>');
     var colorChooser = $('<ul class="dropdown-menu dropdown-color"></ul>');
     var divider = $('<li role="presentation" class="divider"></li>');
     var actionsHeader = $('<li role="presentation" class="dropdown-header">Actions</li>');
@@ -83,7 +83,7 @@ var ready = function() {
     //               </button>
     //               <ul class="dropdown-menu" role="menu">
     //                 <li class="dropdown-submenu">
-    //                   <a tabindex="-1"><span class='glyphicon glyphicon-tint'></span> Select Color</a>
+    //                   <a tabindex="-1"><span class='glyphicon glyphicon-tint'></span> Select color </a>
     //                   <ul class="dropdown-menu dropdown-color">
     //                     <li color-class='panel-danger'><a tabindex='-1'><div class='color-circle' style='background-color:#f2dede;'></div>&nbsp</a></li>
     //                     <li color-class='panel-success'><a tabindex='-1'><div class='color-circle' style='background-color:#dff0d8;' ></div>&nbsp</a></li>
@@ -136,7 +136,7 @@ var ready = function() {
         if($( window ).width()>=768)
           $(this).find('.panel-button').fadeOut(200);
       }
-    ); 
+    );
 
     $("[data-xeditable=true]").each(function() {
       return $(this).editable({
@@ -175,9 +175,7 @@ var ready = function() {
 
     $(".sticky-link").click(function(){
         var button = $(this);
-        /* TODO: see what to do with this..
-         *   maybe a pop-over element? or a drop-down element?
-         *   we might want to add more than one link, maybe we should change the model a bit? */
+        /* TODO: see what to do with this.. */
     });
   };
 
@@ -281,7 +279,7 @@ var ready = function() {
         var title = $('<td></td>');
         editable.append(response.name);
         title.append(editable);
-        var buttonGroup = $('<div class="btn-group pull-right"></div>'); /* TODO: need to add < container: 'body' > option somewhere (?) */
+        var buttonGroup = $('<div class="btn-group pull-right"></div>');
         var addButton = $('<button class="btn btn-xs btn-primary" add-sticky="true" data-toggle="tooltip" data-placement="bottom" title="Adds a new sticky"><span class="glyphicon glyphicon-plus"></span> </button>');
         var deleteButton = $('<button class="btn btn-xs btn-warning delete-story" data-toggle="tooltip" data-placement="bottom" title="Removes the whole story"><span class="glyphicon glyphicon-trash"></span></button>');
         var number_of_columns = $('.title_field').find('tr').first().find('th').length
