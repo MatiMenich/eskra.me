@@ -61,7 +61,7 @@ rake db:drop; rake db:migrate
 		rails server
 	After this is done, just go to 'localhost:3000' in your favorite browser, and you will see the application.
 
-### Code documentations ###
+### Code documentation ###
 
 * This application is very ajax-heavy and it uses jquery.
 * It has the following models:
