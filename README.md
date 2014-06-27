@@ -56,10 +56,10 @@ rake db:drop; rake db:migrate
 ### Code documentations ###
 
 * This application is very ajax-heavy and it uses jquery.
-* it has the following models:
+* It has the following models:
    * Boards
    * Stickies
    * Columns
    * Rows
 * Each model has a JSON view, which are important because most of the interaction between the server is done through AJAX requests to the server.
-* The file boards.js has all the logic regarding the client
+* The javascript asset boards.js has all the logic regarding the client
