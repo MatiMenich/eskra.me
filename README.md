@@ -61,5 +61,5 @@ rake db:drop; rake db:migrate
    * Stickies
    * Columns
    * Rows
-* Each model has a JSON view, which are important because most of the interaction between the server is done through AJAX requests to the server.
+* Each model has a JSON view, which are important because most of the interaction between the server is done through AJAX requests to the server using a REST API.
 * The javascript asset boards.js has all the logic regarding the client
