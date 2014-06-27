@@ -1,5 +1,13 @@
 # eskra.me #
 
+eskra.me is a nice web rails application that allows you create and manage your own kanban board and thus increase your productivity. Inspired by [Scrumy](scrumy.com), currently it has these features:
+
+* No registration required.
+* Easy share your board URL.
+* Multilane for tasks and customizable columns.
+* Multilanguage (currently supporting english, spanish and experimental support for chinese and japanese)
+* And much more !
+
 Here we write the nice features of the app.
 
 blabla bla
