@@ -2,7 +2,7 @@ class ColumnsController < ApplicationController
   before_action :set_column, only: [:show, :edit, :update, :destroy]
   after_action :increment_column_orders, only: :insert_between_columns
   before_action :decrease_column_orders, only: :destroy
-  after_action :move_remaining_stickies, only: :destroy
+  before_action :move_remaining_stickies, only: :destroy
 
   # GET /columns
   # GET /columns.json
@@ -105,7 +105,11 @@ class ColumnsController < ApplicationController
   end
 
   def move_remaining_stickies
-    #TODO
+    board_columns = Board.find(@column.board_id).columns
+    destination_column = board_columns.find_by_column_order(@column.column_order-1)
+    @column.stickies.each do |stickie|
+      stickie.update_attribute(:column_id,destination_column.id)
+    end
   end
 
 end

@@ -29,6 +29,9 @@ $max-width: 100% !important;
   height: 50px;
 }
 
+.dropdown-menu {
+  z-index: 2000;
+}
 
 .dropdown-submenu{
   position:relative;
@@ -84,8 +87,6 @@ $max-width: 100% !important;
   font-size: 20px;
   font-weight: bold;
 }
-
-
 
 
 .panel{
@@ -157,8 +158,8 @@ $max-width: 100% !important;
 }
 
 .action-group {
-  padding: 5px; 
-  padding-left:20px;
+  padding: 4px; 
+  padding-left:12px;
 }
 
 
