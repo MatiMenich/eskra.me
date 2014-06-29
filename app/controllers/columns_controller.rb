@@ -2,6 +2,7 @@ class ColumnsController < ApplicationController
   before_action :set_column, only: [:show, :edit, :update, :destroy]
   after_action :increment_column_orders, only: :insert_between_columns
   before_action :decrease_column_orders, only: :destroy
+  after_action :move_remaining_stickies, only: :destroy
 
   # GET /columns
   # GET /columns.json
@@ -101,6 +102,10 @@ class ColumnsController < ApplicationController
         column.save
       end
     end
+  end
+
+  def move_remaining_stickies
+    #TODO
   end
 
 end
