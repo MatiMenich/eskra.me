@@ -38,6 +38,7 @@
                         <span class='glyphicon glyphicon-circle-arrow-right'></span> <%= t(:to_the_right)%>
                       </a>
                     </li>
+                    <% if @board.columns.length >= 3 %>
                     <li role="presentation" class="divider"></li>
                     <li role="presentation" class="dropdown-header"><%= t(:actions) %></li>
                     <li>
@@ -45,6 +46,7 @@
                         <span class='glyphicon glyphicon-remove-sign'></span> <%= t(:delete_column)%>
                       </a>
                     </li>
+                    <% end %>
                   </ul>
                 </div>
               </div>

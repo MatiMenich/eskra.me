@@ -202,7 +202,7 @@ var ready = function() {
     });
   };
 
-  function addButtonBehaviour(){
+  function addDeleteBehaviour(){
 
     $(".delete-column").click(function(){
 
@@ -212,7 +212,7 @@ var ready = function() {
         dataType: "json",
         type:   'delete',
         url:    '/columns/'+columnId,
-        success:function(data){
+        success:function( data ){
           var columnIndex = button.closest("th").prevAll("th").length;
           button.parents("table").find("tr").each(function () {
             $(this).find("td:eq("+columnIndex+"), th:eq("+columnIndex+")").fadeOut('slow', function() {
@@ -221,7 +221,6 @@ var ready = function() {
           });
         }
       });
-
     });
 
     $(".delete-story").click(function(){
@@ -279,7 +278,7 @@ var ready = function() {
         $('.column_field').append(newRow);
         newRow.fadeIn('slow');
         addLayoutBehaviour();
-        addButtonBehaviour();
+        addDeleteBehaviour();
 
         addStickie(addButton);
       }
@@ -354,59 +353,60 @@ var ready = function() {
       else
         order=columnIndex;
       $.ajax({
-          url:    "/columns/insert_between_columns",
-          type:   "POST",
-          data:   {column: {name: columnTitle, board_id: boardId, column_order: order}, side: side},
-          success: function(response){
-            var columnId = response.id;
-            var insertIndex = columnIndex;
-            if (side === 'left')
-              insertIndex = columnIndex-1;
-            $('.column_field').find('tr').each(function () {
-              var newColumn = $('<td class="column"><div class="column-content"></div></td>');
-              newColumn.hide();
-              $(this).find('td').eq(insertIndex).after(newColumn)
-              newColumn.fadeIn('slow');
-            });
+        url:    "/columns/insert_between_columns",
+        type:   "POST",
+        data:   {column: {name: columnTitle, board_id: boardId, column_order: order}, side: side},
+        success: function(response){
+          var columnId = response.id;
+          var insertIndex = columnIndex;
+          if (side === 'left')
+            insertIndex = columnIndex-1;
+          $('.column_field').find('tr').each(function () {
+            var newColumn = $('<td class="column"><div class="column-content"></div></td>');
+            newColumn.hide();
+            $(this).find('td').eq(insertIndex).after(newColumn)
+            newColumn.fadeIn('slow');
+          });
 
 
-            $('.title_field').find('tr').each(function () {
-              var buttonGroup = $('<div class="btn-group pull-right btn-group-xs"></div>');
-              var button = $('<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-wrench"></span> <span class="caret"></span></button>');
-              var dropdownMenu = $('<ul class="dropdown-menu" role="menu"></ul>');
-              var addColumnHeader = $('<li role="presentation" class="dropdown-header">Add Column ...</li>');
-              var actionsHeader = $('<li role="presentation" class="dropdown-header">Actions</li>');
-              var divider = $('<li role="presentation" class="divider"></li>');
-              var addSideColumnLeftOption = $('<li><a href="#" class="add-side-column" board-id="<%= @board.id %>" side="left"><span class="glyphicon glyphicon-circle-arrow-left"></span> To the left</a></li>');
-              var addSideColumnRightOption = $('<li><a href="#" class="add-side-column" board-id="<%= @board.id %>" side="right"><span class="glyphicon glyphicon-circle-arrow-right"></span> To the right</a></li>');
-              var deleteOption = $('<li><a href="#" class="delete-column" board-id="<%= @board.id %>" side="right"><span class="glyphicon glyphicon-remove-sign"></span> Delete Column</a></li>');
+          $('.title_field').find('tr').each(function () {
+            var buttonGroup = $('<div class="btn-group pull-right btn-group-xs"></div>');
+            var button = $('<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-wrench"></span> <span class="caret"></span></button>');
+            var dropdownMenu = $('<ul class="dropdown-menu" role="menu"></ul>');
+            var addColumnHeader = $('<li role="presentation" class="dropdown-header">Add Column ...</li>');
+            var actionsHeader = $('<li role="presentation" class="dropdown-header">Actions</li>');
+            var divider = $('<li role="presentation" class="divider"></li>');
+            var addSideColumnLeftOption = $('<li><a href="#" class="add-side-column" board-id="<%= @board.id %>" side="left"><span class="glyphicon glyphicon-circle-arrow-left"></span> To the left</a></li>');
+            var addSideColumnRightOption = $('<li><a href="#" class="add-side-column" board-id="<%= @board.id %>" side="right"><span class="glyphicon glyphicon-circle-arrow-right"></span> To the right</a></li>');
+            var deleteOption = $('<li><a href="#" class="delete-column" board-id="<%= @board.id %>" side="right"><span class="glyphicon glyphicon-remove-sign"></span> Delete Column</a></li>');
 
-              addSideColumnBehaviour(addSideColumnLeftOption);
-              addSideColumnBehaviour(addSideColumnRightOption);
+            addSideColumnBehaviour(addSideColumnLeftOption);
+            addSideColumnBehaviour(addSideColumnRightOption);
 
-              var newTitle = $('<div class="h4" column-id="'+columnId+'"></div>');
-              var titleContent = $('<a href="#" data-xeditable="true" data-pk="'+columnId+'" data-model="column" data-name="name" data-url="/columns/'+columnId+'" data-title="Enter name">'+columnTitle+'</a>');
-              
-              dropdownMenu.append(addColumnHeader);
-              dropdownMenu.append(addSideColumnLeftOption);
-              dropdownMenu.append(addSideColumnRightOption);
-              dropdownMenu.append(divider);
-              dropdownMenu.append(actionsHeader);
-              dropdownMenu.append(deleteOption);
+            var newTitle = $('<div class="h4" column-id="'+columnId+'"></div>');
+            var titleContent = $('<a href="#" data-xeditable="true" data-pk="'+columnId+'" data-model="column" data-name="name" data-url="/columns/'+columnId+'" data-title="Enter name">'+columnTitle+'</a>');
+            
+            dropdownMenu.append(addColumnHeader);
+            dropdownMenu.append(addSideColumnLeftOption);
+            dropdownMenu.append(addSideColumnRightOption);
+            dropdownMenu.append(divider);
+            dropdownMenu.append(actionsHeader);
+            dropdownMenu.append(deleteOption);
 
-              buttonGroup.append(button);
-              buttonGroup.append(dropdownMenu);
+            buttonGroup.append(button);
+            buttonGroup.append(dropdownMenu);
 
-              newTitle.append(titleContent);
-              newTitle.append(buttonGroup);
-          
-              newTitle.hide();
-              $(this).find('th').eq(insertIndex).after($('<th class="column-title"></th>').append(newTitle));
-              newTitle.fadeIn('slow');
-            });
-            addButtonBehaviour();
-            addLayoutBehaviour();
-          }
+            newTitle.append(titleContent);
+            newTitle.append(buttonGroup);
+        
+            newTitle.hide();
+            $(this).find('th').eq(insertIndex).after($('<th class="column-title"></th>').append(newTitle));
+            newTitle.fadeIn('slow');
+          });
+
+          addDeleteBehaviour();
+          addLayoutBehaviour();
+        }
       });
     });
   };
@@ -417,9 +417,6 @@ var ready = function() {
 
   addSideColumnBehaviour($('.add-side-column'));
 
-  addLayoutBehaviour();
-  addButtonBehaviour();
-  addMobileBehaviour();
 
   $('#editLinkForm').submit(function(){ 
     var linkInput = $("#link_input").val();
@@ -433,6 +430,10 @@ var ready = function() {
       }
     });
   });
+
+  addLayoutBehaviour();
+  addDeleteBehaviour();
+  addMobileBehaviour();
 
 };
 
