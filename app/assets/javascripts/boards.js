@@ -14,12 +14,12 @@ var ready = function() {
       update: function (event, ui) {
 
         var columnId = ui.item.parents(".column").attr("column-id");
-        var storyId = ui.item.parents("tr").attr("story-id");
+        var laneId = ui.item.parents("tr").attr("lane-id");
         var stickyId = ui.item.attr("sticky-id");
         $.ajax({
           url:    "/stickies/"+stickyId,
           type:   "PUT",
-          data:   {sticky: {column_id: columnId, story_id: storyId}},
+          data:   {sticky: {column_id: columnId, lane_id: laneId}},
           success: function(response){
           }
         });
@@ -223,15 +223,15 @@ var ready = function() {
       });
     });
 
-    $(".delete-story").click(function(){
-      var story = $(this).closest('tr');
-      var storyId = story.attr('story-id');
+    $(".delete-lane").click(function(){
+      var lane = $(this).closest('tr');
+      var laneId = lane.attr('lane-id');
       $.ajax({
         dataType: "json",
         type: 'delete',
-        url: '/rows/'+storyId,
+        url: '/rows/'+laneId,
         success: function (data) {
-          story.fadeOut('slow', function(){
+          lane.fadeOut('slow', function(){
             $(this).remove();
           });
         }
@@ -243,21 +243,21 @@ var ready = function() {
       container: 'body'
   });
 
-  $('.add-story').click(function () {
+  $('.add-lane').click(function () {
     var boardId = $(this).attr("board-id");
     $.ajax({
       url:    "/rows",
       type:   "POST",
       data:   {row: {board_id: boardId}},
       success: function (response) {
-        var newRow = $('<tr story-id="'+response.id+'"></tr>');
+        var newRow = $('<tr lane-id="'+response.id+'"></tr>');
         var editable = $('<a href="#" data-xeditable="true" data-pk="'+response.id+'" data-model="row" data-name="name" data-url="/rows/'+response.id+'" data-title="Enter name"></a>');
         var title = $('<td></td>');
         editable.append(response.name);
         title.append(editable);
         var buttonGroup = $('<div class="btn-group pull-right"></div>');
         var addButton = $('<button class="btn btn-xs btn-primary" add-sticky="true" data-toggle="tooltip" data-placement="bottom" title="Adds a new sticky"><span class="glyphicon glyphicon-plus"></span> </button>');
-        var deleteButton = $('<button class="btn btn-xs btn-warning delete-story" data-toggle="tooltip" data-placement="bottom" title="Removes the whole story"><span class="glyphicon glyphicon-trash"></span></button>');
+        var deleteButton = $('<button class="btn btn-xs btn-warning delete-lane" data-toggle="tooltip" data-placement="bottom" title="Removes the whole lane"><span class="glyphicon glyphicon-trash"></span></button>');
         var number_of_columns = $('.title_field').find('tr').first().find('th').length
 
         /* Button append */
@@ -307,14 +307,14 @@ var ready = function() {
   function addStickie(element){
     element.click(function(){
 
-      var currentStory = $(this).closest('tr');
-      var storyId = currentStory.attr('story-id');
-      var starterColumnId = currentStory.find("td:eq(1)").attr("column-id");
+      var currentLane = $(this).closest('tr');
+      var laneId = currentLane.attr('lane-id');
+      var starterColumnId = currentLane.find("td:eq(1)").attr("column-id");
 
       $.ajax({
         url:    "/stickies",
         type:   "POST",
-        data:   {sticky: {column_id: starterColumnId, row_id: storyId}},
+        data:   {sticky: {column_id: starterColumnId, row_id: laneId}},
         success: function(response){
           var panel = $('<div class="panel panel-default" sticky-id="'+response.id+'"></div>');
           var editableHeader = $('<a href="#" data-xeditable="true" data-pk="'+response.id+'" data-model="sticky" data-name="name" data-url="/stickies/'+response.id+'" data-title="Enter name">'+response.name+'</a>');
@@ -331,7 +331,7 @@ var ready = function() {
           panel.append(panelHeader);
           panel.append(panelBody);
 
-          currentStory.find("td:eq(1)").prepend(panel);
+          currentLane.find("td:eq(1)").prepend(panel);
 
           addLayoutBehaviour();
           addMobileBehaviour();

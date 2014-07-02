@@ -55,21 +55,21 @@
           </tr>
         </thead>
         <tbody class="column_field">
-          <% @board.rows.each do |story| %>
-          <tr story-id="<%= story.id %>">
-            <td class="story-column">
-              <a href="#" data-xeditable="true" data-pk="<%= story.id %>" data-model="row" data-name="name" data-url="<%= row_url(story) %>" data-title="Enter name">
-                <%= story.name %>
+          <% @board.rows.each do |lane| %>
+          <tr lane-id="<%= lane.id %>">
+            <td class="lane-column">
+              <a href="#" data-xeditable="true" data-pk="<%= lane.id %>" data-model="row" data-name="name" data-url="<%= row_url(lane) %>" data-title="Enter name">
+                <%= lane.name %>
               </a>
               <div class="btn-group pull-right">
                 <button class="btn btn-xs btn-primary" add-sticky="true" data-toggle="tooltip" data-placement="bottom" title="Adds a new sticky"><span class="glyphicon glyphicon-plus"> </span></button>
-                <button class="btn btn-xs btn-warning delete-story"><span class="glyphicon glyphicon-trash" data-toggle="tooltip" data-placement="bottom" title="Removes the whole story"> </span></button>
+                <button class="btn btn-xs btn-warning delete-lane"><span class="glyphicon glyphicon-trash" data-toggle="tooltip" data-placement="bottom" title="Removes the whole lane"> </span></button>
               </div>
             </td> 
             <% @board.columns.order(:column_order).each do |column|%>
             <td class="column" column-id="<%= column.id %>">
               <% column.stickies.order('created_at DESC').each do |sticky| %>
-              <% if story.stickies.include?(sticky) %>
+              <% if lane.stickies.include?(sticky) %>
               <div class="panel <%= sticky.color %>" sticky-id="<%= sticky.id %>">
                 <div class="panel-button"><%= sticky.link %></div>
                 <div class="panel-heading"><a href="#" data-xeditable="true" data-pk="<%= sticky.id %>" data-model="sticky" data-name="name" data-url="<%= sticky_url(sticky) %>" data-title="Enter name">

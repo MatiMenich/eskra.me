@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
 
 	def set_locale
 		I18n.locale = params[:locale] || cookies[:locale] || I18n.default_locale 
-		cookies[:locale] = I18n.locale
+		cookies[:locale] = { :value => I18n.locale, :httponly => true }
 	end
 
 end

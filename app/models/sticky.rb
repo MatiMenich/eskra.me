@@ -8,7 +8,7 @@ class Sticky < ActiveRecord::Base
 
   def set_default_parameters
   	self.color = 'panel-default'
-  	self.name = 'New Stickie'
-  	self.text = 'Edit your new stickie content'
+  	self.name = Sticky.human_attribute_name("new_stickie")
+  	self.text = Sticky.human_attribute_name("edit_stickie");
   end
 end
