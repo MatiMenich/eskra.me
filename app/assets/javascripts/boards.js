@@ -46,13 +46,12 @@ var ready = function() {
       var li = $('<li></li>');
       var actionButtonGroup = $('<div class="btn-group btn-group-xs action-group"></div>');
       var deleteOption = $('<a class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Delete</a>');
-      var linkOption = $('<a href="'+stickyLink+ '" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-link"></span> Link</a>');
+      var linkOption = $('<a href="'+stickyLink+ '" class="btn btn-primary btn-xs sticky-link"><span class="glyphicon glyphicon-link"></span> Link</a>');
       var editLinkOption = $('<a href="#" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#linkEditModal"><span class="glyphicon glyphicon-pencil"></span></a>');
 
       editLinkOption.click(function () {
         $('#link_input').val(stickyLink);
-        var hiddenStickieIdInput = $('<input type="hidden" value="'+stickyId+'" id="hiddenStickyId"');
-        $('#editLinkForm').find('fieldset').prepend(hiddenStickieIdInput);
+        $('#hiddenStickyId').val(stickyId);
       });
 
       deleteOption.click(function(){
@@ -418,14 +417,15 @@ var ready = function() {
   addSideColumnBehaviour($('.add-side-column'));
 
 
-  $('#editLinkForm').submit(function(){ 
+  $("a#send").click(function(){ 
     var linkInput = $("#link_input").val();
-    var stickyId = $("#hiddenStickieIdInput").val();
+    var stickyId = $("#hiddenStickyId").val();
     $.ajax({
       url: '/stickies/'+stickyId,
       type: 'PUT',
-      data: {link: linkInput},
+      data: { sticky: {link: linkInput} },
       success: function () {
+        $('[sticky-id='+stickyId+']').find('.sticky-link').attr('href',linkInput);
         $('#linkEditModal').modal('hide');
       }
     });

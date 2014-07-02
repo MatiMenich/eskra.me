@@ -4,7 +4,7 @@
     <div class="modal-content">
 
       <div class="modal-body">
-      <form id="editLinkForm" class="form-horizontal" method="PUT">
+      <form id="editLinkForm" class="form-horizontal">
           <fieldset>
 
             <!-- Form Name -->
@@ -17,13 +17,14 @@
                 <input id="link_input" name="link" type="text" placeholder="Insert a link" class="form-control input-md" required="">
               </div>
             </div>
+            <input id="hiddenStickyId" type="hidden">
 
             <!-- Button (Double) -->
             <div class="form-group">
-              <label class="col-md-4 control-label" for="submit"></label>
+              <label class="col-md-4 control-label"></label>
               <div class="col-md-8">
-                <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-check"></span> Submit</button>
-                <button data-dismiss="modal" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+                <a id="send" class="btn btn-primary"><span class="glyphicon glyphicon-check"></span> Submit</a>
+                <a data-dismiss="modal" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Cancel</a>
               </div>
             </div>
 
