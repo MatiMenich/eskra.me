@@ -6,6 +6,9 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
 
   <%= yield :head %>
+  <script type="text/javascript">
+  	window.I18n = <%= current_translations.to_json.html_safe %>
+  </script>
 
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>

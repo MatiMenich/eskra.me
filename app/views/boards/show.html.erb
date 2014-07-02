@@ -62,8 +62,8 @@
                 <%= lane.name %>
               </a>
               <div class="btn-group pull-right">
-                <button class="btn btn-xs btn-primary" add-sticky="true" data-toggle="tooltip" data-placement="bottom" title="Adds a new sticky"><span class="glyphicon glyphicon-plus"> </span></button>
-                <button class="btn btn-xs btn-warning delete-lane"><span class="glyphicon glyphicon-trash" data-toggle="tooltip" data-placement="bottom" title="Removes the whole lane"> </span></button>
+                <button class="btn btn-xs btn-primary" add-sticky="true" data-toggle="tooltip" data-placement="bottom" title="<%= t(:add_stickie_description) %>"><span class="glyphicon glyphicon-plus"> </span></button>
+                <button class="btn btn-xs btn-warning delete-lane"><span class="glyphicon glyphicon-trash" data-toggle="tooltip" data-placement="bottom" title="<%= t(:delete_lane_description) %>"> </span></button>
               </div>
             </td> 
             <% @board.columns.order(:column_order).each do |column|%>

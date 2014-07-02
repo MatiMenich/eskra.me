@@ -37,3 +37,7 @@ es:
   delete: "Eliminar"
   home: "Inicio"
   contact: "Contacto"
+  delete_option: "Eliminar"
+  link_option: "Enlace"
+  add_stickie_description: "Agrega un nuevo stickie a la pista"
+  delete_lane_description: "Elimina toda la pista"

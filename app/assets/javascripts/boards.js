@@ -39,14 +39,14 @@ var ready = function() {
       var optionsButton = $('<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="glyphicon '+stickieOptionsIcon+'"></span> <span class="caret"></span></button>');
       var optionsDropdownMenu = $('<ul class="dropdown-menu" role="menu"></ul>');
       var optionsDropdownColorSubmenu = $('<li class="dropdown-submenu"></li>');
-      var chooseColorOption = $('<a tabindex="-1"><span class="glyphicon glyphicon-chevron-left" style="opacity:0.3;"></span> Select Color</a>');
+      var chooseColorOption = $('<a tabindex="-1"><span class="glyphicon glyphicon-chevron-left" style="opacity:0.3;"></span> '+I18n.select_color+'</a>');
       var colorChooser = $('<ul class="dropdown-menu dropdown-color"></ul>');
       var divider = $('<li role="presentation" class="divider"></li>');
-      var actionsHeader = $('<li role="presentation" class="dropdown-header">Actions</li>');
+      var actionsHeader = $('<li role="presentation" class="dropdown-header">'+I18n.actions+'</li>');
       var li = $('<li></li>');
       var actionButtonGroup = $('<div class="btn-group btn-group-xs action-group"></div>');
-      var deleteOption = $('<a class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Delete</a>');
-      var linkOption = $('<a href="'+stickyLink+ '" class="btn btn-primary btn-xs sticky-link"><span class="glyphicon glyphicon-link"></span> Link</a>');
+      var deleteOption = $('<a class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> '+I18n.delete_option+'</a>');
+      var linkOption = $('<a href="'+stickyLink+ '" class="btn btn-primary btn-xs sticky-link"><span class="glyphicon glyphicon-link"></span> '+I18n.link_option+'</a>');
       var editLinkOption = $('<a href="#" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#linkEditModal"><span class="glyphicon glyphicon-pencil"></span></a>');
 
       editLinkOption.click(function () {
@@ -152,6 +152,9 @@ var ready = function() {
       });
     });
 
+    $('[data-toggle="tooltip"]').tooltip({
+      container: 'body'
+    });
 
   };
 
@@ -238,10 +241,6 @@ var ready = function() {
     });
   };
 
-  $('[data-toggle="tooltip"]').tooltip({
-      container: 'body'
-  });
-
   $('.add-lane').click(function () {
     var boardId = $(this).attr("board-id");
     $.ajax({
@@ -255,8 +254,8 @@ var ready = function() {
         editable.append(response.name);
         title.append(editable);
         var buttonGroup = $('<div class="btn-group pull-right"></div>');
-        var addButton = $('<button class="btn btn-xs btn-primary" add-sticky="true" data-toggle="tooltip" data-placement="bottom" title="Adds a new sticky"><span class="glyphicon glyphicon-plus"></span> </button>');
-        var deleteButton = $('<button class="btn btn-xs btn-warning delete-lane" data-toggle="tooltip" data-placement="bottom" title="Removes the whole lane"><span class="glyphicon glyphicon-trash"></span></button>');
+        var addButton = $('<button class="btn btn-xs btn-primary" add-sticky="true" data-toggle="tooltip" data-placement="bottom" title="'+I18n.add_stickie_description+'"><span class="glyphicon glyphicon-plus"></span> </button>');
+        var deleteButton = $('<button class="btn btn-xs btn-warning delete-lane" data-toggle="tooltip" data-placement="bottom" title="'+I18n.delete_lane_description+'"><span class="glyphicon glyphicon-trash"></span></button>');
         var number_of_columns = $('.title_field').find('tr').first().find('th').length
 
         /* Button append */
