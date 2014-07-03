@@ -55,7 +55,7 @@
           </tr>
         </thead>
         <tbody class="column_field">
-          <% @board.rows.each do |lane| %>
+          <% @board.rows.order('created_at ASC').each do |lane| %>
           <tr lane-id="<%= lane.id %>">
             <td class="lane-column">
               <a href="#" data-xeditable="true" data-pk="<%= lane.id %>" data-model="row" data-name="name" data-url="<%= row_url(lane) %>" data-title="Enter name">
