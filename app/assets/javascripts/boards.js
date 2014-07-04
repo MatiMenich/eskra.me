@@ -26,7 +26,6 @@ var ready = function() {
       }
     });
 
-
     
     $( ".panel" )
     .find( ".panel-button" ).each(function() {
@@ -49,6 +48,10 @@ var ready = function() {
       var linkOption = $('<a href="'+stickyLink+ '" class="btn btn-primary btn-xs sticky-link"><span class="glyphicon glyphicon-link"></span> '+I18n.link_option+'</a>');
       var editLinkOption = $('<a href="#" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#linkEditModal"><span class="glyphicon glyphicon-pencil"></span></a>');
 
+      optionsButton.click(function() {
+        $(this).next('.dropdown-menu').slideToggle(150);
+      });
+
       editLinkOption.click(function () {
         $('#link_input').val(stickyLink);
         $('#hiddenStickyId').val(stickyId);
@@ -63,9 +66,11 @@ var ready = function() {
           type: 'delete',
           url: '/stickies/' + stickyId,
           success: function (data) {
-            panel.fadeOut('slow', function(){
+            panel.addClass('hinge');
+            //panel.addClass('bounceOut');
+            setTimeout(function(){
               panel.remove();
-            });
+            }, 1000);
           }
         });
       });
@@ -255,7 +260,7 @@ var ready = function() {
         title.append(editable);
         var buttonGroup = $('<div class="btn-group pull-right"></div>');
         var addButton = $('<button class="btn btn-xs btn-primary" add-sticky="true" data-toggle="tooltip" data-placement="bottom" title="'+I18n.add_stickie_description+'"><span class="glyphicon glyphicon-plus"></span> </button>');
-        var deleteButton = $('<button class="btn btn-xs btn-warning delete-lane" data-toggle="tooltip" data-placement="bottom" title="'+I18n.delete_lane_description+'"><span class="glyphicon glyphicon-trash"></span></button>');
+        var deleteButton = $('<button class="btn btn-xs btn-danger delete-lane" data-toggle="tooltip" data-placement="bottom" title="'+I18n.delete_lane_description+'"><span class="glyphicon glyphicon-trash"></span></button>');
         var number_of_columns = $('.title_field').find('tr').first().find('th').length
 
         /* Button append */
@@ -314,7 +319,7 @@ var ready = function() {
         type:   "POST",
         data:   {sticky: {column_id: starterColumnId, row_id: laneId}},
         success: function(response){
-          var panel = $('<div class="panel panel-default" sticky-id="'+response.id+'"></div>');
+          var panel = $('<div class="panel animated bounceInLeft panel-default" sticky-id="'+response.id+'"></div>');
           var editableHeader = $('<a href="#" data-xeditable="true" data-pk="'+response.id+'" data-model="sticky" data-name="name" data-url="/stickies/'+response.id+'" data-title="Enter name">'+response.name+'</a>');
           var panelButton = $('<div class="panel-button">'+response.link+'</div>');
           var panelHeader = $('<div class="panel-heading"></div>');
@@ -333,6 +338,11 @@ var ready = function() {
 
           addLayoutBehaviour();
           addMobileBehaviour();
+
+          setTimeout(function(){
+            //panel.removeClass('tada');
+            panel.removeClass('bounceInLeft');
+          },1000);
 
         }
       });
@@ -428,6 +438,10 @@ var ready = function() {
         $('#linkEditModal').modal('hide');
       }
     });
+  });
+
+  $('.dropdown-toggle').click(function() {
+      $(this).next('.dropdown-menu').slideToggle(150);
   });
 
   addLayoutBehaviour();
