@@ -44,7 +44,7 @@ var ready = function() {
       var actionsHeader = $('<li role="presentation" class="dropdown-header">'+I18n.actions+'</li>');
       var li = $('<li></li>');
       var actionButtonGroup = $('<div class="btn-group btn-group-xs action-group"></div>');
-      var deleteOption = $('<a class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> '+I18n.delete_option+'</a>');
+      var deleteOption = $('<a class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash"></span> '+I18n.delete_option+'</a>');
       var linkOption = $('<a href="'+stickyLink+ '" class="btn btn-primary btn-xs sticky-link"><span class="glyphicon glyphicon-link"></span> '+I18n.link_option+'</a>');
       var editLinkOption = $('<a href="#" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#linkEditModal"><span class="glyphicon glyphicon-pencil"></span></a>');
 
@@ -238,9 +238,10 @@ var ready = function() {
         type: 'delete',
         url: '/rows/'+laneId,
         success: function (data) {
-          lane.fadeOut('slow', function(){
-            $(this).remove();
-          });
+          lane.addClass('animated bounceOutLeft');
+          setTimeout(function() {
+            lane.remove();
+          }, 500);
         }
       });
     });
@@ -254,19 +255,32 @@ var ready = function() {
       data:   {row: {board_id: boardId}},
       success: function (response) {
         var newRow = $('<tr lane-id="'+response.id+'"></tr>');
-        var editable = $('<a href="#" data-xeditable="true" data-pk="'+response.id+'" data-model="row" data-name="name" data-url="/rows/'+response.id+'" data-title="Enter name"></a>');
-        var title = $('<td></td>');
+        var editable = $('<a href="#" data-xeditable="true" data-pk="'+response.id+'" data-model="row" data-name="name" data-url="/rows/'+response.id+'" data-title="Enter name" style="margin-left:5px;"></a>');
+        var title = $('<td class="lane-column"></td>');
+
         editable.append(response.name);
         title.append(editable);
-        var buttonGroup = $('<div class="btn-group pull-right"></div>');
-        var addButton = $('<button class="btn btn-xs btn-primary" add-sticky="true" data-toggle="tooltip" data-placement="bottom" title="'+I18n.add_stickie_description+'"><span class="glyphicon glyphicon-plus"></span> </button>');
+        var addButton = $('<button class="btn btn-xs btn-default add-sticky" add-sticky="true" data-toggle="tooltip" data-placement="bottom" title="'+I18n.add_stickie_description+'"><span class="glyphicon glyphicon-plus"></span> </button>');
         var deleteButton = $('<button class="btn btn-xs btn-danger delete-lane" data-toggle="tooltip" data-placement="bottom" title="'+I18n.delete_lane_description+'"><span class="glyphicon glyphicon-trash"></span></button>');
+        var deleteToggleButton = $(' <button class="btn btn-xs btn-link delete-toggle"><span class="glyphicon glyphicon-trash"></span></button>');
         var number_of_columns = $('.title_field').find('tr').first().find('th').length
 
+        deleteToggleButton.click(function() {
+          var laneColumn = $(this).closest('.lane-column');
+          if(laneColumn.find('.delete-lane').is(':visible')){
+            laneColumn.find('.delete-lane').fadeOut(500);
+            laneColumn.find('a').animate({'marginLeft' : "5px"}); 
+          }
+          else {
+            laneColumn.find('.delete-lane').fadeIn(500);
+            laneColumn.find('a').animate({'marginLeft' : "35px"});
+          }         
+        });
+
         /* Button append */
-        buttonGroup.append(addButton);
-        buttonGroup.append(deleteButton);
-        title.append(buttonGroup);
+        title.prepend(deleteButton);
+        title.append(deleteToggleButton);
+        title.append(addButton);
 
         var columnIds = [];
         $('.column_field').find('tr').first().find('.column').each(function () { columnIds.push( $(this).attr('column-id')) })
@@ -442,6 +456,18 @@ var ready = function() {
 
   $('.dropdown-toggle').click(function() {
       $(this).next('.dropdown-menu').slideToggle(150);
+  });
+
+  $('.delete-toggle').click(function() {
+    var laneColumn = $(this).closest('.lane-column');
+    if(laneColumn.find('.delete-lane').is(':visible')){
+      laneColumn.find('.delete-lane').fadeOut(500);
+      laneColumn.find('a').animate({'marginLeft' : "5px"}); 
+    }
+    else {
+      laneColumn.find('.delete-lane').fadeIn(500);
+      laneColumn.find('a').animate({'marginLeft' : "35px"});
+    }         
   });
 
   addLayoutBehaviour();
