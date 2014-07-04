@@ -307,10 +307,10 @@ var ready = function() {
   $('.toggle-collapse').click(function() {
     $('.panel').each(function () {
       if(viewState){
-        $(this).find( ".panel-body" ).hide();
+        $(this).find( ".panel-body" ).slideUp();
       }
       else {
-        $(this).find( ".panel-body" ).show();
+        $(this).find( ".panel-body" ).slideDown();
       }
     });
     viewState = !viewState;
