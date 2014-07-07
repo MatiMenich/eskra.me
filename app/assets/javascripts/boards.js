@@ -458,6 +458,21 @@ var ready = function() {
       $(this).next('.dropdown-menu').slideToggle(150);
   });
 
+  $(".lane-column").swipe( {
+    swipeLeft:function(event, direction, distance, duration, fingerCount) {
+      console.log('left!');
+      $(this).find('.delete-lane').fadeOut(500);
+      $(this).find('a').animate({'marginLeft' : "5px"}); 
+    },
+    swipeRight:function(event, direction, distance, duration, fingerCount) {
+      console.log('right!');
+      $(this).find('.delete-lane').fadeIn(500);
+      $(this).find('a').animate({'marginLeft' : "35px"});
+    },
+    //Default is 75px, set to 0 for demo so any distance triggers swipe
+    threshold:0
+  });
+
   $('.delete-toggle').click(function() {
     var laneColumn = $(this).closest('.lane-column');
     if(laneColumn.find('.delete-lane').is(':visible')){
