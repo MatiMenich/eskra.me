@@ -259,7 +259,7 @@ var ready = function() {
       type:   "POST",
       data:   {row: {board_id: boardId}},
       success: function (response) {
-        var newRow = $('<tr lane-id="'+response.id+'" class="animated bounceInLeft"></tr>');
+        var newRow = $('<tr lane-id="'+response.id+'" class="animated bounceInDown"></tr>');
         var editable = $('<a href="#" data-xeditable="true" data-pk="'+response.id+'" data-model="row" data-name="name" data-url="/rows/'+response.id+'" data-title="Enter name" style="margin-left:5px;"></a>');
         var title = $('<td class="lane-column"></td>');
 
@@ -301,6 +301,12 @@ var ready = function() {
         addDeleteBehaviour();
 
         addStickie(addButton);
+
+        setTimeout(function(){
+          newRow.removeClass('animated');
+          newRow.removeClass('bounceInDown');
+        },1000);
+        
       }
     });
 
