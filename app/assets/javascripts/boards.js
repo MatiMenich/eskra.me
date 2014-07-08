@@ -32,80 +32,83 @@ var ready = function() {
 
       var stickyId = $(this).closest('.panel').attr('sticky-id');
 
-      var stickyLink = $(this).text();
+      if(!$(this).find(".btn-group").length>0){
 
-      var optionsDiv = $('<div class="btn-group btn-group-xs pull-right"></div>');
-      var optionsButton = $('<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="glyphicon '+stickieOptionsIcon+'"></span> <span class="caret"></span></button>');
-      var optionsDropdownMenu = $('<ul class="dropdown-menu" role="menu"></ul>');
-      var optionsDropdownColorSubmenu = $('<li class="dropdown-submenu"></li>');
-      var chooseColorOption = $('<a tabindex="-1"><span class="glyphicon glyphicon-chevron-left" style="opacity:0.3;"></span> '+I18n.select_color+'</a>');
-      var colorChooser = $('<ul class="dropdown-menu dropdown-color"></ul>');
-      var divider = $('<li role="presentation" class="divider"></li>');
-      var actionsHeader = $('<li role="presentation" class="dropdown-header">'+I18n.actions+'</li>');
-      var li = $('<li></li>');
-      var actionButtonGroup = $('<div class="btn-group btn-group-xs action-group"></div>');
-      var deleteOption = $('<a class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash"></span> '+I18n.delete_option+'</a>');
-      var linkOption = $('<a href="'+stickyLink+ '" class="btn btn-primary btn-xs sticky-link"><span class="glyphicon glyphicon-link"></span> '+I18n.link_option+'</a>');
-      var editLinkOption = $('<a href="#" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#linkEditModal"><span class="glyphicon glyphicon-pencil"></span></a>');
+        var stickyLink = $(this).text();
 
-      optionsButton.click(function() {
-        $(this).next('.dropdown-menu').slideToggle(150);
-      });
+        var optionsDiv = $('<div class="btn-group btn-group-xs pull-right"></div>');
+        var optionsButton = $('<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="glyphicon '+stickieOptionsIcon+'"></span> <span class="caret"></span></button>');
+        var optionsDropdownMenu = $('<ul class="dropdown-menu" role="menu"></ul>');
+        var optionsDropdownColorSubmenu = $('<li class="dropdown-submenu"></li>');
+        var chooseColorOption = $('<a tabindex="-1"><span class="glyphicon glyphicon-chevron-left" style="opacity:0.3;"></span> '+I18n.select_color+'</a>');
+        var colorChooser = $('<ul class="dropdown-menu dropdown-color"></ul>');
+        var divider = $('<li role="presentation" class="divider"></li>');
+        var actionsHeader = $('<li role="presentation" class="dropdown-header">'+I18n.actions+'</li>');
+        var li = $('<li></li>');
+        var actionButtonGroup = $('<div class="btn-group btn-group-xs action-group"></div>');
+        var deleteOption = $('<a class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash"></span> '+I18n.delete_option+'</a>');
+        var linkOption = $('<a href="'+stickyLink+ '" class="btn btn-primary btn-xs sticky-link"><span class="glyphicon glyphicon-link"></span> '+I18n.link_option+'</a>');
+        var editLinkOption = $('<a href="#" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#linkEditModal"><span class="glyphicon glyphicon-pencil"></span></a>');
 
-      editLinkOption.click(function () {
-        $('#link_input').val(stickyLink);
-        $('#hiddenStickyId').val(stickyId);
-      });
-
-      deleteOption.click(function(){
-        var button = $(this);
-        var panel = button.closest(".panel");
-        var stickyId = panel.attr('sticky-id');
-        $.ajax({
-          dataType: "json",
-          type: 'delete',
-          url: '/stickies/' + stickyId,
-          success: function (data) {
-            panel.addClass('hinge');
-            //panel.addClass('bounceOut');
-            setTimeout(function(){
-              panel.remove();
-            }, 1000);
-          }
+        optionsButton.click(function() {
+          $(this).next('.dropdown-menu').slideToggle(150);
         });
-      });
 
-      var redOption = $("<li color-class='panel-danger'><a tabindex='-1'><div class='color-circle' style='background-color:#f2dede;'></div>&nbsp</a></li>");
-      var greenOption = $("<li color-class='panel-success'><a tabindex='-1'><div class='color-circle' style='background-color:#dff0d8;' ></div>&nbsp</a></li>");
-      var defaultOption = $("<li color-class='panel-default'><a tabindex='-1'><div class='color-circle' style='background-color:whitesmoke;' ></div>&nbsp</a></li>");
-      var yellowOption = $("<li color-class='panel-warning'><a tabindex='-1'><div class='color-circle' style='background-color:#fcf8e3;' ></div>&nbsp</a></li>");
-      var blueOption = $("<li color-class='panel-info'><a tabindex='-1'><div class='color-circle' style='background-color:#d9edf7;' ></div>&nbsp</a></li>");
+        editLinkOption.click(function () {
+          $('#link_input').val(stickyLink);
+          $('#hiddenStickyId').val(stickyId);
+        });
 
-      colorChooser.append(defaultOption);
-      colorChooser.append(redOption);
-      colorChooser.append(greenOption);
-      colorChooser.append(yellowOption);
-      colorChooser.append(blueOption);
+        deleteOption.click(function(){
+          var button = $(this);
+          var panel = button.closest(".panel");
+          var stickyId = panel.attr('sticky-id');
+          $.ajax({
+            dataType: "json",
+            type: 'delete',
+            url: '/stickies/' + stickyId,
+            success: function (data) {
+              panel.addClass('hinge');
+              //panel.addClass('bounceOut');
+              setTimeout(function(){
+                panel.remove();
+              }, 1000);
+            }
+          });
+        });
 
-      actionButtonGroup.append(deleteOption);
-      actionButtonGroup.append(linkOption);
-      actionButtonGroup.append(editLinkOption);
+        var redOption = $("<li color-class='panel-danger'><a tabindex='-1'><div class='color-circle' style='background-color:#f2dede;'></div>&nbsp</a></li>");
+        var greenOption = $("<li color-class='panel-success'><a tabindex='-1'><div class='color-circle' style='background-color:#dff0d8;' ></div>&nbsp</a></li>");
+        var defaultOption = $("<li color-class='panel-default'><a tabindex='-1'><div class='color-circle' style='background-color:whitesmoke;' ></div>&nbsp</a></li>");
+        var yellowOption = $("<li color-class='panel-warning'><a tabindex='-1'><div class='color-circle' style='background-color:#fcf8e3;' ></div>&nbsp</a></li>");
+        var blueOption = $("<li color-class='panel-info'><a tabindex='-1'><div class='color-circle' style='background-color:#d9edf7;' ></div>&nbsp</a></li>");
 
-      li.append(actionButtonGroup);
+        colorChooser.append(defaultOption);
+        colorChooser.append(redOption);
+        colorChooser.append(greenOption);
+        colorChooser.append(yellowOption);
+        colorChooser.append(blueOption);
+
+        actionButtonGroup.append(deleteOption);
+        actionButtonGroup.append(linkOption);
+        actionButtonGroup.append(editLinkOption);
+
+        li.append(actionButtonGroup);
 
 
-      optionsDropdownColorSubmenu.append(chooseColorOption);
-      optionsDropdownColorSubmenu.append(colorChooser);
+        optionsDropdownColorSubmenu.append(chooseColorOption);
+        optionsDropdownColorSubmenu.append(colorChooser);
 
-      optionsDropdownMenu.append(optionsDropdownColorSubmenu);
-      optionsDropdownMenu.append(divider);
-      optionsDropdownMenu.append(actionsHeader);
-      optionsDropdownMenu.append(li);
-      
+        optionsDropdownMenu.append(optionsDropdownColorSubmenu);
+        //optionsDropdownMenu.append(divider);
+        //optionsDropdownMenu.append(actionsHeader);
+        optionsDropdownMenu.append(li);
+        
 
-      optionsDiv.append(optionsButton);
-      optionsDiv.append(optionsDropdownMenu);
-      $(this).html(optionsDiv);
+        optionsDiv.append(optionsButton);
+        optionsDiv.append(optionsDropdownMenu);
+        $(this).html(optionsDiv);
+      }
     });
     
 
@@ -222,9 +225,11 @@ var ready = function() {
         success:function( data ){
           var columnIndex = button.closest("th").prevAll("th").length;
           button.parents("table").find("tr").each(function () {
-            $(this).find("td:eq("+columnIndex+"), th:eq("+columnIndex+")").fadeOut('slow', function() {
-              $(this).remove();
-            });
+            var column = $(this).find("td:eq("+columnIndex+"), th:eq("+columnIndex+")")
+            column.addClass('animated fadeOutUpBig');
+            setTimeout(function() {
+              column.remove();
+            },500);
           });
         }
       });
@@ -254,7 +259,7 @@ var ready = function() {
       type:   "POST",
       data:   {row: {board_id: boardId}},
       success: function (response) {
-        var newRow = $('<tr lane-id="'+response.id+'"></tr>');
+        var newRow = $('<tr lane-id="'+response.id+'" class="animated bounceInLeft"></tr>');
         var editable = $('<a href="#" data-xeditable="true" data-pk="'+response.id+'" data-model="row" data-name="name" data-url="/rows/'+response.id+'" data-title="Enter name" style="margin-left:5px;"></a>');
         var title = $('<td class="lane-column"></td>');
 
@@ -291,9 +296,7 @@ var ready = function() {
           newRow.append(newColumn)
         }
 
-        newRow.hide();
         $('.column_field').append(newRow);
-        newRow.fadeIn('slow');
         addLayoutBehaviour();
         addDeleteBehaviour();
 
