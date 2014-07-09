@@ -41,3 +41,5 @@ en:
   link_option: "Link"
   add_stickie_description: "Adds a new stickie to the lane"
   delete_lane_description: "Removes the whole lane"
+
+  share_on: "Share on"

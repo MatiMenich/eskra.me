@@ -102,7 +102,7 @@
         <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown"><%= t(:options) %> <b class="caret"></b></a>
           <ul class="dropdown-menu">
-          <li role="presentation" class="dropdown-header">Share on ...</li>
+          <li role="presentation" class="dropdown-header"><%= t(:share_on) %> ...</li>
             <li><a href="https://www.facebook.com/sharer/sharer.php?u=<%= request.original_url %>" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;"
    target="_blank" title="Share on Facebook"><%= icon('facebook') %> Facebook</a></li>
             <li><a href="https://twitter.com/home?status=<%= request.original_url %>" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;"
