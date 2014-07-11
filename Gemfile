@@ -45,7 +45,7 @@ gem 'bootstrap-sass'
 gem 'bootstrap-x-editable-rails'
 
 # jquery ui
-gem 'jquery-ui-rails'
+gem 'jquery-ui-rails', '~> 4.2.1'
 
 # Use unicorn as the app server
 gem 'unicorn'
