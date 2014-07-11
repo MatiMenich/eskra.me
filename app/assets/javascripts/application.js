@@ -15,5 +15,6 @@
 //= require jquery.ui.all
 //= require turbolinks
 //= require_tree .
+//= require vendor/jquery-touchswipe
 //= require bootstrap
 //= require bootstrap3-editable/bootstrap-editable

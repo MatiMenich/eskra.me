@@ -18,7 +18,7 @@ en:
         edit_stickie: "Edit your new stickie content"
   about_us: "About Us"
   options: "Options"
-  toggle_view: "Toggle View"
+  toggle_content: "Toggle Content"
   toggle_edit: "Toggle Edit"
   add_column: "Add Column"
   add_lane: "Add Lane"
@@ -41,3 +41,5 @@ en:
   link_option: "Link"
   add_stickie_description: "Adds a new stickie to the lane"
   delete_lane_description: "Removes the whole lane"
+
+  share_on: "Share on"

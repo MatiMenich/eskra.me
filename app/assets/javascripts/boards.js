@@ -26,81 +26,89 @@ var ready = function() {
       }
     });
 
-
     
     $( ".panel" )
     .find( ".panel-button" ).each(function() {
 
       var stickyId = $(this).closest('.panel').attr('sticky-id');
 
-      var stickyLink = $(this).text();
+      if(!$(this).find(".btn-group").length>0){
 
-      var optionsDiv = $('<div class="btn-group btn-group-xs pull-right"></div>');
-      var optionsButton = $('<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="glyphicon '+stickieOptionsIcon+'"></span> <span class="caret"></span></button>');
-      var optionsDropdownMenu = $('<ul class="dropdown-menu" role="menu"></ul>');
-      var optionsDropdownColorSubmenu = $('<li class="dropdown-submenu"></li>');
-      var chooseColorOption = $('<a tabindex="-1"><span class="glyphicon glyphicon-chevron-left" style="opacity:0.3;"></span> '+I18n.select_color+'</a>');
-      var colorChooser = $('<ul class="dropdown-menu dropdown-color"></ul>');
-      var divider = $('<li role="presentation" class="divider"></li>');
-      var actionsHeader = $('<li role="presentation" class="dropdown-header">'+I18n.actions+'</li>');
-      var li = $('<li></li>');
-      var actionButtonGroup = $('<div class="btn-group btn-group-xs action-group"></div>');
-      var deleteOption = $('<a class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> '+I18n.delete_option+'</a>');
-      var linkOption = $('<a href="'+stickyLink+ '" class="btn btn-primary btn-xs sticky-link"><span class="glyphicon glyphicon-link"></span> '+I18n.link_option+'</a>');
-      var editLinkOption = $('<a href="#" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#linkEditModal"><span class="glyphicon glyphicon-pencil"></span></a>');
+        var stickyLink = $(this).text();
 
-      editLinkOption.click(function () {
-        $('#link_input').val(stickyLink);
-        $('#hiddenStickyId').val(stickyId);
-      });
+        var optionsDiv = $('<div class="btn-group btn-group-xs pull-right"></div>');
+        var optionsButton = $('<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="glyphicon '+stickieOptionsIcon+'"></span> <span class="caret"></span></button>');
+        var optionsDropdownMenu = $('<ul class="dropdown-menu" role="menu"></ul>');
+        var optionsDropdownColorSubmenu = $('<li class="dropdown-submenu"></li>');
+        var chooseColorOption = $('<a tabindex="-1"><span class="glyphicon glyphicon-chevron-left" style="opacity:0.3;"></span> '+I18n.select_color+'</a>');
+        var colorChooser = $('<ul class="dropdown-menu dropdown-color"></ul>');
+        var divider = $('<li role="presentation" class="divider"></li>');
+        var actionsHeader = $('<li role="presentation" class="dropdown-header">'+I18n.actions+'</li>');
+        var li = $('<li></li>');
+        var actionButtonGroup = $('<div class="btn-group btn-group-xs action-group"></div>');
+        var deleteOption = $('<a class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash"></span> '+I18n.delete_option+'</a>');
+        var linkOption = $('<a href="'+stickyLink+ '" class="btn btn-primary btn-xs sticky-link"><span class="glyphicon glyphicon-link"></span> '+I18n.link_option+'</a>');
+        var editLinkOption = $('<a href="#" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#linkEditModal"><span class="glyphicon glyphicon-pencil"></span></a>');
 
-      deleteOption.click(function(){
-        var button = $(this);
-        var panel = button.closest(".panel");
-        var stickyId = panel.attr('sticky-id');
-        $.ajax({
-          dataType: "json",
-          type: 'delete',
-          url: '/stickies/' + stickyId,
-          success: function (data) {
-            panel.fadeOut('slow', function(){
-              panel.remove();
-            });
-          }
+        optionsButton.click(function() {
+          $(this).next('.dropdown-menu').slideToggle(150);
         });
-      });
 
-      var redOption = $("<li color-class='panel-danger'><a tabindex='-1'><div class='color-circle' style='background-color:#f2dede;'></div>&nbsp</a></li>");
-      var greenOption = $("<li color-class='panel-success'><a tabindex='-1'><div class='color-circle' style='background-color:#dff0d8;' ></div>&nbsp</a></li>");
-      var defaultOption = $("<li color-class='panel-default'><a tabindex='-1'><div class='color-circle' style='background-color:whitesmoke;' ></div>&nbsp</a></li>");
-      var yellowOption = $("<li color-class='panel-warning'><a tabindex='-1'><div class='color-circle' style='background-color:#fcf8e3;' ></div>&nbsp</a></li>");
-      var blueOption = $("<li color-class='panel-info'><a tabindex='-1'><div class='color-circle' style='background-color:#d9edf7;' ></div>&nbsp</a></li>");
+        editLinkOption.click(function () {
+          $('#link_input').val(stickyLink);
+          $('#hiddenStickyId').val(stickyId);
+        });
 
-      colorChooser.append(defaultOption);
-      colorChooser.append(redOption);
-      colorChooser.append(greenOption);
-      colorChooser.append(yellowOption);
-      colorChooser.append(blueOption);
+        deleteOption.click(function(){
+          var button = $(this);
+          var panel = button.closest(".panel");
+          var stickyId = panel.attr('sticky-id');
+          $.ajax({
+            dataType: "json",
+            type: 'delete',
+            url: '/stickies/' + stickyId,
+            success: function (data) {
+              panel.addClass('hinge');
+              //panel.addClass('bounceOut');
+              setTimeout(function(){
+                panel.remove();
+              }, 1000);
+            }
+          });
+        });
 
-      actionButtonGroup.append(deleteOption);
-      actionButtonGroup.append(linkOption);
-      actionButtonGroup.append(editLinkOption);
+        var redOption = $("<li color-class='panel-danger'><a tabindex='-1'><div class='color-circle' style='background-color:#f2dede;'></div>&nbsp</a></li>");
+        var greenOption = $("<li color-class='panel-success'><a tabindex='-1'><div class='color-circle' style='background-color:#dff0d8;' ></div>&nbsp</a></li>");
+        var defaultOption = $("<li color-class='panel-default'><a tabindex='-1'><div class='color-circle' style='background-color:whitesmoke;' ></div>&nbsp</a></li>");
+        var yellowOption = $("<li color-class='panel-warning'><a tabindex='-1'><div class='color-circle' style='background-color:#fcf8e3;' ></div>&nbsp</a></li>");
+        var blueOption = $("<li color-class='panel-info'><a tabindex='-1'><div class='color-circle' style='background-color:#d9edf7;' ></div>&nbsp</a></li>");
 
-      li.append(actionButtonGroup);
+        colorChooser.append(defaultOption);
+        colorChooser.append(redOption);
+        colorChooser.append(greenOption);
+        colorChooser.append(yellowOption);
+        colorChooser.append(blueOption);
+
+        actionButtonGroup.append(deleteOption);
+        actionButtonGroup.append(linkOption);
+        actionButtonGroup.append(editLinkOption);
+
+        li.append(actionButtonGroup);
 
 
-      optionsDropdownColorSubmenu.append(chooseColorOption);
-      optionsDropdownColorSubmenu.append(colorChooser);
+        optionsDropdownColorSubmenu.append(chooseColorOption);
+        optionsDropdownColorSubmenu.append(colorChooser);
 
-      optionsDropdownMenu.append(optionsDropdownColorSubmenu);
-      optionsDropdownMenu.append(divider);
-      optionsDropdownMenu.append(actionsHeader);
-      optionsDropdownMenu.append(li);
-      
+        optionsDropdownMenu.append(optionsDropdownColorSubmenu);
+        //optionsDropdownMenu.append(divider);
+        //optionsDropdownMenu.append(actionsHeader);
+        optionsDropdownMenu.append(li);
+        
 
-      optionsDiv.append(optionsButton);
-      optionsDiv.append(optionsDropdownMenu);
-      $(this).html(optionsDiv);
+        optionsDiv.append(optionsButton);
+        optionsDiv.append(optionsDropdownMenu);
+        $(this).html(optionsDiv);
+      }
     });
     
 
@@ -169,7 +177,7 @@ var ready = function() {
       $('.modal-delete-stickie').attr('sticky-id',data_id);
       $('.modal-edit-link').attr('sticky-id',data_id);
       
-      href = $('[sticky-id="+data_id+"]').find('.sticky-link').attr('href');
+      var href = $('[sticky-id="+data_id+"]').find('.sticky-link').attr('href');
       $('.modal-link').attr('href',href);
       $('.modal-edit-link').attr('sticky-link',href);
 
@@ -215,13 +223,11 @@ var ready = function() {
       var stickyId = $(this).attr('sticky-id');
       var panel = $('.panel[sticky-id="'+stickyId+'"]');
       
-      panel.fadeOut('slow', function(){
-          $('#stickieOptionModal').modal('hide');
-          panel.remove();
-        });
+      
+      $('#stickieOptionModal').modal('hide');
 
-      $('#link_input').val(stickyLink);
-      $('#hiddenStickyId').val(stickyId);
+      //$('#link_input').val(stickyLink);
+      //$('#hiddenStickyId').val(stickyId);
       
     });
 
@@ -240,9 +246,11 @@ var ready = function() {
         success:function( data ){
           var columnIndex = button.closest("th").prevAll("th").length;
           button.parents("table").find("tr").each(function () {
-            $(this).find("td:eq("+columnIndex+"), th:eq("+columnIndex+")").fadeOut('slow', function() {
-              $(this).remove();
-            });
+            var column = $(this).find("td:eq("+columnIndex+"), th:eq("+columnIndex+")")
+            column.addClass('animated fadeOutUpBig');
+            setTimeout(function() {
+              column.remove();
+            },500);
           });
         }
       });
@@ -256,9 +264,10 @@ var ready = function() {
         type: 'delete',
         url: '/rows/'+laneId,
         success: function (data) {
-          lane.fadeOut('slow', function(){
-            $(this).remove();
-          });
+          lane.addClass('animated bounceOutLeft');
+          setTimeout(function() {
+            lane.remove();
+          }, 500);
         }
       });
     });
@@ -271,20 +280,33 @@ var ready = function() {
       type:   "POST",
       data:   {row: {board_id: boardId}},
       success: function (response) {
-        var newRow = $('<tr lane-id="'+response.id+'"></tr>');
-        var editable = $('<a href="#" data-xeditable="true" data-pk="'+response.id+'" data-model="row" data-name="name" data-url="/rows/'+response.id+'" data-title="Enter name"></a>');
-        var title = $('<td></td>');
+        var newRow = $('<tr lane-id="'+response.id+'" class="animated bounceInDown"></tr>');
+        var editable = $('<a href="#" data-xeditable="true" data-pk="'+response.id+'" data-model="row" data-name="name" data-url="/rows/'+response.id+'" data-title="Enter name" style="margin-left:5px;"></a>');
+        var title = $('<td class="lane-column"></td>');
+
         editable.append(response.name);
         title.append(editable);
-        var buttonGroup = $('<div class="btn-group pull-right"></div>');
-        var addButton = $('<button class="btn btn-xs btn-primary" add-sticky="true" data-toggle="tooltip" data-placement="bottom" title="'+I18n.add_stickie_description+'"><span class="glyphicon glyphicon-plus"></span> </button>');
-        var deleteButton = $('<button class="btn btn-xs btn-warning delete-lane" data-toggle="tooltip" data-placement="bottom" title="'+I18n.delete_lane_description+'"><span class="glyphicon glyphicon-trash"></span></button>');
+        var addButton = $('<button class="btn btn-xs btn-default add-sticky" add-sticky="true" data-toggle="tooltip" data-placement="bottom" title="'+I18n.add_stickie_description+'"><span class="glyphicon glyphicon-plus"></span> </button>');
+        var deleteButton = $('<button class="btn btn-xs btn-danger delete-lane" data-toggle="tooltip" data-placement="bottom" title="'+I18n.delete_lane_description+'"><span class="glyphicon glyphicon-trash"></span></button>');
+        var deleteToggleButton = $(' <button class="btn btn-xs btn-link delete-toggle"><span class="glyphicon glyphicon-trash"></span></button>');
         var number_of_columns = $('.title_field').find('tr').first().find('th').length
 
+        deleteToggleButton.click(function() {
+          var laneColumn = $(this).closest('.lane-column');
+          if(laneColumn.find('.delete-lane').is(':visible')){
+            laneColumn.find('.delete-lane').fadeOut(500);
+            laneColumn.find('a').animate({'marginLeft' : "5px"}); 
+          }
+          else {
+            laneColumn.find('.delete-lane').fadeIn(500);
+            laneColumn.find('a').animate({'marginLeft' : "35px"});
+          }         
+        });
+
         /* Button append */
-        buttonGroup.append(addButton);
-        buttonGroup.append(deleteButton);
-        title.append(buttonGroup);
+        title.prepend(deleteButton);
+        title.append(deleteToggleButton);
+        title.append(addButton);
 
         var columnIds = [];
         $('.column_field').find('tr').first().find('.column').each(function () { columnIds.push( $(this).attr('column-id')) })
@@ -295,13 +317,17 @@ var ready = function() {
           newRow.append(newColumn)
         }
 
-        newRow.hide();
         $('.column_field').append(newRow);
-        newRow.fadeIn('slow');
         addLayoutBehaviour();
         addDeleteBehaviour();
 
         addStickie(addButton);
+
+        setTimeout(function(){
+          newRow.removeClass('animated');
+          newRow.removeClass('bounceInDown');
+        },1000);
+        
       }
     });
 
@@ -311,10 +337,10 @@ var ready = function() {
   $('.toggle-collapse').click(function() {
     $('.panel').each(function () {
       if(viewState){
-        $(this).find( ".panel-body" ).hide();
+        $(this).find( ".panel-body" ).slideUp();
       }
       else {
-        $(this).find( ".panel-body" ).show();
+        $(this).find( ".panel-body" ).slideDown();
       }
     });
     viewState = !viewState;
@@ -337,7 +363,7 @@ var ready = function() {
         type:   "POST",
         data:   {sticky: {column_id: starterColumnId, row_id: laneId}},
         success: function(response){
-          var panel = $('<div class="panel panel-default" sticky-id="'+response.id+'"></div>');
+          var panel = $('<div class="panel animated bounceInLeft panel-default" sticky-id="'+response.id+'"></div>');
           var editableHeader = $('<a href="#" data-xeditable="true" data-pk="'+response.id+'" data-model="sticky" data-name="name" data-url="/stickies/'+response.id+'" data-title="Enter name">'+response.name+'</a>');
           var panelButton = $('<div class="panel-button">'+response.link+'</div>');
           var panelHeader = $('<div class="panel-heading"></div>');
@@ -356,6 +382,11 @@ var ready = function() {
 
           addLayoutBehaviour();
           addMobileBehaviour();
+
+          setTimeout(function(){
+            //panel.removeClass('tada');
+            panel.removeClass('bounceInLeft');
+          },1000);
 
         }
       });
@@ -451,6 +482,37 @@ var ready = function() {
         $('#linkEditModal').modal('hide');
       }
     });
+  });
+
+  $('.dropdown-toggle').click(function() {
+      $(this).next('.dropdown-menu').slideToggle(150);
+  });
+
+  $(".lane-column").swipe( {
+    swipeLeft:function(event, direction, distance, duration, fingerCount) {
+      console.log('left!');
+      $(this).find('.delete-lane').fadeOut(500);
+      $(this).find('a').animate({'marginLeft' : "5px"}); 
+    },
+    swipeRight:function(event, direction, distance, duration, fingerCount) {
+      console.log('right!');
+      $(this).find('.delete-lane').fadeIn(500);
+      $(this).find('a').animate({'marginLeft' : "35px"});
+    },
+    //Default is 75px, set to 0 for demo so any distance triggers swipe
+    threshold:0
+  });
+
+  $('.delete-toggle').click(function() {
+    var laneColumn = $(this).closest('.lane-column');
+    if(laneColumn.find('.delete-lane').is(':visible')){
+      laneColumn.find('.delete-lane').fadeOut(500);
+      laneColumn.find('a').animate({'marginLeft' : "5px"}); 
+    }
+    else {
+      laneColumn.find('.delete-lane').fadeIn(500);
+      laneColumn.find('a').animate({'marginLeft' : "35px"});
+    }         
   });
 
   addLayoutBehaviour();

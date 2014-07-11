@@ -1,17 +1,15 @@
 class ColumnsController < ApplicationController
   before_action :set_column, only: [:show, :edit, :update, :destroy]
-  after_action :increment_column_orders, only: :insert_between_columns
   before_action :decrease_column_orders, only: :destroy
   before_action :move_remaining_stickies, only: :destroy
+  after_action :increment_column_orders, only: :insert_between_columns
 
   # GET /columns
-  # GET /columns.json
   def index
     @columns = Column.all
   end
 
   # GET /columns/1
-  # GET /columns/1.json
   def show
   end
 
@@ -39,7 +37,6 @@ class ColumnsController < ApplicationController
   end
 
   # POST /columns
-  # POST /columns.json
   def create
     @column = Column.new(column_params)
 
@@ -50,11 +47,12 @@ class ColumnsController < ApplicationController
         format.json { render json: @column.errors, status: :unprocessable_entity }
       end
     end
+
   end
 
   # PATCH/PUT /columns/1
-  # PATCH/PUT /columns/1.json
   def update
+
     respond_to do |format|
       if @column.update(column_params)
         format.json { render :show, status: :ok, location: @column }
@@ -62,24 +60,25 @@ class ColumnsController < ApplicationController
         format.json { render json: @column.errors, status: :unprocessable_entity }
       end
     end
+
   end
 
   # DELETE /columns/1
-  # DELETE /columns/1.json
   def destroy
     @column.destroy
+
     respond_to do |format|
       format.json { head :no_content }
     end
+
   end
 
   private
-  # Use callbacks to share common setup or constraints between actions.
+
   def set_column
     @column = Column.find(params[:id])
   end
 
-  # Never trust parameters from the scary internet, only allow the white list through.
   def column_params
     params.require(:column).permit(:name, :column_order, :board_id)
   end

@@ -162,4 +162,28 @@ $max-width: 100% !important;
   padding-left:12px;
 }
 
+.add-sticky {
+  height: 100%;
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  @include addBorderRadius(0,0,0,0);
+  border: 1px solid transparent;
+  border-left: 1px solid #cccccc;
+}
+.delete-lane {
+  display: none;
+  position: absolute;
+  height: 100%;
+  top: 0px;
+  @include addBorderRadius(0,0,0,0);
+  border: 1px solid transparent;
+  border-left: 1px solid #cccccc;
+}
+
+.lane-column {
+  vertical-align:middle !important;
+  padding: 0 !important;
+  position: relative;
+}
 

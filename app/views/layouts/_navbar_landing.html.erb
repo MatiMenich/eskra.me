@@ -22,33 +22,33 @@
              language = "es"
            when :jp
              language = "jp"
-                               when :zh # traditional chinese
-                                 language = "zh"
-                                 end %>
-                                 <%= image_tag "flags/" + language + ".png" , :height => "16" %> <b class="caret"></b>
-                               </a>
-                               <ul class="dropdown-menu">
-                                <li>
-                                  <a href="?locale=en"> <%= image_tag "flags/us.png", :height => "16" %> &nbsp;<%= t(:english) %></a>
-                                </li>
-                                <li>
-                                  <a href="?locale=es"> <%= image_tag "flags/es.png", :height => "16" %> &nbsp;<%= t(:spanish) %></a>
-                                </li>
-                                <li>
-                                  <a href="?locale=jp"> <%= image_tag "flags/jp.png", :height => "16" %> &nbsp; <%= t(:japanese) %></a>
-                                </li>
-                                <li>
-                                  <a href="?locale=zh"> <%= image_tag "flags/zh.png", :height => "16" %> &nbsp; <%= t(:chinese) %></a>
-                                </li>
-                              </ul>
-                            </li>
-                            <li><a href="#about">About</a>
-                            </li>
-                            <li><a href="#contact">Contact</a>
-                            </li>
-                          </ul>
-                        </div>
-                        <!-- /.navbar-collapse -->
-                      </div>
-                      <!-- /.container -->
-                    </nav>
+           when :zh # traditional chinese
+             language = "zh"
+             end %>
+             <%= image_tag "flags/" + language + ".png" , :height => "16" %> <b class="caret"></b>
+           </a>
+           <ul class="dropdown-menu">
+            <li>
+              <a href="?locale=en"> <%= image_tag "flags/us.png", :height => "16" %> &nbsp;<%= t(:english) %></a>
+            </li>
+            <li>
+              <a href="?locale=es"> <%= image_tag "flags/es.png", :height => "16" %> &nbsp;<%= t(:spanish) %></a>
+            </li>
+            <li>
+              <a href="?locale=jp"> <%= image_tag "flags/jp.png", :height => "16" %> &nbsp; <%= t(:japanese) %></a>
+            </li>
+            <li>
+              <a href="?locale=zh"> <%= image_tag "flags/zh.png", :height => "16" %> &nbsp; <%= t(:chinese) %></a>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#about">About</a>
+        </li>
+        <li><a href="#contact">Contact</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /.navbar-collapse -->
+  </div>
+  <!-- /.container -->
+</nav>
