@@ -167,6 +167,13 @@ var ready = function() {
       }
       $('[modal-color-class]').attr('sticky-id',data_id);
       $('.modal-delete-stickie').attr('sticky-id',data_id);
+      $('.modal-edit-link').attr('sticky-id',data_id);
+      
+      href = $('[sticky-id="+data_id+"]').find('.sticky-link').attr('href');
+      $('.modal-link').attr('href',href);
+      $('.modal-edit-link').attr('sticky-link',href);
+
+
     });
 
     $('[modal-color-class]').click(function() {
@@ -202,6 +209,22 @@ var ready = function() {
         }
       });
     });
+
+
+    $('.modal-edit-link').click(function(){
+      var stickyId = $(this).attr('sticky-id');
+      var panel = $('.panel[sticky-id="'+stickyId+'"]');
+      
+      panel.fadeOut('slow', function(){
+          $('#stickieOptionModal').modal('hide');
+          panel.remove();
+        });
+
+      $('#link_input').val(stickyLink);
+      $('#hiddenStickyId').val(stickyId);
+      
+    });
+
   };
 
   function addDeleteBehaviour(){
